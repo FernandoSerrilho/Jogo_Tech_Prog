@@ -22,6 +22,7 @@ class Drone : public Inimigo {
         void setPos(float x, float y);
         void initFigura();
         sf::CircleShape getFigura();
+        sf::FloatRect getBounds() const;
 
         void setJog(Jogador* p);
         void executar();

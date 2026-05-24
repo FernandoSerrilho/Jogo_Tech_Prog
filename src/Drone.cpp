@@ -21,6 +21,10 @@ void Drone::initFigura() {
 
 sf::CircleShape Drone::getFigura() { return figura;}
 
+sf::FloatRect Drone::getBounds() const {
+    return figura.getGlobalBounds();
+}
+
 void Drone::setPos(float x, float y) {
 
     pos.x = x;
