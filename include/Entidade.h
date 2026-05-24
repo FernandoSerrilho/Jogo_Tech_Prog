@@ -17,6 +17,7 @@ class Entidade : public Ente {
     public:
         virtual void executar() = 0;
         sf::Vector2f getPos();
+        virtual sf::FloatRect getBounds() const = 0;
         //virtual void salvar() = 0;          TODO
 
 };

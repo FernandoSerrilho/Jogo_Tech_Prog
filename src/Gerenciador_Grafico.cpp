@@ -1,6 +1,7 @@
 #include "Gerenciador_Grafico.h"
 #include "Jogador.h"
 #include "Drone.h"
+#include "Gerenciador_Colisoes.h"
 
 using namespace Personagens;
 
@@ -18,6 +19,8 @@ void Gerenciador_Grafico::executar() {
 
     Jogador* j1 = new Jogador();
     Drone* d1 = new Drone();
+    Gerenciador_Colisoes* pGC = new Gerenciador_Colisoes(j1);
+    pGC->incluirInimigo(static_cast<Inimigo*>(d1));
     d1->setJog(j1);
     janela.setFramerateLimit(60);
 
@@ -33,6 +36,10 @@ void Gerenciador_Grafico::executar() {
     }
         janela.clear();
         j1->executar();
+        
+
+        pGC->executar();
+
         d1->executar();
 
         janela.draw(j1->getFigura());

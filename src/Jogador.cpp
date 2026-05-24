@@ -1,11 +1,12 @@
 #include "Jogador.h"
+#include "Inimigo.h"
 
 using namespace Entidades;
 using namespace Personagens;
 
 
 
-Jogador::Jogador(): Personagem(), pontos(0) , figura(sf::Vector2f(50.0f,50.0f)){
+Jogador::Jogador(): Personagem(), pontos(0) , vidas(3), figura(sf::Vector2f(50.0f,50.0f)){
     initFigura();
 }
 
@@ -18,9 +19,37 @@ void Jogador::initFigura() {
 
 }
 
+void Jogador::setVidas(int v) { vidas = v;}
+
 sf::Vector2f Jogador::getPos() { return pos;}
 
 sf::RectangleShape Jogador::getFigura() { return figura;}
+
+void Jogador::setPos(sf::Vector2f novapos) {
+
+    figura.setPosition(novapos);
+    pos = novapos;
+
+}
+
+sf::FloatRect Jogador::getBounds() const{
+
+    return figura.getGlobalBounds();
+
+}
+
+void Jogador::colidir(Inimigo* pIn) {
+
+
+    int v = vidas - 1;
+
+    setVidas(v);
+
+    std::cout << "Vidas:" << v  << std::endl; 
+
+
+
+}
 
 void Jogador::executar() {
     mover();
@@ -42,10 +71,6 @@ void Jogador::mover() {
         pos.y += vel.y;
     }
 
-
-
-    figura.setPosition(pos);
-
-
+    setPos(pos);
 
 }
