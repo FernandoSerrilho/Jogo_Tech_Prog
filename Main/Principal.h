@@ -1,0 +1,22 @@
+#pragma once
+
+#include "Gerenciador_Grafico.h"
+#include "Jogador.h"
+#include "Drone.h"
+#include "Ente.h"
+#include <list>
+using namespace std;
+using namespace Gerenciadores;
+using namespace Personagens;
+
+class Principal {
+	private:
+		Gerenciador_Grafico* GG;
+		Jogador* j1;
+		Drone* d1;
+		list<Ente*> entidades;
+	public:
+		Principal();
+		~Principal();
+		void executar();
+};
