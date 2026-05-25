@@ -58,18 +58,25 @@ void Jogador::executar() {
 
 void Jogador::mover() {
 
+    float gravidade = 0.3f;
+    float velpulo = 10.0f;
+
+    if (pos.y >= 550) {
+        vel.y = 0;
+    }
+        vel.y += gravidade;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         pos.x += vel.x;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         pos.x -= vel.x;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        pos.y -= vel.y;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pos.y >= 550) {
+        vel.y -= velpulo;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        pos.y += vel.y;
-    }
+
+    pos.y += vel.y;
 
     setPos(pos);
 

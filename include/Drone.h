@@ -14,7 +14,7 @@ class Drone : public Inimigo {
         Jogador* pJ;
 
     public:
-        Drone();
+        Drone(Jogador* p = NULL);
         ~Drone();
         
         //void danificar(Jogador* p);   TODO

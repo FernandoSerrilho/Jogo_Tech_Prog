@@ -5,7 +5,7 @@ using namespace Personagens;
 
 
 
-Drone::Drone() : Inimigo(), raio(25.0f), pJ(NULL) , figura(raio) {
+Drone::Drone(Jogador* p) : Inimigo(), pJ(p), raio(25.0f), figura(raio) {
     initFigura();
 }
 Drone::~Drone() {}
@@ -22,7 +22,9 @@ void Drone::initFigura() {
 sf::CircleShape Drone::getFigura() { return figura;}
 
 sf::FloatRect Drone::getBounds() const {
+
     return figura.getGlobalBounds();
+
 }
 
 void Drone::setPos(float x, float y) {
