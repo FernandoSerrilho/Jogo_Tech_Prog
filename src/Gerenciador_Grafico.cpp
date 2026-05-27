@@ -2,56 +2,58 @@
 #include "Jogador.h"
 #include "Drone.h"
 #include "Gerenciador_Colisoes.h"
+#include <iostream>
+using namespace std;
 
 using namespace Personagens;
 
 using namespace Gerenciadores;
 
+Gerenciador_Grafico* Gerenciador_Grafico::pGG = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() : janela(sf::VideoMode(800, 600), "Teste SFML - UTFPR") 
+Gerenciador_Grafico::Gerenciador_Grafico() : janela(new sf::RenderWindow(sf::VideoMode(800, 600), "Teste SFML - UTFPR"))
 {    
-    executar();
+    if (janela == nullptr)
+        cout << "Erro, janela não criada" << endl;
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {}
 
-void Gerenciador_Grafico::executar() {
+void Gerenciador_Grafico::fechaJanela() {
+    if(VerificajanelaAberta())
+        janela->close();
+}
 
-    Jogador* j1 = new Jogador();
-    Drone* d1 = new Drone();
-    Gerenciador_Colisoes* pGC = new Gerenciador_Colisoes(j1);
-    pGC->incluirInimigo(static_cast<Inimigo*>(d1));
-    d1->setJog(j1);
-    janela.setFramerateLimit(60);
+void Gerenciador_Grafico::limpaJanela() {
+    if (VerificajanelaAberta())
+        janela->clear();
+}
 
-     while (janela.isOpen()) {
-        sf::Event event;
-        while (janela.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                janela.close();
-            else if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Escape)
-                janela.close();
-        }
-    }
-        janela.clear();
-        j1->executar();
-        
+void Gerenciador_Grafico::displayJanela() {
+    if (VerificajanelaAberta())
+        janela->display();
+}
 
-        pGC->executar();
+Gerenciador_Grafico* Gerenciador_Grafico::getGerenciadorG() {
+    if (pGG == nullptr)
+        return new Gerenciador_Grafico();
+    return pGG;
+}
 
-        d1->executar();
+const bool Gerenciador_Grafico::VerificajanelaAberta() {
+    if (janela->isOpen())
+        return true;
+    return false;
+}
 
-        janela.draw(j1->getFigura());
-        janela.draw(d1->getFigura());
+sf::RenderWindow* Gerenciador_Grafico::getJanela() {
+    return janela;
+}
 
-        janela.display();
-    }
-
+void Gerenciador_Grafico::setFrame(int n) {
+    janela->setFramerateLimit(n);
 }
 
 void Gerenciador_Grafico::desenharEnte(Ente* pE) {
-
-    
-
+    janela->draw(pE->getSprite());
 }
