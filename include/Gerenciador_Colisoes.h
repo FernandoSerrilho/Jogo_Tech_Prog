@@ -2,24 +2,22 @@
 
 #include <list>
 #include <vector>
-#include <SFML/Graphics.hpp>
-#include "Jogador.h"
 #include "Inimigo.h"
-#include "Entidade.h"
+#include "Jogador.h"
+#include "Obstaculo.h"
 
-
-
+using namespace Entidades;
+using namespace Personagens;
+using namespace Obstaculos;
 
 namespace Gerenciadores {
-
-    using namespace Entidades;
-    using namespace Entidades::Personagens;
 
     class Gerenciador_Colisoes {
 
         private:
             std::vector<Inimigo*> LIs;
             Jogador* pJog1;
+            std::vector<Obstaculo*>LOs;
         private:
             const bool verificarColisao(Entidade* pe1, Entidade* pe2);
             void tratarColisoesJogsObstacs();
@@ -29,6 +27,7 @@ namespace Gerenciadores {
             Gerenciador_Colisoes(Jogador* pJ);
             ~Gerenciador_Colisoes();
             void incluirInimigo(Inimigo* pi);
+            void incluirObstaculo(Obstaculo* pi);
             void executar();
     };
 
