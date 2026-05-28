@@ -1,6 +1,5 @@
 #include "Gerenciador_Colisoes.h"
 #include <math.h>
-#include <iostream>
 
 using namespace Gerenciadores;
 using namespace Entidades;
@@ -14,7 +13,6 @@ Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
 
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
-
     if (pI) {
         LIs.push_back(pI);
     }
@@ -28,16 +26,11 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) 
         return pe1->getBounds().intersects(pe2->getBounds());
 
     }
-    
-
-
     else
         return false;
-
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
-
     if (!LIs.empty()) {
         
         std::vector<Inimigo*>::iterator it;
@@ -52,17 +45,15 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
             }
         }
 
-
     }
 
 
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsLims() {
-
     sf::Vector2f lims_sup (0.0f,0.0f);
-    sf::Vector2f lims_inf (800.0f,600.0f);
-    float tam = 50.0f;
+    sf::Vector2f lims_inf (800.0f,550.0f);
+    float tam = 24.0f;
 
     if (pJog1) {
 
@@ -89,13 +80,13 @@ void Gerenciador_Colisoes::tratarColisoesJogsLims() {
             colisao = true;
 
         }
-
-
-
         if (colisao) {
             pJog1->setPos(posJ);
         }
     }
+}
+
+void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
 }
 
 void Gerenciador_Colisoes::executar() {
