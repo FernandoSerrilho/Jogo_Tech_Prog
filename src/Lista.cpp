@@ -29,7 +29,7 @@ void Lista<TL>::Elemento<TE>::setProx(Elemento<TE>* pTE) {
 
 template <class TL>
 template <class TE>
-const Lista<TL>::Elemento<TE>* Lista<TL>::Elemento<TE>::getProx() {
+const typename Lista<TL>::template Elemento<TE>* Lista<TL>::Elemento<TE>::getProx() {
 	return pProx;
 }
 
