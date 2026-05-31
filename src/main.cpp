@@ -1,10 +1,11 @@
-#include "Gerenciador_Grafico.h"
+/*#include "Jogo.h"
 
 using namespace Gerenciadores;
 
 int main() {
 
-    Gerenciador_Grafico GG;
+    Jogo j;
+    j.executar();
 
     return 0;
-}
+}*/
