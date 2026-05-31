@@ -1,4 +1,5 @@
 #include "Personagem.h"
+#include "Entidade.h"
 
 using namespace Personagens;
 

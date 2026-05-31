@@ -3,7 +3,7 @@
 using namespace Entidades;
 
 
-Entidade::Entidade() : Ente(), pos(0.0f,550.0f), vel(5.0f, 5.0f) {}
+Entidade::Entidade() : Ente(), pos(0.0f,500.0f), vel(5.0f, 5.0f) {}
 Entidade::~Entidade() {}
 
 

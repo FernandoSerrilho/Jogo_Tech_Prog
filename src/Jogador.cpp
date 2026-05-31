@@ -1,13 +1,16 @@
 #include "Jogador.h"
 #include "Inimigo.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 using namespace Entidades;
 using namespace Personagens;
 
-
-
-Jogador::Jogador(): Personagem(), pontos(0) , vidas(3), figura(sf::Vector2f(50.0f,50.0f)){
+Jogador::Jogador(const char* caminhoTextura): Personagem(), pontos(0) , vidas(3), figura(sf::Vector2f(17.0f,22.0f)){
     initFigura();
+    setText(caminhoTextura, figura);
+    sf::Vector2f aux(0.0f, 550.0f);
+    setPos(aux);
 }
 
 Jogador::~Jogador() {}
@@ -16,7 +19,6 @@ void Jogador::initFigura() {
 
     figura.setFillColor(sf::Color::Blue);
     figura.setPosition(pos);
-
 }
 
 void Jogador::setVidas(int v) { vidas = v;}
@@ -25,11 +27,11 @@ sf::Vector2f Jogador::getPos() { return pos;}
 
 sf::RectangleShape Jogador::getFigura() { return figura;}
 
-void Jogador::setPos(sf::Vector2f novapos) {
+sf::Vector2f Jogador::getTam() { return figura.getSize(); }
 
+void Jogador::setPos(sf::Vector2f novapos) {
     figura.setPosition(novapos);
     pos = novapos;
-
 }
 
 sf::FloatRect Jogador::getBounds() const{
@@ -46,13 +48,11 @@ void Jogador::colidir(Inimigo* pIn) {
     setVidas(v);
 
     std::cout << "Vidas:" << v  << std::endl; 
-
-
-
 }
 
 void Jogador::executar() {
     mover();
+    desenhar(getPos());
 }
 
 
@@ -60,8 +60,9 @@ void Jogador::mover() {
 
     float gravidade = 0.3f;
     float velpulo = 10.0f;
+    float tam = 526;
 
-    if (pos.y >= 550) {
+    if (pos.y >= tam) {
         vel.y = 0;
     }
         vel.y += gravidade;
@@ -72,7 +73,7 @@ void Jogador::mover() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         pos.x -= vel.x;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pos.y >= 550) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pos.y >= tam) {
         vel.y -= velpulo;
     }
 
