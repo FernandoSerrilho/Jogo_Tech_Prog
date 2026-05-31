@@ -10,13 +10,20 @@ namespace Gerenciadores {
     class Gerenciador_Grafico {
 
         private:
-            sf::RenderWindow janela;
+            sf::RenderWindow* janela;
+            static Gerenciador_Grafico* pGG;
+            Gerenciador_Grafico();
 
         public:
-            Gerenciador_Grafico();
             ~Gerenciador_Grafico();
-
-            void executar();
+            static Gerenciador_Grafico* getGerenciadorG();
+            void fechaJanela();
+            void limpaJanela();
+            const bool VerificajanelaAberta();
+            void displayJanela();
+            void setFrame(int n);
+            sf::RenderWindow* getJanela();
+            //void executar();
             void desenharEnte(Ente* pE);
 
     };

@@ -1,5 +1,6 @@
 #pragma once
 #include "Ente.h"
+#include <SFML/Graphics.hpp>
 
 namespace Entidades {
 
