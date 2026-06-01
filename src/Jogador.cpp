@@ -11,6 +11,7 @@ Jogador::Jogador(const char* caminhoTextura): Personagem(), pontos(0) , vidas(3)
     setText(caminhoTextura, figura);
     sf::Vector2f aux(0.0f, 550.0f);
     setPos(aux);
+    pulavel = false;
 }
 
 Jogador::~Jogador() {}
@@ -23,15 +24,23 @@ void Jogador::initFigura() {
 
 void Jogador::setVidas(int v) { vidas = v;}
 
+void Jogador::setPulavel(bool p) { pulavel = p; }
+
 sf::Vector2f Jogador::getPos() { return pos;}
+
+sf::Vector2f Jogador::getVel() { return vel;}
 
 sf::RectangleShape Jogador::getFigura() { return figura;}
 
 sf::Vector2f Jogador::getTam() { return figura.getSize(); }
 
-void Jogador::setPos(sf::Vector2f novapos) {
-    figura.setPosition(novapos);
-    pos = novapos;
+void Jogador::setPos(sf::Vector2f npos) {
+    figura.setPosition(npos);
+    pos = npos;
+}
+
+void Jogador::setVel(sf::Vector2f nvel) {
+    vel = nvel;
 }
 
 sf::FloatRect Jogador::getBounds() const{
@@ -64,6 +73,7 @@ void Jogador::mover() {
 
     if (pos.y >= tam) {
         vel.y = 0;
+        setPulavel(true);
     }
         vel.y += gravidade;
 
@@ -73,8 +83,9 @@ void Jogador::mover() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         pos.x -= vel.x;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pos.y >= tam) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pulavel) {
         vel.y -= velpulo;
+        setPulavel(false);
     }
 
     pos.y += vel.y;

@@ -17,7 +17,8 @@ namespace Entidades {
 
             //void salvarDataBuffer();     TODO
             virtual void executar() = 0;
-            //virtual void danificar(Jogador* p) = 0; TODO
+            virtual void danificar(Jogador* p) = 0;
+            virtual void colidir(Jogador* p) = 0;
             //virtual void salva() = 0;    TODO
             static void sementear();
 
