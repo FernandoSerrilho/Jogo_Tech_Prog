@@ -19,6 +19,13 @@ void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
 
 }
 
+void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* pO) {
+    if (pO) {
+        LOs.push_back(pO);
+    }
+
+}
+
 const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) {
 
     if (pe1 != NULL && pe2 != NULL) {
@@ -41,6 +48,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
             if (verificarColisao(pJog1,pIn)) {
 
                 pJog1->colidir(pIn);
+                pIn->colidir(pJog1);
 
             }
         }
@@ -87,10 +95,26 @@ void Gerenciador_Colisoes::tratarColisoesJogsLims() {
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
+    if (!LOs.empty()) {
+
+        std::vector<Obstaculo*>::iterator it;
+        for (it = LOs.begin(); it != LOs.end(); it++) {
+
+            Obstaculo* pOb = *it;
+
+            if (verificarColisao(pJog1, pOb)) {
+
+                pOb->obstaculizar(pJog1);
+
+            }
+        }
+
+    }
 }
 
 void Gerenciador_Colisoes::executar() {
 
     tratarColisoesJogsLims();
     tratarColisoesJogsInimigs();
+    tratarColisoesJogsObstacs();
 }

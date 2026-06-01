@@ -27,7 +27,7 @@ namespace Gerenciadores {
             Gerenciador_Colisoes(Jogador* pJ);
             ~Gerenciador_Colisoes();
             void incluirInimigo(Inimigo* pi);
-            void incluirObstaculo(Obstaculo* pi);
+            void incluirObstaculo(Obstaculo* po);
             void executar();
     };
 

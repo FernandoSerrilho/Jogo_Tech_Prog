@@ -4,7 +4,6 @@
 #include "Gerenciador_Grafico.h"
 #include "Jogador.h"
 #include "Drone.h"
-//#include "Ente.h"
 #include "Plataforma.h"
 #include "Chao.h"
 #include <list>

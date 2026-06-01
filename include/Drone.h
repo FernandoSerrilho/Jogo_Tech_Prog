@@ -25,6 +25,7 @@ namespace Entidades {
             void setJog(Jogador* p);
             void executar();
             void mover();
+            void colidir(Jogador *p);
         };
     }
 }

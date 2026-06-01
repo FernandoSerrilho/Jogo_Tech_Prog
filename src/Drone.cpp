@@ -50,13 +50,20 @@ void Drone::setJog(Jogador* p) {
 
 void Drone::danificar(Jogador* p) {
 
-
-
 }
 
 void Drone::executar(){
     mover();
     desenhar(getPos());
+}
+
+void Drone::colidir(Jogador *p) {
+
+    sf::Vector2f posd = getPos();
+
+    
+
+
 }
 
 void Drone::mover() {

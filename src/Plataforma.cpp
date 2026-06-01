@@ -9,20 +9,13 @@ Plataforma::Plataforma() :Obstaculo(), altura(0), colisao(sf::Vector2f(200.0f, (
 
 }
 
-Plataforma::Plataforma(sf::Vector2f pos, sf::Color cor, sf::Vector2f tam) : Obstaculo(), colisao(sf::Vector2f(tam)), altura((int)pos.y) {
-    InitColi(tam, pos, cor);
+Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), colisao(sf::Vector2f(tam)), altura((int)pos.y){
+    InitColi(tam, pos);
     InitText();
 }
 
 void Plataforma::InitText() {
-    if (!textura.loadFromFile("Texturas/Grama/Grama_Quadrado.png")) {
-        cout << "Textura Grama_Quadrado.png nao carregada!" << endl;
-    }
-    textura.setRepeated(true);
-    sprites.setTexture(textura);
-    sprites.setTextureRect(sf::IntRect(0, 0, (int)pos.x, (int)pos.y));
-    sprites.setPosition(colisao.getPosition());
-    setTexturas(textura, sprites);
+    setText("Texturas/Grama/Grama_QuadradoSemBorda.png", colisao);
 }
 
 
@@ -39,24 +32,49 @@ void Plataforma::setPos(sf::Vector2f pos) {
     colisao.setPosition(pos);
 }
 
-void Plataforma::setCor(sf::Color cor) {
-    colisao.setFillColor(cor);
-}
-
-void Plataforma::InitColi(sf::Vector2f dim, sf::Vector2f pos, sf::Color cor) {
+void Plataforma::InitColi(sf::Vector2f dim, sf::Vector2f pos) {
     setDim(dim);
     setPos(pos);
-    setCor(cor);
 }
 
 sf::RectangleShape Plataforma::getColi() {
     return colisao;
 }
 
+
+
 void Plataforma::obstaculizar(Jogador* j1) {
+
+    sf::Vector2f pos = j1->getPos();
+
+    sf::FloatRect boundsj = j1->getBounds();
+    sf::FloatRect boundsp = getBounds();
+
+    //colisao com o topo da plataforma
+    if (boundsj.top + boundsj.height <= (boundsp.top + 10.0f)){
+        j1->setPos(sf::Vector2f(pos.x,boundsp.top - boundsj.height));
+
+        j1->setVel(sf::Vector2f(j1->getVel().x,0.0f));
+
+        j1->setPulavel(true);
+    }
+    //colisao por baixo da plataforma
+    else if (boundsj.top >= boundsp.top + boundsp.height - 10.0f) {
+        j1->setPos(sf::Vector2f(pos.x,boundsp.top + boundsp.height));
+
+        j1->setVel(sf::Vector2f(j1->getVel().x,0.0f));
+    }
+    //colisao pela esquerda
+    else if (boundsj.left + boundsj.width <= boundsp.left + 10.0f) {
+        j1->setPos(sf::Vector2f(boundsp.left - boundsj.width,pos.y));
+    }
+    //colisao pela direita
+    else {
+        j1->setPos(sf::Vector2f(boundsp.left + boundsj.width,pos.y));
+    }
 
 }
 
 void Plataforma::executar() {
-    sprites.setPosition(0, 400);
+    desenhar(colisao.getPosition());
 }
