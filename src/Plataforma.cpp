@@ -53,53 +53,59 @@ void Plataforma::obstaculizar(Jogador* j1) {
 
     //colisao com o topo da plataforma
     if (boundsj.top + boundsj.height <= (boundsp.top + 10.0f)) {
-        j1->setPos(sf::Vector2f(pos.x, boundsp.top - boundsj.height));
+        j1->setPos(pos.x, boundsp.top - boundsj.height);
 
-        j1->setVel(sf::Vector2f(j1->getVel().x, 0.0f));
+        j1->setVel(j1->getVel().x, 0.0f);
 
         j1->setPulavel(true);
     }
     //colisao por baixo da plataforma
     else if (boundsj.top >= boundsp.top + boundsp.height - 10.0f) {
-        j1->setPos(sf::Vector2f(pos.x, boundsp.top + boundsp.height));
+        j1->setPos(pos.x, boundsp.top + boundsp.height);
 
-        j1->setVel(sf::Vector2f(j1->getVel().x, 0.0f));
+        j1->setVel(j1->getVel().x, 0.0f);
     }
     //colisao pela esquerda
     else if (boundsj.left + boundsj.width <= boundsp.left + 10.0f) {
-        j1->setPos(sf::Vector2f(boundsp.left - boundsj.width, pos.y));
+        j1->setPos(boundsp.left - boundsj.width, pos.y);
     }
     //colisao pela direita
     else {
-        j1->setPos(sf::Vector2f(boundsp.left + boundsj.width, pos.y));
+        j1->setPos(boundsp.left + boundsp.width, pos.y);
+
     }
 
 }
 
-void Plataforma::obstaculizar(Inimigo* j1) {
-    /*sf::Vector2f pos = j1->getPos();
+void Plataforma::obstaculizar(Inimigo* i1) {
+    sf::Vector2f pos = i1->getPos();
 
-    sf::FloatRect boundsj = j1->getBounds();
+    sf::FloatRect boundsj = i1->getBounds();
     sf::FloatRect boundsp = getBounds();
+
+
+    sf::Vector2f velI = i1->getVel();
 
     //colisao com o topo da plataforma
     if (boundsj.top + boundsj.height <= (boundsp.top + 10.0f)) {
-        j1->setPos(sf::Vector2f(pos.x, boundsp.top - boundsj.height));
-        j1->setVel(sf::Vector2f(j1->getVel().x, 0.0f));
+        i1->setPos(pos.x, boundsp.top - boundsj.height);
+        i1->setVel(i1->getVel().x, 0.0f);
     }
     //colisao por baixo da plataforma
     else if (boundsj.top >= boundsp.top + boundsp.height - 10.0f) {
-        j1->setPos(sf::Vector2f(pos.x, boundsp.top + boundsp.height));
-        j1->setVel(sf::Vector2f(j1->getVel().x, 0.0f));
+        i1->setPos(pos.x, boundsp.top + boundsp.height);
+        i1->setVel(i1->getVel().x, 0.0f);
     }
     //colisao pela esquerda
     else if (boundsj.left + boundsj.width <= boundsp.left + 10.0f) {
-        j1->setPos(sf::Vector2f(boundsp.left - boundsj.width, pos.y));
+        i1->setPos(boundsp.left - boundsj.width, pos.y);
     }
     //colisao pela direita
     else {
-        j1->setPos(sf::Vector2f(boundsp.left + boundsj.width, pos.y));
-    }*/
+        i1->setPos(boundsp.left + boundsj.width, pos.y);
+    }
+
+    i1->setVel(velI.x,velI.y);
 
 }
 

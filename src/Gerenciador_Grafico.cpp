@@ -11,7 +11,7 @@ using namespace Gerenciadores;
 
 Gerenciador_Grafico* Gerenciador_Grafico::pGG = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() : janela(new sf::RenderWindow(sf::VideoMode(800, 600), "Teste SFML - UTFPR"))
+Gerenciador_Grafico::Gerenciador_Grafico() : janela(new sf::RenderWindow(sf::VideoMode(1920, 1080), "Teste SFML - UTFPR"))
 {    
     if (janela == nullptr)
         cout << "Erro, janela não criada" << endl;

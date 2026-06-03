@@ -24,12 +24,9 @@ namespace Entidades {
             //void salvar();                TODO
             void mover();
 
+            void setPos(float x,float y);
             sf::RectangleShape getFigura();
-            sf::Vector2f getPos();
-            sf::Vector2f getVel();
             sf::Vector2f getTam();
-            void setPos(sf::Vector2f npos);
-            void setVel(sf::Vector2f nvel);
             sf::FloatRect getBounds() const;
         };
     }

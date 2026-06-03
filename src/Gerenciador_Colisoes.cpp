@@ -1,6 +1,7 @@
 #include "Gerenciador_Colisoes.h"
 #include "Obstaculo.h"
 #include <math.h>
+#include <iostream>
 
 using namespace Gerenciadores;
 using namespace Entidades;
@@ -8,7 +9,7 @@ using namespace Entidades::Personagens;
 
 
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), LIs() {}
+Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), pChao(NULL),LIs() {}
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
 
@@ -24,6 +25,12 @@ void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* pO) {
     if (pO) {
         LOs.push_back(pO);
     }
+
+}
+
+void Gerenciador_Colisoes::setChao(Chao* pC) {
+
+    pChao = pC;
 
 }
 
@@ -71,6 +78,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
                 pJog1->colidir(pIn);
                 pIn->danificar(pJog1);
 
+
             }
         }
 
@@ -79,40 +87,19 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
 
 }
 
-void Gerenciador_Colisoes::tratarColisoesJogsLims() {
-    sf::Vector2f lims_sup(0.0f, 0.0f);
-    sf::Vector2f lims_inf(800.0f, 550.0f);
-    float tam = 24.0f;
+void Gerenciador_Colisoes::tratarColisoesJogsChao() {
 
-    if (pJog1) {
+    if (pChao) {
 
-        bool colisao = false;
 
-        sf::Vector2f posJ = pJog1->getPos();
+            if (verificarColisao(pJog1,pChao)) {
+                pChao->colidir(pJog1);
 
-        if (posJ.x <= lims_sup.x) {
-            posJ.x = lims_sup.x;
-            colisao = true;
-        }
-        if (posJ.y <= lims_sup.y) {
-            posJ.y = lims_sup.y;
-            colisao = true;
-        }
-
-        else if (posJ.x >= lims_inf.x - tam) {
-            posJ.x = lims_inf.x - tam;
-            colisao = true;
-
-        }
-        else if (posJ.y >= lims_inf.y - tam) {
-            posJ.y = lims_inf.y - tam;
-            colisao = true;
-
-        }
-        if (colisao) {
-            pJog1->setPos(posJ);
-        }
+            }
     }
+
+    
+    
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
@@ -134,7 +121,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
 }
 
 void Gerenciador_Colisoes::executar() {
-    tratarColisoesJogsLims();
+    tratarColisoesJogsChao();
     tratarColisoesJogsInimigs();
     tratarColisoesJogsObstacs();
     tratarColisoesObstacInimigos();

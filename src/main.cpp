@@ -1,4 +1,4 @@
-/*#include "Jogo.h"
+#include "Jogo.h"
 
 using namespace Gerenciadores;
 
@@ -8,4 +8,4 @@ int main() {
     j.executar();
 
     return 0;
-}*/
+}

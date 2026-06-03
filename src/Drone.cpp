@@ -30,17 +30,6 @@ sf::FloatRect Drone::getBounds() const {
 
 }
 
-void Drone::setPos(float x, float y) {
-
-    pos.x = x;
-    pos.y = y;
-
-}
-
-void Drone::setVel(float vx, float vy) {
-    vel.x = vx;
-    vel.y = vy;
-}
 
 void Drone::setJog(Jogador* p) {
 

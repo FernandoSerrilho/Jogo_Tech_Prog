@@ -30,7 +30,7 @@ void Fase::criarPlataformas() {
 	int MAX = 2;
 
 	for (int i = 0;i < MAX;i++) {
-		Plataforma* p = new Plataforma(sf::Vector2f(400.0f - 100 * i, 420.0f - 100 * i), sf::Vector2f(300.0f, 42.0f));
+		Plataforma* p = new Plataforma(sf::Vector2f(400.0f - 100 * i, 900.0f - 100 * i), sf::Vector2f(300.0f, 42.0f));
 		GC.incluirObstaculo(p);
 		list_ents.incluir(p);
 	}

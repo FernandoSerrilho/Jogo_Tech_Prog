@@ -1,8 +1,8 @@
 #include "BackGround.h"
 
 BackGround::BackGround() {
-	colisao.setSize(sf::Vector2f(800.0f, 600.0f));
-	Ente::setText("Texturas/BackGround/Ceu_Escuro.png", colisao);
+	colisao.setSize(sf::Vector2f(1920.0f, 1080.0f));
+	Ente::setText("Texturas/BackGround/Fundo.png", colisao);
 }
 
 BackGround::~BackGround() {}

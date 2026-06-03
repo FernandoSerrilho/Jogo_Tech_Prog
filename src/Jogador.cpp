@@ -9,8 +9,7 @@ using namespace Personagens;
 Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(17.0f, 22.0f)) {
     initFigura();
     setText(caminhoTextura, figura);
-    sf::Vector2f aux(0.0f, 550.0f);
-    setPos(aux);
+    setPos(100.0f,800.0f);
     pulavel = false;
 }
 
@@ -24,24 +23,18 @@ void Jogador::initFigura() {
 
 void Jogador::setVidas(int v) { vidas = v; }
 
+void Jogador::setPos(float x, float y){
+    pos.x = x;
+    pos.y = y;
+    figura.setPosition(x, y);
+}
+
 void Jogador::setPulavel(bool p) { pulavel = p; }
-
-sf::Vector2f Jogador::getPos() { return pos; }
-
-sf::Vector2f Jogador::getVel() { return vel; }
 
 sf::RectangleShape Jogador::getFigura() { return figura; }
 
 sf::Vector2f Jogador::getTam() { return figura.getSize(); }
 
-void Jogador::setPos(sf::Vector2f npos) {
-    figura.setPosition(npos);
-    pos = npos;
-}
-
-void Jogador::setVel(sf::Vector2f nvel) {
-    vel = nvel;
-}
 
 sf::FloatRect Jogador::getBounds() const {
 
@@ -56,7 +49,7 @@ void Jogador::colidir(Inimigo* pIn) {
 
     setVidas(v);
 
-    std::cout << "Vidas:" << v << std::endl;
+    //std::cout << "Vidas:" << v << std::endl;
 }
 
 void Jogador::executar() {
@@ -69,12 +62,10 @@ void Jogador::mover() {
 
     float gravidade = 0.3f;
     float velpulo = 10.0f;
-    float tam = 526;
+    float tam = 1080.0f -50.0f;
 
-    if (pos.y >= tam) {
-        vel.y = 0;
-        setPulavel(true);
-    }
+    
+
     vel.y += gravidade;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -90,6 +81,6 @@ void Jogador::mover() {
 
     pos.y += vel.y;
 
-    setPos(pos);
+    setPos(pos.x,pos.y);
 
 }

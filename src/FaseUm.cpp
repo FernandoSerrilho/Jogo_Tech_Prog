@@ -4,10 +4,6 @@
 using namespace Entidades;
 
 FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
-	criarInimigos(j1);
-	criarObstaculos();
-	criarCenario();
-	criarPlataformas();
 }
 
 FaseUm::~FaseUm() {
@@ -34,13 +30,23 @@ void FaseUm::criarObstaculos() {
 }
 
 void FaseUm::criarCenario() {
-	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
-	list_ents.incluir(c);
 	BackGround* b = new BackGround();
 	list_ents.incluir(b);
+	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
+	GC.setChao(c);
+	list_ents.incluir(c);
 }
 
 void FaseUm::executar() {
 	list_ents.percorrer();
 	GC.executar();
+}
+
+void FaseUm::inicializar(Jogador* j1) {
+	criarCenario();
+	criarObstaculos();
+	criarPlataformas();
+	criarInimigos(j1);
+
+
 }

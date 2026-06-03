@@ -16,8 +16,6 @@ namespace Entidades {
             ~Drone();
 
             void danificar(Jogador* p);
-            void setVel(float vx, float vy);
-            void setPos(float x, float y);
             void initFigura();
             sf::RectangleShape getFigura();
             sf::FloatRect getBounds() const;

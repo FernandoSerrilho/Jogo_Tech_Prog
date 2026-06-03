@@ -4,6 +4,7 @@
 #include <vector>
 #include "Inimigo.h"
 #include "Jogador.h"
+#include "Chao.h"
 //#include "Obstaculo.h"
 
 namespace Entidades {
@@ -26,15 +27,17 @@ namespace Gerenciadores {
         std::vector<Inimigo*> LIs;
         Jogador* pJog1;
         std::vector<Obstaculo*>LOs;
+        Chao* pChao;
     private:
         const bool verificarColisao(Entidade* pe1, Entidade* pe2);
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimigs();
         void tratarColisoesObstacInimigos();
-        void tratarColisoesJogsLims();
+        void tratarColisoesJogsChao();
     public:
         Gerenciador_Colisoes(Jogador* pJ);
         ~Gerenciador_Colisoes();
+        void setChao(Chao* pC);
         void incluirInimigo(Inimigo* pi);
         void incluirObstaculo(Obstaculo* po);
         void executar();

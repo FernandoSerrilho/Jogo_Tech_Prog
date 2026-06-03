@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entidade.h"
+#include "Jogador.h"
 using namespace Entidades;
 
 class Chao : public Entidade {
@@ -11,4 +12,5 @@ public:
 	~Chao();
 	void executar();
 	sf::FloatRect getBounds() const;
+	void colidir(Entidade * pE);
 };
