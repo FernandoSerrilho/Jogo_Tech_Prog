@@ -1,5 +1,6 @@
 #include "Inimigo.h"
 #include "Jogador.h"
+#include <Windows.h>
 
 using namespace Personagens;
 

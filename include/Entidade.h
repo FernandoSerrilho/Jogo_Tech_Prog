@@ -1,5 +1,6 @@
 #pragma once
 #include "Ente.h"
+#include <SFML/Graphics.hpp>
 
 namespace Entidades {
 
@@ -17,6 +18,9 @@ class Entidade : public Ente {
     public:
         virtual void executar() = 0;
         sf::Vector2f getPos();
+        sf::Vector2f getVel();
+        virtual void setPos(float x, float y);
+        virtual void setVel(float vx, float vy);
         virtual sf::FloatRect getBounds() const = 0;
         //virtual void salvar() = 0;          TODO
 
