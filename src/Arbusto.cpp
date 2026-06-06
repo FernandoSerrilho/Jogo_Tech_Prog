@@ -21,13 +21,6 @@ void Arbusto::executar() {
 }
 
 void Arbusto::obstaculizar(Jogador* j1) {
-    sf::Vector2f pos = j1->getPos();
-    sf::Vector2f velJ = j1->getVel();
-    sf::FloatRect boundsJ = j1->getBounds();
-    sf::FloatRect boundsA = getBounds();
-
-    //float overlapX = (boundsJ.left + boundsJ.width) - boundsA.left;
-    //j1->setPos(pos.x - overlapX, pos.y);
     j1->setLent(true);
     j1->setmodifiVelo(lentidao);
 }
