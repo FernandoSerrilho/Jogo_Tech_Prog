@@ -4,6 +4,7 @@ using namespace Entidades::Personagens;
 
 Chao::Chao(const char* caminhoTextura) {
 	colisao.setPosition(0.0f, 1080.0f - 50.0f);
+	setPos(0.0f, 1080.0f - 50.0f);
 	sf::Vector2f tam(1920.0f, 50.0f);
 	colisao.setSize(tam);
 	setText(caminhoTextura, colisao);

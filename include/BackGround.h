@@ -7,7 +7,7 @@ class BackGround : public Entidade {
 private:
 	sf::RectangleShape colisao;
 public:
-	BackGround();
+	BackGround(const char* caminhoTextura = "");
 	~BackGround();
 	sf::FloatRect getBounds() const;
 	void executar();

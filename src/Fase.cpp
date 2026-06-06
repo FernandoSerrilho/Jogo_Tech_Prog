@@ -5,7 +5,7 @@
 using namespace Fases;
 
 Fase::Fase(Jogador* j) :list_ents(), GC(j) {
-	criarInmFaceis(j);
+	//criarInmFaceis(j);
 }
 
 Fase::~Fase() {
