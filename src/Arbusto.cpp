@@ -7,6 +7,7 @@ Arbusto::Arbusto():Obstaculo(), lentidao(0.3f) {}
 Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), lentidao(0.3f) {
 	colisao.setSize(tam);
 	colisao.setPosition(pos);
+	setPos(pos.x,pos.y);
 	setText("Texturas/Arbusto/Bush.png", colisao);
 }
 

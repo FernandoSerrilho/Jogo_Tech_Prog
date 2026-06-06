@@ -14,9 +14,13 @@ const Gerenciador_Grafico* Jogo::getGG (){
 }
 
 void Jogo::executar() {
-        GG->limpaJanela();
-        f1->executar();
-        j1->executar();
-        GG->displayJanela();
-    }
+    GG->limpaJanela();
+    f1->executar();
+    j1->executar();
+    GG->displayJanela();
+}
+
+void Jogo::desenhar() {
+    f1->desenhar();
+    j1->desenhar(j1->getPos());
 }

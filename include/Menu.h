@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Ente.h"
+#include "BackGround.h"
 #include <string>
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 private:
 	Jogo* pJogo;
 	EstadoMenu estadoAtual;
+	EstadoMenu estadoAnterior;
 	sf::Font fonte;
 	BackGround* bMenu;
 

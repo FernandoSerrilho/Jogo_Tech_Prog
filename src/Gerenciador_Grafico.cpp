@@ -36,7 +36,7 @@ void Gerenciador_Grafico::displayJanela() {
 
 Gerenciador_Grafico* Gerenciador_Grafico::getGerenciadorG() {
     if (pGG == nullptr)
-        return new Gerenciador_Grafico();
+        pGG = new Gerenciador_Grafico();
     return pGG;
 }
 

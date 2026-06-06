@@ -1,8 +1,9 @@
 #include "Menu.h"
 #include "Jogo.h"
 
-Menu::Menu():pJogo(new Jogo()),bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0),fase_selecionada(0){
-	if (!fonte.loadFromFile("Fontes/FonteTexto.ttf")) {
+Menu::Menu():pJogo(new Jogo()),bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
+,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL){
+	if (!fonte.loadFromFile("Texturas/Fontes/FonteTexto.ttf")) {
 		std::cout << "Erro ao carregar a fonte!" << std::endl;
 	}
 	initText("txtTituloJogo", "CONTRA DA SHOPEE", 90, { 960.f, 150.f });
@@ -63,32 +64,81 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 
 void Menu::executar() {
 	while (pJogo->getGG()->getGerenciadorG()->VerificajanelaAberta()) {
+		sf::Vector2i mousePosI = sf::Mouse::getPosition(*(pJogo->getGG()->getGerenciadorG()->getJanela()));
+		sf::Vector2f mousePos(static_cast<float>(mousePosI.x), static_cast<float>(mousePosI.y));
+
 		sf::Event event;
 		while (pJogo->getGG()->getGerenciadorG()->getJanela()->pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-				pJogo->getGG()->getGerenciadorG()->fechaJanela();
-			else if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Escape)
-					estadoAtual = PAUSA;
-			}
-			if (estadoAtual == MENU_PRINCIPAL) {
-				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
-				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
-				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
-			}
-			else if (estadoAtual == CONFIRMA_SAIR) {
-				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtCerteza"]);
-				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSim"]);
-				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnNao"]);
-			}
-			else if (estadoAtual = JOGO_RODANDO) {
-				pJogo->executar();
-				if (estadoAtual == PAUSA) {
-					pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnContinuar"]);
-					pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
+				if (event.type == sf::Event::Closed) {
+					pJogo->getGG()->getGerenciadorG()->fechaJanela();
 				}
+				else if (event.type == sf::Event::KeyPressed) {
+						if (event.key.code == sf::Keyboard::Escape) {
+							if (estadoAtual == JOGO_RODANDO) {
+								estadoAtual = PAUSA;
+							}
+							else if (estadoAtual == PAUSA) {
+								estadoAtual = JOGO_RODANDO;
+							}
+							else if (estadoAtual == CONFIRMA_SAIR) {
+								estadoAtual = estadoAnterior;
+							}
+					}
+				}
+				else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+					if (estadoAtual == MENU_PRINCIPAL && textos["btnSair"].getGlobalBounds().contains(mousePos)) {
+						estadoAnterior = MENU_PRINCIPAL;
+						estadoAtual = CONFIRMA_SAIR;
+					}
+					else if (estadoAtual == PAUSA && textos["btnSair"].getGlobalBounds().contains(mousePos)) {
+						estadoAnterior = PAUSA; 
+						estadoAtual = CONFIRMA_SAIR;
+					}
+					else if (estadoAtual == CONFIRMA_SAIR) {
+						if (textos["btnSim"].getGlobalBounds().contains(mousePos)) {
+							pJogo->getGG()->getGerenciadorG()->fechaJanela();
+						}
+						else if (textos["btnNao"].getGlobalBounds().contains(mousePos)) {
+							estadoAtual = estadoAnterior; 
+						}
+					}
+					else {
+						executarMouse(mousePos); 
+					}
+				}
+		}
+
+		if (estadoAtual == JOGO_RODANDO)
+			pJogo->executar();
+
+		else if (estadoAtual == MENU_PRINCIPAL) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
+
+		else if (estadoAtual == CONFIRMA_SAIR) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			if (estadoAnterior == PAUSA) {
+				pJogo->desenhar();
 			}
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtCerteza"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSim"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnNao"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
+
+		else if (estadoAtual == PAUSA) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->desenhar();
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnContinuar"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
 	}
 }
+
 

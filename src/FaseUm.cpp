@@ -66,6 +66,8 @@ void FaseUm::inicializar(Jogador* j1) {
 	criarObstaculos();
 	criarPlataformas();
 	criarInimigos(j1);
+}
 
-
+void FaseUm::desenhar() {
+	list_ents.desenhar();
 }

@@ -19,6 +19,7 @@ public:
 	~Jogo();
 	void executar();
 	const Gerenciador_Grafico* getGG();
+	void desenhar();
 };
 
 /*#pragma once

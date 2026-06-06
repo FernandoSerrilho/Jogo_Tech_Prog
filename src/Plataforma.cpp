@@ -31,6 +31,7 @@ void Plataforma::setDim(sf::Vector2f dim) {
 
 void Plataforma::setPos(sf::Vector2f pos) {
     colisao.setPosition(pos);
+    Entidade::setPos(pos.x,pos.y);
 }
 
 void Plataforma::InitColi(sf::Vector2f dim, sf::Vector2f pos) {

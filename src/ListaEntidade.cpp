@@ -31,3 +31,15 @@ void ListaEntidade::limpar() {
 	LEs.limpar();
 }
 
+void ListaEntidade::desenhar() {
+	Lista<Entidade>::Iterador it = LEs.begin();
+
+	while (it != LEs.end()) {
+		Entidade* e = *it;
+
+		if (e)
+			e->desenhar(e->getPos());
+		++it;
+	}
+}
+

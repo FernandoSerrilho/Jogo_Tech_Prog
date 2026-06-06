@@ -17,6 +17,7 @@ public:
 	~ListaEntidade();
 	void incluir(Entidade* pE);
 	void percorrer();
+	void desenhar();
 	void limpar();
 
 };
