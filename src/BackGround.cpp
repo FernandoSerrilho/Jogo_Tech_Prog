@@ -1,8 +1,8 @@
 #include "BackGround.h"
 
-BackGround::BackGround() {
+BackGround::BackGround(const char* caminhoTextura) {
 	colisao.setSize(sf::Vector2f(1920.0f, 1080.0f));
-	Ente::setText("Texturas/BackGround/Fundo.png", colisao);
+	Ente::setText(caminhoTextura, colisao);
 }
 
 BackGround::~BackGround() {}

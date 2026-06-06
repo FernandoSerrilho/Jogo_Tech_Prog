@@ -49,7 +49,7 @@ void FaseUm::criarObstaculos() {
 }
 
 void FaseUm::criarCenario() {
-	BackGround* b = new BackGround();
+	BackGround* b = new BackGround("Texturas/BackGround/Fundo.png");
 	list_ents.incluir(b);
 	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
 	GC.setChao(c);

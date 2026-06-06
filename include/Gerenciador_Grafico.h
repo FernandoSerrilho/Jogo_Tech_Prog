@@ -25,6 +25,7 @@ namespace Gerenciadores {
             sf::RenderWindow* getJanela();
             //void executar();
             void desenharEnte(Ente* pE);
+            void desenharTexto(sf::Text t);
 
     };
 

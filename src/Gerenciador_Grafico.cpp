@@ -57,3 +57,7 @@ void Gerenciador_Grafico::setFrame(int n) {
 void Gerenciador_Grafico::desenharEnte(Ente* pE) {
     janela->draw(pE->getSprite());
 }
+
+void Gerenciador_Grafico::desenharTexto(sf::Text t) {
+    janela->draw(t);
+}

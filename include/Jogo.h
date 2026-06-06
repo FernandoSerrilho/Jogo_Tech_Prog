@@ -12,15 +12,13 @@ using namespace Personagens;
 class Jogo {
 private:
 	Gerenciador_Grafico* GG;
-	//Gerenciador_Colisoes* GC;
 	Jogador* j1;
-	//Chao* c;
-	//BackGround* b;
 	FaseUm* f1;
 public:
 	Jogo();
 	~Jogo();
 	void executar();
+	const Gerenciador_Grafico* getGG();
 };
 
 /*#pragma once
