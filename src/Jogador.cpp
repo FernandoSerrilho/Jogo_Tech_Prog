@@ -6,11 +6,11 @@
 using namespace Entidades;
 using namespace Personagens;
 
-Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), modifiVelo(1.0f) {
+Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), 
+modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false) {
     initFigura();
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
-    pulavel = false;
 }
 
 Jogador::~Jogador() {}
@@ -59,6 +59,14 @@ void Jogador::executar() {
     desenhar(getPos());
 }
 
+bool Jogador::verificaLent() const {
+    return (lento);
+}
+
+void Jogador::setLent(bool v) {
+    lento = v;
+}
+
 
 void Jogador::mover() {
 
@@ -66,8 +74,11 @@ void Jogador::mover() {
     float velpulo = 10.0f;
     float tam = 1080.0f -50.0f;
 
-    vel.x *= modifiVelo;
     vel.y += gravidade;
+    if (verificaLent())
+        vel.x = velBase * modifiVelo;
+    else
+        vel.x = velBase;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         pos.x += vel.x;

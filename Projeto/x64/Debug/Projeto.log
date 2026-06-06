@@ -1,4 +1,15 @@
 ﻿  Arbusto.cpp
+  Chao.cpp
+  Drone.cpp
+  Fase.cpp
+  FaseUm.cpp
+  Gerenciador_Colisoes.cpp
+  Gerenciador_Grafico.cpp
+  Inimigo.cpp
   Jogador.cpp
+  Jogo.cpp
+  Obstaculo.cpp
+  Plataforma.cpp
+  main.cpp
   Gerando Código...
   Projeto.vcxproj -> C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\x64\Debug\Projeto.exe

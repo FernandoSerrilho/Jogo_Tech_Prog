@@ -2,9 +2,9 @@
 #include "Jogador.h"
 #include "Inimigo.h"
 
-Arbusto::Arbusto():Obstaculo(), lentidao(((rand() % 3) / 0.1f) + 0.3f) {}
+Arbusto::Arbusto():Obstaculo(), lentidao(0.3f) {}
 
-Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), lentidao(((rand()%5)/0.1f) + 0.3f) {
+Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), lentidao(0.3f) {
 	colisao.setSize(tam);
 	colisao.setPosition(pos);
 	setText("Texturas/Arbusto/Bush.png", colisao);
@@ -26,8 +26,10 @@ void Arbusto::obstaculizar(Jogador* j1) {
     sf::FloatRect boundsJ = j1->getBounds();
     sf::FloatRect boundsA = getBounds();
 
+    //float overlapX = (boundsJ.left + boundsJ.width) - boundsA.left;
+    //j1->setPos(pos.x - overlapX, pos.y);
+    j1->setLent(true);
     j1->setmodifiVelo(lentidao);
-    //j1->setVel(velJ.x,velJ.y);
 }
 
 void Arbusto::obstaculizar(Inimigo* i1) {

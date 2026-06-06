@@ -12,6 +12,8 @@ namespace Entidades {
             sf::RectangleShape figura;
             bool pulavel;
             float modifiVelo;
+            float velBase;
+            bool lento;
         public:
             Jogador(const char* caminhoTextura = "");
             ~Jogador();
@@ -20,6 +22,8 @@ namespace Entidades {
             void setVidas(int v);
             void setPulavel(bool p);
             void setmodifiVelo(float v);
+            bool verificaLent() const;
+            void setLent(bool v);
 
             void colidir(Inimigo* pIn);
             void executar();
