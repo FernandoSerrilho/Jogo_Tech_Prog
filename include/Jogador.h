@@ -11,6 +11,7 @@ namespace Entidades {
             int vidas;
             sf::RectangleShape figura;
             bool pulavel;
+            float modifiVelo;
         public:
             Jogador(const char* caminhoTextura = "");
             ~Jogador();
@@ -18,6 +19,7 @@ namespace Entidades {
             void initFigura();
             void setVidas(int v);
             void setPulavel(bool p);
+            void setmodifiVelo(float v);
 
             void colidir(Inimigo* pIn);
             void executar();

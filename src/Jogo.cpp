@@ -1,6 +1,6 @@
 #include "Jogo.h"
 
-Jogo::Jogo() :GG(GG->getGerenciadorG()), j1(new Jogador("Texturas/Jogador/Soldado_Parado.png"))
+Jogo::Jogo() :GG(GG->getGerenciadorG()), j1(new Jogador("Texturas/Jogador/Soldado.png"))
 ,f1(new FaseUm(j1)) {
     GG->setFrame(60);
     j1->setGG(GG);

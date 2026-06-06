@@ -1,0 +1,68 @@
+﻿  BackGround.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/BackGround.cpp')
+  
+  Chao.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Chao.cpp')
+  
+  Drone.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Drone.cpp')
+  
+  Ente.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Ente.cpp')
+  
+  Entidade.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Entidade.cpp')
+  
+  Fase.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Fase.cpp')
+  
+  FaseUm.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/FaseUm.cpp')
+  
+  Gerenciador_Colisoes.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Gerenciador_Colisoes.cpp')
+  
+  Gerenciador_Grafico.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Gerenciador_Grafico.h(4,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Gerenciador_Grafico.cpp')
+  
+  Inimigo.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Inimigo.cpp')
+  
+  Jogador.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Jogador.cpp')
+  
+  Jogo.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Gerenciador_Grafico.h(4,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Jogo.cpp')
+  
+  ListaEntidade.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/ListaEntidade.cpp')
+  
+  main.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Gerenciador_Grafico.h(4,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/main.cpp')
+  
+  Obstaculo.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Obstaculo.cpp')
+  
+  Personagem.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Personagem.cpp')
+  
+  Plataforma.cpp
+C:\Users\peter\Desktop\Tech_Prog\pl\Projeto\include\Ente.h(2,10): error C1083: Não é possível abrir arquivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  (compilando o arquivo fonte '../src/Plataforma.cpp')
+  
