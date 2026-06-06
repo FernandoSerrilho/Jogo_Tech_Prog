@@ -1,6 +1,7 @@
 #include "Drone.h"
 #include "Jogador.h"
 #include "SFML/Graphics.hpp"
+#include <cmath>
 
 using namespace Personagens;
 using namespace Entidades;
@@ -17,7 +18,7 @@ Drone::~Drone() {}
 void Drone::initFigura() {
 
     figura.setFillColor(sf::Color::Red);
-    setPos(400, 300);
+    setPos(400, 600);
     figura.setPosition(pos);
     setVel(0.2f * (float)nivel_maldade + 0.5f, 0.2f * (float)nivel_maldade + 0.5f);
 }
@@ -77,8 +78,26 @@ void Drone::colidir(Entidade* pE) {
 }
 
 void Drone::mover() {
+    
+    
+    
     if (pJ) {
+
+
+        float raio_det = 200.0f;
+
         sf::Vector2f posj = pJ->getPos();
+
+        float dy = (pJ->getBounds().top + pJ->getBounds().height)/2.0f - (getBounds().top + getBounds().height)/2.0f;
+        float dx = (pJ->getBounds().left + pJ->getBounds().width)/2.0f - (getBounds().left + getBounds().width)/2.0f;
+
+        float dist = std::sqrt(dx*dx + dy*dy);
+
+
+
+        if (dist <= raio_det) {
+
+
         sf::Vector2f tamD = figura.getSize();
         sf::Vector2f tamJ = pJ->getTam();
         float tamRy = tamD.y - tamJ.y;
@@ -93,6 +112,18 @@ void Drone::mover() {
         if (posj.y - pos.y - tamRy > 0)
             pos.y += vel.y;
         figura.setPosition(pos);
+        }
+
+        else {
+            static sf::Clock relogio;
+            float tempo = relogio.getElapsedTime().asSeconds();
+
+
+            pos.x += std::cos(tempo * 0.8f) * vel.x * 0.5f;
+
+            figura.setPosition(pos);
+        }
+
     }
 
 

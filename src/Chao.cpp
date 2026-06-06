@@ -38,6 +38,4 @@ void Chao::colidir(Entidade* pE) {
 
 	}
 
-
-
 }
