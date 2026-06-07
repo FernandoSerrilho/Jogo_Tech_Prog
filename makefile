@@ -15,6 +15,6 @@ src/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f src/*.o
+	del /Q /F src\*.o bin\*.exe
 
 .PHONY: all clean

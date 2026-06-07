@@ -10,6 +10,11 @@ namespace Entidades {
         private:
             sf::RectangleShape figura;
             Jogador* pJ;
+            bool emKnockback;
+            sf::Clock relogioKnockback;
+            float temp_knockback;
+            sf::Vector2f vetorKnockback;
+
 
         public:
             Drone(Jogador* p = NULL, const char* caminhoTextura = "");
