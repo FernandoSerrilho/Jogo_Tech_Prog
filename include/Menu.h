@@ -31,7 +31,7 @@ private:
 
 	void initText(const string& chave, const string& conteudo, unsigned int tamanho, sf::Vector2f posicao);
 public:
-	Menu();
+	Menu(Jogo* pJ = nullptr);
 	~Menu();
 	void executarMouse(const sf::Vector2f& mousePos);
 	EstadoMenu getEstado() { return estadoAtual; }
