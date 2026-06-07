@@ -27,5 +27,5 @@ void Arbusto::obstaculizar(Jogador* j1) {
 }
 
 void Arbusto::obstaculizar(Inimigo* i1) {
-    int n = 45;
+    //int n = 45;
 }

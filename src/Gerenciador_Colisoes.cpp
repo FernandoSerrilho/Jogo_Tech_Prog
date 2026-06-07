@@ -76,7 +76,6 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
             if (verificarColisao(pJog1, pIn)) {
 
                 pJog1->colidir(pIn);
-                pIn->danificar(pJog1);
 
 
             }
