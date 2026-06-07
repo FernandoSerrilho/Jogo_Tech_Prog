@@ -1,8 +1,8 @@
 #include "Menu.h"
 #include "Jogo.h"
 
-Menu::Menu():pJogo(new Jogo()),bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
-,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL){
+Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
+,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL),pJogo(j){
 	if (!fonte.loadFromFile("Texturas/Fontes/FonteTexto.ttf")) {
 		std::cout << "Erro ao carregar a fonte!" << std::endl;
 	}
@@ -109,7 +109,7 @@ void Menu::executar() {
 		}
 
 		if (estadoAtual == JOGO_RODANDO)
-			pJogo->executar();
+				pJogo->executarf1();
 
 		else if (estadoAtual == MENU_PRINCIPAL) {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
