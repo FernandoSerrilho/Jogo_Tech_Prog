@@ -16,7 +16,7 @@ Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), colisa
 }
 
 void Plataforma::InitText() {
-    setText("Texturas/Grama/Grama_QuadradoSemBorda.png", colisao);
+    setText("Texturas/Grama/QuadradoPlat.png", colisao);
 }
 
 

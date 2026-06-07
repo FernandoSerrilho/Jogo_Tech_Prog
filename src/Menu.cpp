@@ -6,7 +6,7 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	if (!fonte.loadFromFile("Texturas/Fontes/FonteTexto.ttf")) {
 		std::cout << "Erro ao carregar a fonte!" << std::endl;
 	}
-	initText("txtTituloJogo", "CONTRA DA SHOPEE", 90, { 960.f, 150.f });
+	initText("txtTituloJogo", "MILITARY ZONE", 90, { 960.f, 150.f });
 	initText("btnJogar", "JOGAR", 40, { 960.f, 450.f });
 	initText("btnSair", "SAIR", 40, { 960.f, 700.f });
 
