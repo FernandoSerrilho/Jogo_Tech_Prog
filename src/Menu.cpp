@@ -20,6 +20,10 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnSim", "SIM", 40, { 750.f, 550.f });
 	initText("btnNao", "NAO", 40, { 1170.f, 550.f });
 
+	initText("txtMorte", "MORREU!", 60, { 960.f, 300.f });
+	initText("btnRestart", "REINICIAR", 40, { 750.f, 550.f });
+	initText("btnMenu", "MENU PRINCIPAL", 40, { 1170.f, 550.f });
+
 	initText("btnContinuar", "CONTINUAR", 40, { 960.f, 550.f });
 }
 
@@ -59,6 +63,14 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 			estadoAtual = JOGO_RODANDO;
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos))
 			estadoAtual = CONFIRMA_SAIR;
+	}
+	else if (estadoAtual == MENU_MORTE) {
+		/*if (textos["btnRestart"].getGlobalBounds().contains(mousePos))
+			estadoAtual = JOGO_RODANDO;*/
+		if (textos["btnSair"].getGlobalBounds().contains(mousePos))
+			estadoAtual = CONFIRMA_SAIR;
+		else if (textos["btnMenu"].getGlobalBounds().contains(mousePos))
+			estadoAtual = MENU_PRINCIPAL;
 	}
 }
 
@@ -135,6 +147,16 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
 			pJogo->desenhar();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnContinuar"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
+
+		else if (estadoAtual == MENU_MORTE) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->desenhar();
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMorte"]);
+			//pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}

@@ -12,6 +12,7 @@ public:
 	enum EstadoMenu {
 		MENU_PRINCIPAL,
 		SEL_FASE,
+		MENU_MORTE,
 		SEL_JOGADORES,
 		CONFIRMA_SAIR,
 		JOGO_RODANDO,
