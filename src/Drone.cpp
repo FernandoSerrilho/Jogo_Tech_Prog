@@ -78,6 +78,9 @@ void Drone::danificar(Jogador* p) {
 void Drone::executar() {
     mover();
     desenhar(getPos());
+    if (invulneravel && relogioinv.getElapsedTime().asSeconds() >= 0.5f) {
+		invulneravel = false;
+	}
 }
 
 void Drone::colidir(Jogador* j) {

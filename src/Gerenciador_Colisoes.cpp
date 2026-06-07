@@ -105,6 +105,33 @@ void Gerenciador_Colisoes::tratarColisoesJogsChao() {
     
 }
 
+void Gerenciador_Colisoes::tratarColisoesInimsChao() {
+
+    if (pChao) {
+
+
+           if (!LIs.empty()) {
+
+        std::vector<Inimigo*>::iterator it;
+            for (it = LIs.begin(); it != LIs.end(); it++) {
+
+            Inimigo* pIn = *it;
+
+            if (verificarColisao(pIn, pChao)) {
+
+                pChao->colidir(pIn);
+            }
+
+            }
+
+
+        }
+    }
+
+    
+    
+}
+
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
     if (!LOs.empty()) {
 
@@ -147,6 +174,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsLims() {
 
 void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsChao();
+    tratarColisoesInimsChao();
     tratarColisoesJogsInimigs();
     tratarColisoesJogsObstacs();
     tratarColisoesObstacInimigos();

@@ -1,8 +1,9 @@
 #include "Soldado.h"
 #include "Jogador.h"
+#include <cmath>
 
 Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo(),figura(sf::Vector2f(58.0f,75.0f))
-,temp_parado(0.5f),vetorParado(sf::Vector2f(0.0f,0.0f)),parado(false){
+,vidas(4),temp_parado(0.5f),vetorParado(sf::Vector2f(0.0f,0.0f)),parado(false){
 	setText(caminhoTextura, figura);
 	setPos(pos.x,pos.y);
 	setVel(3.0f, 3.0f);
@@ -19,7 +20,11 @@ sf::FloatRect Soldado::getBounds() const {
 	return figura.getGlobalBounds();
 }
 
-void Soldado::colidir(Entidade* pE){}
+int Soldado::getVidas() { return vidas;}
+
+void Soldado::setVidas(int v) { vidas = v;}
+
+void Soldado::colidir(Jogador* j){}
 
 void Soldado::danificar(Jogador* j) {
 	if (j->getInvulneravel()) return;
@@ -65,5 +70,11 @@ void Soldado::mover() {
 }
 
 void Soldado::executar() {
+
+	if (invulneravel && relogioinv.getElapsedTime().asSeconds() >= 0.5f) {
+		invulneravel = false;
+	}
+
+
 	mover();
 }

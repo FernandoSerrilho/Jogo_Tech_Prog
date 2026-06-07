@@ -82,13 +82,23 @@ void Jogador::colidir(Inimigo* pIn) {
 
 void Jogador::danificar(Inimigo* pIn) {
 
+
+    if (pIn->getInvulneravel()) {
+        return;
+    }
+
     int v = pIn->getVidas();
 
     v -= 1;
 
+    pIn->setInvulneravel(true);
+    pIn->getRelogioInv().restart();
+
     if (v <= 0) {
 
         pIn->setVivo(false);
+
+        pIn->setPos(2500.0f,2500.0f);
 
         std::cout << "morreu" << std::endl;
 

@@ -5,7 +5,7 @@
 using namespace Personagens;
 
 
-Inimigo::Inimigo() : Personagem(), nivel_maldade(0) {
+Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false){
 
     sementear();
     nivel_maldade = rand()%10 + 1;
@@ -19,3 +19,7 @@ void Inimigo::sementear() {
     srand((unsigned) time(&t)); rand();
 
 }
+
+bool Inimigo::getInvulneravel() const { return invulneravel; }
+void Inimigo::setInvulneravel(bool inv) { invulneravel = inv; }
+sf::Clock& Inimigo::getRelogioInv() { return relogioinv; }
