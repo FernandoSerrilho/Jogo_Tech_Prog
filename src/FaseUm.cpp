@@ -22,7 +22,7 @@ void FaseUm::criarIniMed() {
 
 void FaseUm::criarObsMed() {
 	Inimigo::sementear();
-	int MAX = 5;//rand() % 3 + 3;
+	int MAX = rand() % 3 + 3;
 
 	for (int i = 0;i < MAX;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
