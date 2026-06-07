@@ -27,6 +27,21 @@ void ListaEntidade::percorrer() {
 	}
 }
 
+void ListaEntidade::removeMortos() {
+	Lista<Entidade>::Iterador it = LEs.begin();
+
+	while (it != LEs.end()) {
+		Entidade* e = *it;
+
+		if (e->getVivo() == false) {
+			LEs.remove(it.getIt());
+		
+		}
+		++it;
+	}
+
+}
+
 void ListaEntidade::limpar() {
 	LEs.limpar();
 }

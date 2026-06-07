@@ -34,6 +34,7 @@ namespace Gerenciadores {
         void tratarColisoesJogsInimigs();
         void tratarColisoesObstacInimigos();
         void tratarColisoesJogsChao();
+        void tratarColisoesJogsLims();
     public:
         Gerenciador_Colisoes(Jogador* pJ);
         ~Gerenciador_Colisoes();

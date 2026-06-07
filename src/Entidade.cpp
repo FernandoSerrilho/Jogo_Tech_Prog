@@ -23,6 +23,10 @@ void Entidade::setVel(float vx, float vy) {
 
 }
 
+void Entidade::setVivo(bool v) { vivo = v;}
+
+bool Entidade::getVivo() {return vivo;}
+
 
 
 

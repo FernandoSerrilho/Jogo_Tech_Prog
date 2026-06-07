@@ -79,6 +79,10 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
 
 
             }
+            if (pJog1->getAtacando() && verificarColisao(pJog1->getFaca(),pIn)) {
+
+                pJog1->danificar(pIn);
+            }
         }
 
     }
@@ -119,9 +123,32 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
     }
 }
 
+void Gerenciador_Colisoes::tratarColisoesJogsLims() {
+
+    sf::Vector2f pos = pJog1->getPos();
+    sf::FloatRect bounds = pJog1->getBounds();
+
+
+    if (pos.x <= 0.0f) {
+
+        pJog1->setPos(0.0f,pos.y);
+    }
+    if (pos.x + bounds.width >= 1920.0f) {
+
+        pJog1->setPos(1920.0f - bounds.width, pos.y );
+
+    }
+
+
+}
+
+
+
+
 void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsChao();
     tratarColisoesJogsInimigs();
     tratarColisoesJogsObstacs();
     tratarColisoesObstacInimigos();
+    tratarColisoesJogsLims();
 }
