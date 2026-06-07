@@ -11,7 +11,7 @@ using namespace Gerenciadores;
 
 Gerenciador_Grafico* Gerenciador_Grafico::pGG = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() : janela(new sf::RenderWindow(sf::VideoMode(1920, 1080), "Teste SFML - UTFPR"))
+Gerenciador_Grafico::Gerenciador_Grafico() : janela(new sf::RenderWindow(sf::VideoMode(1920, 1080), "MILITARY ZONE"))
 {    
     if (janela == nullptr)
         cout << "Erro, janela não criada" << endl;
@@ -54,8 +54,17 @@ void Gerenciador_Grafico::setFrame(int n) {
     janela->setFramerateLimit(n);
 }
 
+void Gerenciador_Grafico::desenharfaca(sf::RectangleShape* faca) {
+    if (faca) {
+        janela->draw(*faca);
+    }
+}
+
+
 void Gerenciador_Grafico::desenharEnte(Ente* pE) {
     janela->draw(pE->getSprite());
+
+
 }
 
 void Gerenciador_Grafico::desenharTexto(sf::Text t) {

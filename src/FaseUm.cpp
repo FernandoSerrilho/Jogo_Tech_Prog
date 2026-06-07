@@ -2,6 +2,7 @@
 #include "Chao.h"
 #include "BackGround.h"
 #include "Arbusto.h"
+#include "Soldado.h"
 using namespace Entidades;
 
 FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
@@ -17,7 +18,30 @@ void FaseUm::criarInimigos(Jogador* j) {
 }
 
 void FaseUm::criarIniMed() {
+	Inimigo::sementear();
 
+	int MAX = rand()%4 + 3;
+	sf::Vector2f p(0.0f, 0.0f);
+
+	for (int i = 0;i < MAX;i++) {
+		if (i < 2) {
+			p.x = 700.0f + 400 * i;
+			p.y = 957.0f;
+		}
+
+		else if (i >= 2 && i < 4) {
+			p.x = 510.0f + 1000.0f * (i - 2);
+			p.y = 835.0f;
+		}
+		else if (i >= 4) {
+			p.x = 510.0f + 1000.0f * (i - 4);
+			p.y = 570.0f;
+		}
+
+		Soldado* s = new Soldado(p, "Texturas/Soldado/SoldadoInimigo.png");
+		GC.incluirInimigo(s);
+		list_ents.incluir(s);
+	}
 }
 
 void FaseUm::criarObsMed() {

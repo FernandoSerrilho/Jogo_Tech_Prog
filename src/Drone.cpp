@@ -8,7 +8,7 @@ using namespace Entidades;
 
 
 
-Drone::Drone(Jogador* p, const char* caminhoTextura) : Inimigo(), pJ(p), emKnockback(false), temp_knockback(0.3f), vetorKnockback(sf::Vector2f()), figura(sf::Vector2f(50.0f, 40.0f)) {
+Drone::Drone(Jogador* p, const char* caminhoTextura) : Inimigo(), vidas(2), pJ(p), emKnockback(false), vetorKnockback(sf::Vector2f()), figura(sf::Vector2f(50.0f, 40.0f)) {
     initFigura();
     setText(caminhoTextura, figura);
     setJog(pJ);
@@ -31,6 +31,10 @@ sf::FloatRect Drone::getBounds() const {
 
 }
 
+
+int Drone::getVidas() { return vidas;}
+
+void Drone::setVidas(int v) { vidas = v;}
 
 void Drone::setJog(Jogador* p) {
 
@@ -74,9 +78,13 @@ void Drone::danificar(Jogador* p) {
 void Drone::executar() {
     mover();
     desenhar(getPos());
+    if (invulneravel && relogioinv.getElapsedTime().asSeconds() >= 0.5f) {
+		invulneravel = false;
+	}
 }
 
-void Drone::colidir(Entidade* pE) {
+void Drone::colidir(Jogador* j) {
+
   
 }
 
@@ -88,7 +96,7 @@ void Drone::mover() {
 
         if (emKnockback) {
 
-           if (relogioKnockback.getElapsedTime().asSeconds() < temp_knockback) { 
+           if (relogioKnockback.getElapsedTime().asSeconds() < 0.3f) { 
             pos.y += vetorKnockback.y * 10.0f;
             pos.x += vetorKnockback.x * 10.0f;
 

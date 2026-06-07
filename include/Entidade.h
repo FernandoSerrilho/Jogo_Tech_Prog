@@ -9,6 +9,7 @@ class Entidade : public Ente {
     protected:
         sf::Vector2f pos;
         sf::Vector2f vel;
+        bool vivo;
         //std::ostream& buffer;               TODO
     public:
         Entidade();
@@ -17,6 +18,8 @@ class Entidade : public Ente {
         // void salvarDataBuffer();           TODO
     public:
         virtual void executar() = 0;
+        void setVivo(bool v);
+        bool getVivo();
         sf::Vector2f getPos();
         sf::Vector2f getVel();
         virtual void setPos(float x, float y);

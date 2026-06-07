@@ -1,19 +1,25 @@
 #include "Jogador.h"
 #include "Inimigo.h"
+#include "Gerenciador_Grafico.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 using namespace Entidades;
 using namespace Personagens;
 
-Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), 
-modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , temp_inv(1.5f) {
+Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true), 
+modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , olhandoEsquerda(false), temp_inv(1.5f) {
     initFigura();
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
+
+    faca = new Faca();
 }
 
-Jogador::~Jogador() {}
+Jogador::~Jogador() {
+
+    delete faca;
+}
 
 void Jogador::initFigura() {
 
@@ -22,6 +28,8 @@ void Jogador::initFigura() {
 }
 
 int Jogador::getVidas() { return vidas; }
+
+Faca* Jogador::getFaca()  { return faca;}
 
 void Jogador::setVidas(int v) { vidas = v; }
 
@@ -55,6 +63,8 @@ sf::RectangleShape Jogador::getFigura() { return figura; }
 
 sf::Vector2f Jogador::getTam() { return figura.getSize(); }
 
+bool Jogador::getAtacando() { return atacando;}
+
 void Jogador::setmodifiVelo(float v) { modifiVelo = v; }
 
 
@@ -69,10 +79,82 @@ void Jogador::colidir(Inimigo* pIn) {
     pIn->danificar(this);
 }
 
+
+void Jogador::danificar(Inimigo* pIn) {
+
+
+    if (pIn->getInvulneravel()) {
+        return;
+    }
+
+    int v = pIn->getVidas();
+
+    v -= 1;
+
+    pIn->setInvulneravel(true);
+    pIn->getRelogioInv().restart();
+
+    if (v <= 0) {
+
+        pIn->setVivo(false);
+
+        pIn->setPos(2500.0f,2500.0f);
+
+        std::cout << "morreu" << std::endl;
+
+        return;
+    }
+
+    pIn->setVidas(v);
+
+    std::cout << "vidas:" << v << std::endl;
+
+}
+
+
+
+
+void Jogador::atacar() {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !atacando && podeAtacar) {
+        atacando = true;
+        podeAtacar = false;
+        relogioatq.restart();
+
+    }
+
+        faca->initFigura(this, olhandoEsquerda);
+        
+
+    if (atacando && relogioatq.getElapsedTime().asSeconds() >= 0.2f) {
+        atacando = false;
+        cooldownatq.restart();
+    }
+
+    if (!atacando && !podeAtacar) {
+        if (cooldownatq.getElapsedTime().asSeconds() >= 0.5f) {
+            podeAtacar = true;
+        }
+    }
+
+
+
+ }
+
+
+
+
 void Jogador::executar() {
     mover();
-    desenhar(getPos());
     attInv();
+    atacar();
+
+    desenhar(getPos());
+
+    if (atacando && faca) {
+       // faca->desenhar(faca->getPos()); faca nn tem sprite ent nn da pra chamar COLOCAR DEPOIS
+       pGG->desenharfaca(faca->getFigura());
+    }
 }
 
 bool Jogador::verificaLent() const {
@@ -98,9 +180,13 @@ void Jogador::mover() {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         pos.x += vel.x;
+
+        olhandoEsquerda = false;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         pos.x -= vel.x;
+
+        olhandoEsquerda = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pulavel) {
         vel.y -= velpulo;

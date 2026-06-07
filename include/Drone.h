@@ -10,9 +10,9 @@ namespace Entidades {
         private:
             sf::RectangleShape figura;
             Jogador* pJ;
+            int vidas;
             bool emKnockback;
             sf::Clock relogioKnockback;
-            float temp_knockback;
             sf::Vector2f vetorKnockback;
 
 
@@ -20,6 +20,8 @@ namespace Entidades {
             Drone(Jogador* p = NULL, const char* caminhoTextura = "");
             ~Drone();
 
+            int getVidas();
+            void setVidas(int v);
             void danificar(Jogador* p);
             void initFigura();
             sf::RectangleShape getFigura();
@@ -28,7 +30,7 @@ namespace Entidades {
             void setJog(Jogador* p);
             void executar();
             void mover();
-            void colidir(Entidade* pE);
+            void colidir(Jogador* j);
         };
     }
 }
