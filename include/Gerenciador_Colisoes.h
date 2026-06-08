@@ -43,6 +43,7 @@ namespace Gerenciadores {
         void incluirInimigo(Inimigo* pi);
         void incluirObstaculo(Obstaculo* po);
         void executar();
+        bool listaInimigosStatus();
     };
 
 

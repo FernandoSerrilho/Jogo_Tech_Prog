@@ -23,4 +23,7 @@ public:
 	void executarf1();
 	const Gerenciador_Grafico* getGG();
 	void desenhar();
+	void reviveJogador();
+	bool jogadorVivo();
+	bool statusIni();
 };

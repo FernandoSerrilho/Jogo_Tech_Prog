@@ -6,7 +6,7 @@ using namespace std;
 using namespace Gerenciadores;
 
 Ente::Ente() : id(cont_id++) {}
-Ente::~Ente() {}
+Ente::~Ente() { id = -1; }
 
 void Ente::setGG(Gerenciador_Grafico* pG) {
     pGG = pG;

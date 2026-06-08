@@ -8,12 +8,10 @@ using namespace Entidades;
 using namespace Personagens;
 
 Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true), 
-modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , olhandoEsquerda(false), temp_inv(1.5f) {
+modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca()) {
     initFigura();
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
-
-    faca = new Faca();
 }
 
 Jogador::~Jogador() {
@@ -31,7 +29,7 @@ int Jogador::getVidas() { return vidas; }
 
 Faca* Jogador::getFaca()  { return faca;}
 
-void Jogador::setVidas(int v) { vidas = v; }
+void Jogador::setVidas(int v) { vidas = v; if (v <= 0) setVivo(false); std::cout << vidas << std::endl; }
 
 void Jogador::setPos(float x, float y){
     pos.x = x;
@@ -152,8 +150,7 @@ void Jogador::executar() {
     desenhar(getPos());
 
     if (atacando && faca) {
-       // faca->desenhar(faca->getPos()); faca nn tem sprite ent nn da pra chamar COLOCAR DEPOIS
-       pGG->desenharfaca(faca->getFigura());
+        faca->executar();
     }
 }
 

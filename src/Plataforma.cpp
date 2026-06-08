@@ -13,6 +13,7 @@ Plataforma::Plataforma() :Obstaculo(), altura(0), colisao(sf::Vector2f(200.0f, (
 Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), colisao(sf::Vector2f(tam)), altura((int)pos.y) {
     InitColi(tam, pos);
     InitText();
+    contraGravidade = -0.3f;
 }
 
 void Plataforma::InitText() {
@@ -111,5 +112,8 @@ void Plataforma::obstaculizar(Inimigo* i1) {
 }
 
 void Plataforma::executar() {
+    sf::Vector2f posP = getPos();
+    posP.y += (gravidade + contraGravidade);
+    setPos(posP);
     desenhar(colisao.getPosition());
 }

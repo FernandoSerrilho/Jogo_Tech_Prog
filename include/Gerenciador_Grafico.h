@@ -23,8 +23,6 @@ namespace Gerenciadores {
             void displayJanela();
             void setFrame(int n);
             sf::RenderWindow* getJanela();
-            void desenharfaca(sf::RectangleShape* faca);
-            //void executar();
             void desenharEnte(Ente* pE);
             void desenharTexto(sf::Text t);
 

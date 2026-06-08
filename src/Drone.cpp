@@ -13,7 +13,7 @@ Drone::Drone(Jogador* p, const char* caminhoTextura) : Inimigo(), vidas(2), pJ(p
     setText(caminhoTextura, figura);
     setJog(pJ);
 }
-Drone::~Drone() {}
+Drone::~Drone() { vidas = -1; emKnockback = false; vidas = -1; }
 
 void Drone::initFigura() {
 

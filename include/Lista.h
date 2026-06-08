@@ -42,7 +42,7 @@ namespace Listas {
 		void incluir(TL* pTl);
 		void limpar();
 		bool busca(Elemento<TL>* pTl);
-		void remove(Elemento<TL>* pTl);
+		void remove(Iterador pTl);
 		Iterador begin();
 		Iterador end();
 	};
@@ -200,29 +200,30 @@ bool Lista<TL>::busca(Elemento<TL>* pTL) {
 }
 
 template <class TL>
-void Lista<TL>::remove(Elemento<TL>* pTL) {
-	if (busca(pTL)) {
-		if (pPrim == pTL) {
-			pPrim = pTL->getProx();
+void Lista<TL>::remove(Iterador pTl) {
+	Elemento<TL>* pElem = pTl.getIt(); 
+	if (busca(pElem)) {
+		if (pPrim == pElem) {
+			pPrim = pElem->getProx();
 			if (pPrim == nullptr)
 				pUlti = nullptr;
-			delete pTL;
+			delete pElem;
 			return;
 		}
 		Iterador it = begin();
-		Elemento<TL>* ant;
+		Elemento<TL>* ant = nullptr;
 
-		while (it != pTL) {
+		while (it != pElem) {
 			ant = it.getIt();
 			++it;
 		}
 
 		if (ant != nullptr) {
-			ant->setProx(pTL->getProx());
-			if (pTL == pUlti) {
+			ant->setProx(pElem->getProx());
+			if (pElem == pUlti) {
 				pUlti = ant;
 			}
-			delete pTL;
+			delete pElem;
 		}
 	}
 }

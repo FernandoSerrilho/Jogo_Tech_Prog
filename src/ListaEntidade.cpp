@@ -21,9 +21,19 @@ void ListaEntidade::percorrer() {
 	while (it != LEs.end()) {
 		Entidade* e = *it;
 
-		if (e)
-			e->executar();
-		++it;
+		Lista<Entidade>::Iterador aux = it;
+		++aux;
+
+		if (e) {
+			if (e->getVivo()) {
+				e->executar();
+			}
+			else {
+				delete e;
+				LEs.remove(it);
+			}
+		}
+		it = aux;
 	}
 }
 

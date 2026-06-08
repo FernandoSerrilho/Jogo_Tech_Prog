@@ -99,3 +99,7 @@ void FaseUm::inicializar(Jogador* j1) {
 void FaseUm::desenhar() {
 	list_ents.desenhar();
 }
+
+bool FaseUm::statusInimigos() {
+	return GC.listaInimigosStatus();
+}

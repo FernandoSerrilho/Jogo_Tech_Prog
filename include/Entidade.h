@@ -11,6 +11,8 @@ class Entidade : public Ente {
         sf::Vector2f vel;
         bool vivo;
         //std::ostream& buffer;               TODO
+        float gravidade;
+        float contraGravidade;
     public:
         Entidade();
         virtual ~Entidade();

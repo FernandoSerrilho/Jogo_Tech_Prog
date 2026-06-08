@@ -11,6 +11,8 @@ class Menu : public Ente {
 public:
 	enum EstadoMenu {
 		MENU_PRINCIPAL,
+		MENU_MORTE,
+		FASE_VENCIDA,
 		SEL_FASE,
 		SEL_JOGADORES,
 		CONFIRMA_SAIR,

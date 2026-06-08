@@ -11,7 +11,7 @@ Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false){
     nivel_maldade = rand()%10 + 1;
 
 }
-Inimigo::~Inimigo() {}
+Inimigo::~Inimigo() { nivel_maldade = -1;}
 
 void Inimigo::sementear() {
 

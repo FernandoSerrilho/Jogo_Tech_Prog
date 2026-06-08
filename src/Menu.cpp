@@ -10,7 +10,7 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnJogar", "JOGAR", 40, { 960.f, 450.f });
 	initText("btnSair", "SAIR", 40, { 960.f, 700.f });
 
-	initText("txtFase", "Escolha a Fase:", 30, { 960.f, 450.f });
+	initText("txtFase", "Escolha a Fase:", 60, { 960.f, 450.f });
 	initText("btnFase1", "Fase 1", 40, { 600.f, 700.f });
 	initText("btnFase2", "Fase 2", 40, { 1320.f, 700.f });
 	initText("btn1Player", "1 Jogador", 40, { 600.f, 500.f });
@@ -20,6 +20,11 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnSim", "SIM", 40, { 750.f, 550.f });
 	initText("btnNao", "NAO", 40, { 1170.f, 550.f });
 
+	initText("txtMorte", "MORREU!", 60, { 960.f, 400.f });
+	initText("txtFaseVencida", "INIMIGOS DERROTADOS!", 60, { 960.f, 400.f });
+	initText("btnMenu", "MENU", 40, { 960.f, 550.f });
+	initText("btnRestart", "RESTART", 40, { 960.f, 850.f });
+	initText("btnSairMorte", "SAIR", 40, { 960.f, 700.f });
 	initText("btnContinuar", "CONTINUAR", 40, { 960.f, 550.f });
 }
 
@@ -40,10 +45,22 @@ void Menu::initText(const string& chave, const string& conteudo, unsigned int ta
 void Menu::executarMouse(const sf::Vector2f& mousePos) {
 	if (estadoAtual == MENU_PRINCIPAL) {
 		if (textos["btnJogar"].getGlobalBounds().contains(mousePos)) {
-			estadoAtual = JOGO_RODANDO;
+			estadoAtual = SEL_FASE;
 		}
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos)) {
 			estadoAtual = CONFIRMA_SAIR;
+		}
+	}
+	else if (estadoAtual == SEL_FASE) {
+		if (textos["btnFase1"].getGlobalBounds().contains(mousePos)) {
+			fase_selecionada = 1;
+			estadoAtual = JOGO_RODANDO;
+			estadoAnterior = SEL_FASE;
+		}
+		else if (textos["btnFase2"].getGlobalBounds().contains(mousePos)) {
+			fase_selecionada = 2;
+			estadoAtual = JOGO_RODANDO;
+			estadoAnterior = SEL_FASE;
 		}
 	}
 	else if (estadoAtual == CONFIRMA_SAIR) {
@@ -59,6 +76,20 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 			estadoAtual = JOGO_RODANDO;
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos))
 			estadoAtual = CONFIRMA_SAIR;
+	}
+	else if (estadoAtual == MENU_MORTE) {
+		if (textos["btnSairMorte"].getGlobalBounds().contains(mousePos))
+			estadoAtual = CONFIRMA_SAIR;
+		else if (textos["btnMenu"].getGlobalBounds().contains(mousePos))
+			estadoAtual = MENU_PRINCIPAL;
+		/*else if (textos["btnRestart"].getGlobalBounds().contains(mousePos))
+			estadoAtual=*/
+	}
+	else if (estadoAtual == FASE_VENCIDA) {
+		if (textos["btnSairMorte"].getGlobalBounds().contains(mousePos))
+			estadoAtual = CONFIRMA_SAIR;
+		else if (textos["btnMenu"].getGlobalBounds().contains(mousePos))
+			estadoAtual = MENU_PRINCIPAL;
 	}
 }
 
@@ -108,11 +139,24 @@ void Menu::executar() {
 				}
 		}
 
-		if (estadoAtual == JOGO_RODANDO)
-				pJogo->executarf1();
+		if (estadoAtual == JOGO_RODANDO) {
+			if (pJogo->jogadorVivo()) {
+				if (getFase() == 1) {
+					pJogo->executarf1();
+					if (pJogo->statusIni()) {
+						estadoAtual = FASE_VENCIDA;
+					}
+				}
+			}
+			else {
+				estadoAnterior = JOGO_RODANDO;
+				estadoAtual = MENU_MORTE;
+			}
+		}
 
 		else if (estadoAtual == MENU_PRINCIPAL) {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->reviveJogador();
 			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
@@ -138,7 +182,32 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
+		else if (estadoAtual == MENU_MORTE) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtMorte"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
+		else if (estadoAtual == SEL_FASE) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFase"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase1"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase2"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
+
+		else if (estadoAtual == FASE_VENCIDA) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->desenhar();
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFaseVencida"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
 	}
 }
+
 
 

@@ -18,4 +18,5 @@ public:
 	void inicializar(Jogador* j1);
 	void executar();
 	void desenhar();
+	bool statusInimigos();
 };

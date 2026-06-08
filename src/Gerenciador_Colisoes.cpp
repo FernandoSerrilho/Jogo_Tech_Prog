@@ -67,71 +67,54 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) 
 
 void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
     if (!LIs.empty()) {
+        std::vector<Inimigo*>::iterator it = LIs.begin();
 
-        std::vector<Inimigo*>::iterator it;
-        for (it = LIs.begin(); it != LIs.end(); it++) {
-
+        while (it != LIs.end()) {
             Inimigo* pIn = *it;
-
-            if (verificarColisao(pJog1, pIn)) {
-
-                pJog1->colidir(pIn);
-
-
+            if (*it) {
+                if (pIn->getVivo()) {
+                    if (verificarColisao(pJog1, pIn)) {
+                        pJog1->colidir(pIn);
+                    }
+                    if (pJog1->getAtacando() && verificarColisao(pJog1->getFaca(), pIn)) {
+                        pJog1->danificar(pIn);
+                    }
+                    it++;
+                }
+                else {
+                    it = LIs.erase(it);
+                }
             }
-            if (pJog1->getAtacando() && verificarColisao(pJog1->getFaca(),pIn)) {
-
-                pJog1->danificar(pIn);
+            else {
+                it = LIs.erase(it);
             }
         }
-
     }
-
-
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsChao() {
-
     if (pChao) {
 
-
-            if (verificarColisao(pJog1,pChao)) {
-                pChao->colidir(pJog1);
-
-            }
-    }
-
-    
-    
-}
-
-void Gerenciador_Colisoes::tratarColisoesInimsChao() {
-
-    if (pChao) {
-
-
-           if (!LIs.empty()) {
-
-        std::vector<Inimigo*>::iterator it;
-            for (it = LIs.begin(); it != LIs.end(); it++) {
-
-            Inimigo* pIn = *it;
-
-            if (verificarColisao(pIn, pChao)) {
-
-                pChao->colidir(pIn);
-            }
-
-            }
-
+        if (verificarColisao(pJog1,pChao)) {
+            pChao->colidir(pJog1);
 
         }
     }
-
-    
-    
 }
 
+void Gerenciador_Colisoes::tratarColisoesInimsChao() {
+    if (pChao && !LIs.empty()) {
+        std::vector<Inimigo*>::iterator it;
+        for (it = LIs.begin(); it != LIs.end(); it++) {
+            Inimigo* pIn = *it;
+            if (pIn && pIn->getVivo()) {
+                if (verificarColisao(pIn, pChao)) {
+                    pChao->colidir(pIn);
+                }
+            }
+        }
+    }
+}
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
     if (!LOs.empty()) {
 
@@ -179,4 +162,8 @@ void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsObstacs();
     tratarColisoesObstacInimigos();
     tratarColisoesJogsLims();
+}
+
+bool Gerenciador_Colisoes::listaInimigosStatus() {
+    return LIs.empty();
 }

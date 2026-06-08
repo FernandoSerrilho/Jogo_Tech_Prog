@@ -13,18 +13,35 @@ const Gerenciador_Grafico* Jogo::getGG (){
     return GG;
 }
 
+bool Jogo::statusIni() {
+    return f1->statusInimigos();
+}
+
+void Jogo::reviveJogador(){
+    if (!j1->getVivo()) {
+        j1->setVidas(3);
+        j1->setVivo(true);
+    }
+}
+
+bool Jogo::jogadorVivo() { return j1->getVivo(); }
+
 void Jogo::executar() {
     m->executar();
 }
 
 void Jogo::executarf1() {
-    GG->limpaJanela();
-    f1->executar();
-    j1->executar();
-    GG->displayJanela();
+    if (j1->getVivo()) {
+        GG->limpaJanela();
+        f1->executar();
+        j1->executar();
+        GG->displayJanela();
+    }
+    return;
 }
 
 void Jogo::desenhar() {
     f1->desenhar();
-    j1->desenhar(j1->getPos());
+    if(j1->getVivo())
+        j1->desenhar(j1->getPos());
 }

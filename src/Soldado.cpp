@@ -74,7 +74,8 @@ void Soldado::executar() {
 	if (invulneravel && relogioinv.getElapsedTime().asSeconds() >= 0.5f) {
 		invulneravel = false;
 	}
-
-
+	/*sf::Vector2f posS = getPos();
+	posS.y += (gravidade + contraGravidade);
+	setPos(posS.x,posS.y);*/
 	mover();
 }

@@ -15,7 +15,7 @@ namespace Entidades {
             sf::Clock relogioinv;
         public:
             Inimigo();
-            ~Inimigo();
+            virtual ~Inimigo();
 
             //void salvarDataBuffer();     TODO
             virtual int getVidas() = 0;

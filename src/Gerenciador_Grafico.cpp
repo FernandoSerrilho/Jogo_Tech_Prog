@@ -54,12 +54,6 @@ void Gerenciador_Grafico::setFrame(int n) {
     janela->setFramerateLimit(n);
 }
 
-void Gerenciador_Grafico::desenharfaca(sf::RectangleShape* faca) {
-    if (faca) {
-        janela->draw(*faca);
-    }
-}
-
 
 void Gerenciador_Grafico::desenharEnte(Ente* pE) {
     janela->draw(pE->getSprite());

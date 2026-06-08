@@ -7,9 +7,9 @@
 
 
 
-    Faca::Faca() : Entidade(), figura(sf::Vector2f(58.0f, 70.0f)) {
-
+    Faca::Faca() : Entidade(), figura(sf::Vector2f(70.0f, 58.0f)) {
         figura.setFillColor(sf::Color::White);
+        setText("Texturas/Faca/FacaDeitada.png", figura);
     }
 
 
@@ -24,11 +24,15 @@
        if (olhandoesquerda) {
 
             figura.setPosition(boundsj.left - 58.0f - 10.0f, boundsj.top);
+            sf::Vector2f posF(figura.getPosition());
+            setPos(posF.x,posF.y);
        }
 
-       else 
-            figura.setPosition(boundsj.left + boundsj.width + 10.0f, boundsj.top);
-
+       else {
+           figura.setPosition(boundsj.left + boundsj.width + 10.0f, boundsj.top);
+           sf::Vector2f posF(figura.getPosition());
+           setPos(posF.x, posF.y);
+       }
 
     }
 
@@ -42,4 +46,5 @@
 
 
     void Faca::executar() {
+        desenhar(getPos());
     }
