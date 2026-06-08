@@ -21,7 +21,6 @@ class Ente {
         virtual void executar() = 0;
         void desenhar(sf::Vector2f posicao);
         static void setGG(Gerenciador_Grafico *pG);
-        void setTexturas(sf::Texture pT, sf::Sprite pS);
         void setText(const char* caminhoTextura, sf::RectangleShape colisao);
         sf::Sprite getSprite();
 };

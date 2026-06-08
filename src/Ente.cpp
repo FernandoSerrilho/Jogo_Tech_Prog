@@ -19,11 +19,6 @@ void Ente::desenhar(sf::Vector2f posicao) {
     }
 }
 
-void Ente::setTexturas(sf::Texture pT, sf::Sprite pS) {
-    texturaGeral = pT;
-    sprite = pS;
-}
-
 sf::Sprite Ente::getSprite() {
     return sprite;
 }
