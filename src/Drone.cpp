@@ -12,6 +12,7 @@ Drone::Drone(Jogador* p, const char* caminhoTextura) : Inimigo(), vidas(2), pJ(p
     initFigura();
     setText(caminhoTextura, figura);
     setJog(pJ);
+    contraGravidade = -0.3f;
 }
 Drone::~Drone() { vidas = -1; emKnockback = false; vidas = -1; }
 
@@ -76,6 +77,7 @@ void Drone::danificar(Jogador* p) {
 }
 
 void Drone::executar() {
+
     mover();
     desenhar(getPos());
     if (invulneravel && relogioinv.getElapsedTime().asSeconds() >= 0.5f) {
@@ -90,7 +92,7 @@ void Drone::colidir(Jogador* j) {
 
 void Drone::mover() {
     
-    
+    vel.y += gravidade + contraGravidade;
     
     if (pJ) {
 

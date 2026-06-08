@@ -43,6 +43,8 @@ void Soldado::danificar(Jogador* j) {
 
 void Soldado::mover() {
 
+
+
 	if (parado) {
 
 		if (relogioParado.getElapsedTime().asSeconds() < temp_parado) {
@@ -64,6 +66,7 @@ void Soldado::mover() {
 
 
 	pos.x += std::cos(tempo * 0.8f) * vel.x * 0.5f;
+	pos.y += gravidade + contraGravidade;
 
 	figura.setPosition(pos);
 	desenhar(pos);
@@ -74,8 +77,5 @@ void Soldado::executar() {
 	if (invulneravel && relogioinv.getElapsedTime().asSeconds() >= 0.5f) {
 		invulneravel = false;
 	}
-	/*sf::Vector2f posS = getPos();
-	posS.y += (gravidade + contraGravidade);
-	setPos(posS.x,posS.y);*/
 	mover();
 }
