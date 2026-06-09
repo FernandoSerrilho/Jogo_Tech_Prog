@@ -16,12 +16,13 @@ namespace Entidades {
 
         private:
             sf::RectangleShape figura;
+            Personagens::Jogador* pJog;
 
         public:
-            Faca();
+            Faca(Personagens::Jogador* pJ);
             ~Faca();
 
-        void initFigura(Personagens::Jogador * j, bool olhandoesquerda);
+        void initFigura();
         void executar();
         sf::RectangleShape* getFigura();
         sf::FloatRect getBounds() const;

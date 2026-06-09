@@ -8,7 +8,7 @@ using namespace Entidades;
 using namespace Personagens;
 
 Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true), 
-modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca()) {
+modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)) {
     initFigura();
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
@@ -26,6 +26,8 @@ void Jogador::initFigura() {
 }
 
 int Jogador::getVidas() { return vidas; }
+
+bool Jogador::getDirecao() {return olhandoEsquerda;};
 
 Faca* Jogador::getFaca()  { return faca;}
 
@@ -121,7 +123,7 @@ void Jogador::atacar() {
 
     }
 
-        faca->initFigura(this, olhandoEsquerda);
+        faca->initFigura();
         
 
     if (atacando && relogioatq.getElapsedTime().asSeconds() >= 0.2f) {

@@ -30,6 +30,7 @@ namespace Entidades {
 
             void initFigura();
             Faca* getFaca();
+            bool getDirecao();
             bool getAtacando();
             int getVidas();
             void setVidas(int v);
