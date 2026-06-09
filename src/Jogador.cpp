@@ -143,6 +143,8 @@ void Jogador::atacar() {
 
 
 void Jogador::executar() {
+
+
     mover();
     attInv();
     atacar();
@@ -165,11 +167,12 @@ void Jogador::setLent(bool v) {
 
 void Jogador::mover() {
 
-    float gravidade = 0.3f;
     float velpulo = 10.0f;
     float tam = 1080.0f -50.0f;
 
-    vel.y += gravidade;
+
+    vel.y += gravidade + contraGravidade;
+
     if (verificaLent())
         vel.x = velBase * modifiVelo;
     else

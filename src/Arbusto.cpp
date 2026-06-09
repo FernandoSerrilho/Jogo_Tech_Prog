@@ -9,6 +9,8 @@ Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), lentidao(0.3f
 	colisao.setPosition(pos);
 	setPos(pos.x,pos.y);
 	setText("Texturas/Arbusto/Bush.png", colisao);
+
+	contraGravidade = -0.3f;
 }
 
 Arbusto::~Arbusto(){}
@@ -18,6 +20,10 @@ sf::FloatRect Arbusto::getBounds() const {
 }
 
 void Arbusto::executar() {
+
+
+	setPos(pos.x,pos.y + gravidade + contraGravidade);
+
 	desenhar(colisao.getPosition());
 }
 

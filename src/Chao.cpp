@@ -8,11 +8,16 @@ Chao::Chao(const char* caminhoTextura) {
 	sf::Vector2f tam(1920.0f, 50.0f);
 	colisao.setSize(tam);
 	setText(caminhoTextura, colisao);
+
+	contraGravidade = -0.3f;
 }
 
 Chao::~Chao() {}
 
 void Chao::executar() {
+
+	setPos(pos.x,pos.y + gravidade + contraGravidade);
+
 	desenhar(colisao.getPosition());
 }
 

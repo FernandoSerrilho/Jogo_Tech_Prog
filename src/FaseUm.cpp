@@ -85,8 +85,8 @@ void FaseUm::criarCenario() {
 }
 
 void FaseUm::executar() {
-	list_ents.percorrer();
 	GC.executar();
+	list_ents.percorrer();
 }
 
 void FaseUm::inicializar(Jogador* j1) {
