@@ -7,7 +7,7 @@
 
 
 
-    Faca::Faca() : Entidade(), figura(sf::Vector2f(70.0f, 58.0f)) {
+    Faca::Faca(Jogador* pJ) : Entidade(), pJog(pJ), figura(sf::Vector2f(70.0f, 58.0f)) {
         figura.setFillColor(sf::Color::White);
         setText("Texturas/Faca/FacaDeitada.png", figura);
     }
@@ -16,10 +16,12 @@
     Faca::~Faca() {}
 
 
-    void Faca::initFigura(Jogador * j, bool olhandoesquerda) {
+    void Faca::initFigura() {
 
-       sf::Vector2f posj = j->getPos();
-       sf::FloatRect boundsj = j->getBounds();
+        bool olhandoesquerda = pJog->getDirecao();
+
+       sf::Vector2f posj = pJog->getPos();
+       sf::FloatRect boundsj = pJog->getBounds();
 
        if (olhandoesquerda) {
 
