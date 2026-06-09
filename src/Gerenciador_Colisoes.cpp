@@ -119,15 +119,23 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
     if (!LOs.empty()) {
 
         std::vector<Obstaculo*>::iterator it;
-        for (it = LOs.begin(); it != LOs.end(); it++) {
+        it = LOs.begin();
+        while(it != LOs.end()) {
 
             Obstaculo* pOb = *it;
 
-            if (verificarColisao(pJog1, pOb)) {
-
-                pOb->obstaculizar(pJog1);
-
+            if (pOb) {
+                if (pOb->getVivo()) {
+                    if (verificarColisao(pJog1, pOb)) {
+                        pOb->obstaculizar(pJog1);
+                    }
+                    it++;
+                }
+                else
+                    it = LOs.erase(it);
             }
+            else
+                it = LOs.erase(it);
         }
 
     }

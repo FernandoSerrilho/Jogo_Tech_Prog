@@ -4,5 +4,5 @@
 using namespace Obstaculos;
 using namespace Entidades;
 
-Obstaculo::Obstaculo(bool flag) : Entidade(), danoso(flag) {}
+Obstaculo::Obstaculo(bool flag) : Entidade(), danoso(flag){}
 Obstaculo::~Obstaculo() {}

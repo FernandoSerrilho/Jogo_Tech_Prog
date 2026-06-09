@@ -2,6 +2,7 @@
 #include "Chao.h"
 #include "BackGround.h"
 #include "Arbusto.h"
+#include "MinaTerrestre.h"
 #include "Soldado.h"
 using namespace Entidades;
 
@@ -45,7 +46,7 @@ void FaseUm::criarIniMed() {
 }
 
 void FaseUm::criarObsMed() {
-	Inimigo::sementear();
+	/*Inimigo::sementear();
 	int MAX = rand() % 3 + 3;
 
 	for (int i = 0;i < MAX;i++) {
@@ -66,6 +67,13 @@ void FaseUm::criarObsMed() {
 			Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
 			GC.incluirObstaculo(a);
 			list_ents.incluir(a);
+	}*/
+
+	int MAX = 1;
+	for (int i = 0;i < MAX;i++) {
+		MinaTerrestre* mT = new MinaTerrestre(sf::Vector2f(950.0f,1019.0f),sf::Vector2f(29.0f,10.0f));
+		GC.incluirObstaculo(mT);
+		list_ents.incluir(mT);
 	}
 
 }
