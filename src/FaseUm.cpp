@@ -2,7 +2,6 @@
 #include "Chao.h"
 #include "BackGround.h"
 #include "Arbusto.h"
-#include "MinaTerrestre.h"
 #include "Soldado.h"
 
 using namespace Gerenciadores;
@@ -16,6 +15,7 @@ using namespace Inimigos;
 FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
 	limparGC();
 	limparListEnts();
+	inicializar(j1);
 }
 
 FaseUm::~FaseUm() {
