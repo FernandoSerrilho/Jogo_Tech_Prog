@@ -27,10 +27,18 @@ bool Jogo::statusIni() {
     return f1->statusInimigos();
 }
 
+void Jogo::reiniciarFaseUm() {
+    if (!f1)
+        delete f1;
+    f1 = new FaseUm(j1);
+    f1->inicializar(j1);
+}
+
 void Jogo::reviveJogador(){
     if (!j1->getVivo()) {
         j1->setVidas(3);
         j1->setVivo(true);
+        j1->setPos(100.0f,800.0f);
     }
 }
 

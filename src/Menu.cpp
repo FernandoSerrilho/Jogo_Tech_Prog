@@ -58,11 +58,15 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 		if (textos["btnFase1"].getGlobalBounds().contains(mousePos)) {
 			fase_selecionada = 1;
 			estadoAtual = JOGO_RODANDO;
+			pJogo->reviveJogador();
+			pJogo->reiniciarFaseUm();
 			estadoAnterior = SEL_FASE;
 		}
 		else if (textos["btnFase2"].getGlobalBounds().contains(mousePos)) {
 			fase_selecionada = 2;
 			estadoAtual = JOGO_RODANDO;
+			pJogo->reviveJogador();
+			pJogo->reiniciarFaseUm();
 			estadoAnterior = SEL_FASE;
 		}
 	}
@@ -85,8 +89,11 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 			estadoAtual = CONFIRMA_SAIR;
 		else if (textos["btnMenu"].getGlobalBounds().contains(mousePos))
 			estadoAtual = MENU_PRINCIPAL;
-		/*else if (textos["btnRestart"].getGlobalBounds().contains(mousePos))
-			estadoAtual=*/
+		else if (textos["btnRestart"].getGlobalBounds().contains(mousePos)) {
+			estadoAtual = JOGO_RODANDO;
+			pJogo->reviveJogador();
+			pJogo->reiniciarFaseUm();
+		}
 	}
 	else if (estadoAtual == FASE_VENCIDA) {
 		if (textos["btnSairMorte"].getGlobalBounds().contains(mousePos))
@@ -189,6 +196,7 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtMorte"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
@@ -206,6 +214,7 @@ void Menu::executar() {
 			pJogo->desenhar();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFaseVencida"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}

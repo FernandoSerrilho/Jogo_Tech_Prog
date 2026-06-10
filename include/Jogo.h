@@ -29,6 +29,7 @@ public:
 	void executarf1();
 	const Gerenciadores::Gerenciador_Grafico* getGG();
 	void desenhar();
+	void reiniciarFaseUm();
 	void reviveJogador();
 	bool jogadorVivo();
 	bool statusIni();

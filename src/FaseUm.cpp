@@ -14,6 +14,8 @@ using namespace Personagens;
 using namespace Inimigos;
 
 FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
+	limparGC();
+	limparListEnts();
 }
 
 FaseUm::~FaseUm() {
@@ -21,11 +23,11 @@ FaseUm::~FaseUm() {
 }
 
 void FaseUm::criarInimigos(Jogador* j) {
-	criarInmFaceis(j);
-	criarIniMed();
+	criarDrones(j);
+	criarSoldados();
 }
 
-void FaseUm::criarIniMed() {
+void FaseUm::criarSoldados() {
 	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	int MAX = rand()%4 + 3;
@@ -47,12 +49,13 @@ void FaseUm::criarIniMed() {
 		}
 
 		Soldado* s = new Soldado(p, "Texturas/Soldado/SoldadoInimigo.png");
+		s->setPos(p.x, p.y);
 		GC.incluirInimigo(s);
 		list_ents.incluir(s);
 	}
 }
 
-void FaseUm::criarObsMed() {
+void FaseUm::criarArbustos() {
 	Entidades::Personagens::Inimigos::Inimigo::sementear();
 	int MAX = rand() % 3 + 3;
 
@@ -79,7 +82,7 @@ void FaseUm::criarObsMed() {
 
 void FaseUm::criarObstaculos() {
 	criarPlataformas();
-	criarObsMed();
+	criarArbustos();
 
 }
 
