@@ -1,4 +1,5 @@
 #include "BackGround.h"
+using namespace Entidades;
 
 BackGround::BackGround(const char* caminhoTextura) {
 	colisao.setSize(sf::Vector2f(1920.0f, 1080.0f));

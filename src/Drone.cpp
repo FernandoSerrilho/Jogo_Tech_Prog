@@ -3,10 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include <cmath>
 
-using namespace Personagens;
-using namespace Entidades;
-
-
+using namespace Entidades::Personagens::Inimigos;
 
 Drone::Drone(Jogador* p, const char* caminhoTextura) : Inimigo(), vidas(2), pJ(p), emKnockback(false), vetorKnockback(sf::Vector2f()), figura(sf::Vector2f(50.0f, 40.0f)) {
     initFigura();
@@ -14,7 +11,7 @@ Drone::Drone(Jogador* p, const char* caminhoTextura) : Inimigo(), vidas(2), pJ(p
     setJog(pJ);
     contraGravidade = -0.3f;
 }
-Drone::~Drone() { vidas = -1; emKnockback = false; vidas = -1; }
+Drone::~Drone() { vidas = -1; emKnockback = false; vidas = -1; pJ = nullptr; }
 
 void Drone::initFigura() {
 

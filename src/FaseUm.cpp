@@ -4,7 +4,14 @@
 #include "Arbusto.h"
 #include "MinaTerrestre.h"
 #include "Soldado.h"
+
+using namespace Gerenciadores;
+using namespace Listas;
+using namespace Fases;
 using namespace Entidades;
+using namespace Obstaculos;
+using namespace Personagens;
+using namespace Inimigos;
 
 FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
 }
@@ -19,7 +26,7 @@ void FaseUm::criarInimigos(Jogador* j) {
 }
 
 void FaseUm::criarIniMed() {
-	Inimigo::sementear();
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	int MAX = rand()%4 + 3;
 	sf::Vector2f p(0.0f, 0.0f);
@@ -46,7 +53,7 @@ void FaseUm::criarIniMed() {
 }
 
 void FaseUm::criarObsMed() {
-	/*Inimigo::sementear();
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 	int MAX = rand() % 3 + 3;
 
 	for (int i = 0;i < MAX;i++) {
@@ -67,15 +74,7 @@ void FaseUm::criarObsMed() {
 			Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
 			GC.incluirObstaculo(a);
 			list_ents.incluir(a);
-	}*/
-
-	int MAX = 1;
-	for (int i = 0;i < MAX;i++) {
-		MinaTerrestre* mT = new MinaTerrestre(sf::Vector2f(950.0f,1019.0f),sf::Vector2f(29.0f,10.0f));
-		GC.incluirObstaculo(mT);
-		list_ents.incluir(mT);
 	}
-
 }
 
 void FaseUm::criarObstaculos() {

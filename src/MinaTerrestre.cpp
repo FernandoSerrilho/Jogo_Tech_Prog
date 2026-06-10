@@ -1,7 +1,11 @@
 #include "MinaTerrestre.h"
+#include "Inimigo.h"
 #include "Jogador.h"
 
-using namespace Entidades::Obstaculos;
+using namespace Entidades;
+using namespace Obstaculos;
+using namespace Personagens;
+using namespace Inimigos;
 
 MinaTerrestre::MinaTerrestre() :Obstaculo(true), tempoAtivacao(0.6f), colisao(), raio(rand() % 8 + 25.0f), tempoAtivo(false) { contraGravidade = -0.3f; }
 
@@ -57,7 +61,9 @@ void MinaTerrestre::explodir(Jogador* pJ) {
 	}
 }
 
-void MinaTerrestre::obstaculizar(Inimigo* pI) {}
+void MinaTerrestre::obstaculizar(Inimigo* pI) {
+	int n = 45;
+}
 
 sf::FloatRect MinaTerrestre::getBounds() const {
 	return colisao.getGlobalBounds();

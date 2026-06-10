@@ -1,13 +1,15 @@
 #pragma once
 
 #include "Entidade.h"
-#include "Inimigo.h"
+
 namespace Entidades {
 	namespace Personagens {
+		namespace Inimigos {
+			class Inimigo;
+		}
 		class Jogador;
 	}
 }
-using namespace Entidades::Personagens;
 
 namespace Entidades {
 	namespace Obstaculos {
@@ -20,8 +22,8 @@ namespace Entidades {
 			//void salvarDataBuffer();		TODO
 			virtual void executar() = 0;
 			//virtual void salvar() = 0;	TODO
-			virtual void obstaculizar(Jogador* j1) = 0;
-			virtual void obstaculizar(Inimigo* j1) = 0;
+			virtual void obstaculizar(Entidades::Personagens::Jogador* j1) = 0;
+			virtual void obstaculizar(Entidades::Personagens::Inimigos::Inimigo* i1) = 0;
 
 		};
 	}

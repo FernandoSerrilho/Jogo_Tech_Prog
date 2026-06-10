@@ -4,6 +4,9 @@
 #include <iostream>
 using namespace std;
 
+using namespace Entidades;
+using namespace Personagens;
+using namespace Inimigos;
 using namespace Obstaculos;
 
 Plataforma::Plataforma() :Obstaculo(), altura(0), colisao(sf::Vector2f(200.0f, (float)altura)) {
@@ -16,12 +19,12 @@ Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), colisa
     contraGravidade = -0.3f;
 }
 
+Plataforma::~Plataforma() { altura = -1; }
+
 void Plataforma::InitText() {
     setText("Texturas/Grama/QuadradoPlat.png", colisao);
 }
 
-
-Plataforma::~Plataforma() {}
 sf::FloatRect Plataforma::getBounds() const {
     return colisao.getGlobalBounds();
 }

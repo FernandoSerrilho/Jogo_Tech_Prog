@@ -1,4 +1,6 @@
 #include "Chao.h"
+#include "Jogador.h"
+using namespace Entidades;
 
 using namespace Entidades::Personagens;
 

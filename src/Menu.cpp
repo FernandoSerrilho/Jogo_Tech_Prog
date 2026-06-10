@@ -1,5 +1,8 @@
 #include "Menu.h"
 #include "Jogo.h"
+#include "BackGround.h"
+#include "Gerenciador_Grafico.h"
+#include <iostream>
 
 Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
 ,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL),pJogo(j){
@@ -28,7 +31,7 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnContinuar", "CONTINUAR", 40, { 960.f, 550.f });
 }
 
-Menu::~Menu(){}
+Menu::~Menu() { bMenu = nullptr; textos.clear(); }
 
 int Menu::getFase() { return fase_selecionada; }
 

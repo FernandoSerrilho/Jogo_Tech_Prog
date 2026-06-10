@@ -1,4 +1,14 @@
 #include "Jogo.h"
+#include "Menu.h"
+#include "Gerenciador_Grafico.h"
+#include "Jogador.h"
+#include "FaseUm.h"
+
+using namespace Fases;
+using namespace Gerenciadores;
+using namespace Entidades;
+using namespace Personagens;
+
 
 Jogo::Jogo() :GG(GG->getGerenciadorG()), j1(new Jogador("Texturas/Jogador/Soldado.png"))
 ,f1(new FaseUm(j1)),m(new Menu(this)) {
@@ -7,7 +17,7 @@ Jogo::Jogo() :GG(GG->getGerenciadorG()), j1(new Jogador("Texturas/Jogador/Soldad
     f1->inicializar(j1);
 }
 
-Jogo::~Jogo() {}
+Jogo::~Jogo() { GG = nullptr;j1 = nullptr;f1 = nullptr;m = nullptr; }
 
 const Gerenciador_Grafico* Jogo::getGG (){
     return GG;

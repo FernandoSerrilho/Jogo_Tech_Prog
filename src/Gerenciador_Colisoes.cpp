@@ -1,17 +1,21 @@
 #include "Gerenciador_Colisoes.h"
 #include "Obstaculo.h"
+#include "Chao.h"
+#include "Inimigo.h"
+#include "Jogador.h"
+#include "Faca.h"
 #include <math.h>
 #include <iostream>
 
 using namespace Gerenciadores;
 using namespace Entidades;
-using namespace Entidades::Personagens;
-
-
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Inimigos;
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), pChao(NULL),LIs() {}
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
+Gerenciador_Colisoes::~Gerenciador_Colisoes() { LIs.clear(); LOs.clear(); pJog1 = nullptr;pChao = nullptr; }
 
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
@@ -159,9 +163,6 @@ void Gerenciador_Colisoes::tratarColisoesJogsLims() {
 
 
 }
-
-
-
 
 void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsChao();

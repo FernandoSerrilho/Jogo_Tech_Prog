@@ -4,33 +4,34 @@
 namespace Entidades {
     namespace Personagens {
         class Jogador;
+        namespace Inimigos {
+            class Drone : public Inimigo {
 
-        class Drone : public Inimigo {
-
-        private:
-            sf::RectangleShape figura;
-            Jogador* pJ;
-            int vidas;
-            bool emKnockback;
-            sf::Clock relogioKnockback;
-            sf::Vector2f vetorKnockback;
+            private:
+                sf::RectangleShape figura;
+                Jogador* pJ;
+                int vidas;
+                bool emKnockback;
+                sf::Clock relogioKnockback;
+                sf::Vector2f vetorKnockback;
 
 
-        public:
-            Drone(Jogador* p = NULL, const char* caminhoTextura = "");
-            ~Drone();
+            public:
+                Drone(Jogador* p = NULL, const char* caminhoTextura = "");
+                ~Drone();
 
-            int getVidas();
-            void setVidas(int v);
-            void danificar(Jogador* p);
-            void initFigura();
-            sf::RectangleShape getFigura();
-            sf::FloatRect getBounds() const;
+                int getVidas();
+                void setVidas(int v);
+                void danificar(Jogador* p);
+                void initFigura();
+                sf::RectangleShape getFigura();
+                sf::FloatRect getBounds() const;
 
-            void setJog(Jogador* p);
-            void executar();
-            void mover();
-            void colidir(Jogador* j);
-        };
+                void setJog(Jogador* p);
+                void executar();
+                void mover();
+                void colidir(Jogador* j);
+            };
+        }
     }
 }

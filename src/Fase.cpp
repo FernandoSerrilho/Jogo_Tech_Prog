@@ -2,14 +2,19 @@
 #include "Drone.h"
 #include "Plataforma.h"
 #include "Chao.h"
+
 using namespace Fases;
+using namespace Listas;
+using namespace Entidades;
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Inimigos;
 
 Fase::Fase(Jogador* j) :list_ents(), GC(j) {
 
 }
 
 Fase::~Fase() {
-	list_ents.limpar();
 }
 
 void Fase::criarInmFaceis(Jogador* j) {
