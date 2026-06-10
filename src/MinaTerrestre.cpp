@@ -7,9 +7,9 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-MinaTerrestre::MinaTerrestre() :Obstaculo(true), tempoAtivacao(0.6f), colisao(), raio(rand() % 8 + 25.0f), tempoAtivo(false) { contraGravidade = -0.3f; }
+MinaTerrestre::MinaTerrestre() :Obstaculo(true), tempoAtivacao(0.6f), colisao(), raio(rand() % 8 + 25.0f), tempoAtivo(false), alvoExplosao(nullptr) { contraGravidade = -0.3f; }
 
-MinaTerrestre::MinaTerrestre(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), tempoAtivacao(0.6f),raio(rand()% 8 + 25.0f), tempoAtivo(false) {
+MinaTerrestre::MinaTerrestre(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), tempoAtivacao(0.6f),raio(rand()% 8 + 25.0f), tempoAtivo(false), alvoExplosao(nullptr) {
 	colisao.setSize(tam);
 	colisao.setPosition(pos);
 	setPos(pos.x, pos.y);
@@ -30,7 +30,7 @@ void MinaTerrestre::obstaculizar(Jogador* pJ){
 		tempoExplosao.restart();
 	}
 
-	explodir(pJ);
+	alvoExplosao = pJ;
 
 }
 
@@ -70,6 +70,12 @@ sf::FloatRect MinaTerrestre::getBounds() const {
 }
 
 void MinaTerrestre::executar(){
+
+
+	if (tempoAtivo) {
+		explodir(alvoExplosao);
+	}
+
 	setPos(pos.x, pos.y + gravidade + contraGravidade);
 	desenhar(colisao.getPosition());
 }

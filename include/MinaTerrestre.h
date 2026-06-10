@@ -21,6 +21,7 @@ namespace Entidades{
 				sf::RectangleShape explosao;
 				sf::Clock tempoExplosao;
 				bool tempoAtivo;
+				Entidades::Personagens::Jogador* alvoExplosao;
 			public:
 				MinaTerrestre();
 				MinaTerrestre(sf::Vector2f pos, sf::Vector2f tam);
