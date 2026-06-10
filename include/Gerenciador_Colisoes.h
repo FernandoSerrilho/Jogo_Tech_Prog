@@ -41,6 +41,7 @@ namespace Gerenciadores {
         void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pi);
         void incluirObstaculo(Entidades::Obstaculos::Obstaculo* po);
         void executar();
+        void limparListas();
         bool listaInimigosStatus();
     };
 

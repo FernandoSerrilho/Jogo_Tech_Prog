@@ -17,6 +17,10 @@ Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), pChao(NULL)
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes() { LIs.clear(); LOs.clear(); pJog1 = nullptr;pChao = nullptr; }
 
+void Gerenciador_Colisoes::limparListas() {
+    LIs.clear();
+    LOs.clear();
+}
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
     if (pI) {

@@ -14,6 +14,7 @@ namespace Entidades {
 
 namespace Fases {
 	class FaseUm;
+	class FaseDois;
 }
 
 class Jogo {
@@ -21,15 +22,21 @@ private:
 	Gerenciadores::Gerenciador_Grafico* GG;
 	Entidades::Personagens::Jogador* j1;
 	Fases::FaseUm* f1;
+	Fases::FaseDois* f2;
 	Menu* m;
 public:
 	Jogo();
 	~Jogo();
 	void executar();
 	void executarf1();
+	void executarf2();
 	const Gerenciadores::Gerenciador_Grafico* getGG();
-	void desenhar();
+	void desenharf1();
+	void desenharf2();
+	void reiniciarFaseUm();
+	void reiniciarFaseDois();
 	void reviveJogador();
 	bool jogadorVivo();
-	bool statusIni();
+	bool statusInif1();
+	bool statusInif2();
 };

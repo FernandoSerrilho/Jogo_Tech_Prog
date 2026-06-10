@@ -14,8 +14,8 @@ namespace Fases {
 		const int maxIniMed = 2;
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j);
-		void criarIniMed();
-		void criarObsMed();
+		void criarSoldados();
+		void criarArbustos();
 		void criarObstaculos();
 		void criarCenario();
 	public:

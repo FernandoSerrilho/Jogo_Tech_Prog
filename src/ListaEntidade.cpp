@@ -29,10 +29,6 @@ void ListaEntidade::percorrer() {
 			if (e->getVivo()) {
 				e->executar();
 			}
-			else {
-				delete e;
-				LEs.remove(it);
-			}
 		}
 		it = aux;
 	}

@@ -15,7 +15,7 @@ namespace Fases {
 	protected:
 		Listas::ListaEntidade list_ents;
 		Gerenciadores::Gerenciador_Colisoes GC;
-		void criarInmFaceis(Entidades::Personagens::Jogador* j);
+		void criarDrones(Entidades::Personagens::Jogador* j);
 		void criarPlataformas();
 		virtual void criarCenario() = 0;
 		virtual void criarInimigos(Entidades::Personagens::Jogador* j) = 0;
@@ -23,6 +23,8 @@ namespace Fases {
 	public:
 		Fase(Entidades::Personagens::Jogador* j = nullptr);
 		~Fase();
+		void limparGC();
+		void limparListEnts();
 		virtual void executar() = 0;
 	};
 }
