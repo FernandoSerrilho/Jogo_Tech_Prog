@@ -1,18 +1,26 @@
 #include "Gerenciador_Colisoes.h"
 #include "Obstaculo.h"
+#include "Chao.h"
+#include "Inimigo.h"
+#include "Jogador.h"
+#include "Faca.h"
 #include <math.h>
 #include <iostream>
 
 using namespace Gerenciadores;
 using namespace Entidades;
-using namespace Entidades::Personagens;
-
-
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Inimigos;
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), pChao(NULL),LIs() {}
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
+Gerenciador_Colisoes::~Gerenciador_Colisoes() { LIs.clear(); LOs.clear(); pJog1 = nullptr;pChao = nullptr; }
 
+void Gerenciador_Colisoes::limparListas() {
+    LIs.clear();
+    LOs.clear();
+}
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
     if (pI) {
@@ -119,15 +127,23 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
     if (!LOs.empty()) {
 
         std::vector<Obstaculo*>::iterator it;
-        for (it = LOs.begin(); it != LOs.end(); it++) {
+        it = LOs.begin();
+        while(it != LOs.end()) {
 
             Obstaculo* pOb = *it;
 
-            if (verificarColisao(pJog1, pOb)) {
-
-                pOb->obstaculizar(pJog1);
-
+            if (pOb) {
+                if (pOb->getVivo()) {
+                    if (verificarColisao(pJog1, pOb)) {
+                        pOb->obstaculizar(pJog1);
+                    }
+                    it++;
+                }
+                else
+                    it = LOs.erase(it);
             }
+            else
+                it = LOs.erase(it);
         }
 
     }
@@ -151,9 +167,6 @@ void Gerenciador_Colisoes::tratarColisoesJogsLims() {
 
 
 }
-
-
-
 
 void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsChao();

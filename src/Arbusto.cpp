@@ -2,6 +2,10 @@
 #include "Jogador.h"
 #include "Inimigo.h"
 
+using namespace Entidades;
+using namespace Obstaculos;
+using namespace Personagens;
+
 Arbusto::Arbusto():Obstaculo(), lentidao(0.3f) {}
 
 Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), lentidao(0.3f) {
@@ -13,7 +17,9 @@ Arbusto::Arbusto(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), lentidao(0.3f
 	contraGravidade = -0.3f;
 }
 
-Arbusto::~Arbusto(){}
+Arbusto::~Arbusto(){
+	lentidao = -1;
+}
 
 sf::FloatRect Arbusto::getBounds() const {
 	return colisao.getGlobalBounds();
@@ -32,6 +38,6 @@ void Arbusto::obstaculizar(Jogador* j1) {
     j1->setmodifiVelo(lentidao);
 }
 
-void Arbusto::obstaculizar(Inimigo* i1) {
-    //int n = 45;
+void Arbusto::obstaculizar(Entidades::Personagens::Inimigos::Inimigo* i1) {
+    int n = 45;
 }

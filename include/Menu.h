@@ -1,9 +1,13 @@
 #pragma once
 
 #include "Ente.h"
-#include "BackGround.h"
 #include <string>
 using namespace std;
+
+namespace Entidades{
+	class BackGround;
+}
+using namespace Entidades;
 
 class Jogo;
 

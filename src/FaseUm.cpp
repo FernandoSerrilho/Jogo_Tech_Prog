@@ -3,9 +3,19 @@
 #include "BackGround.h"
 #include "Arbusto.h"
 #include "Soldado.h"
+
+using namespace Gerenciadores;
+using namespace Listas;
+using namespace Fases;
 using namespace Entidades;
+using namespace Obstaculos;
+using namespace Personagens;
+using namespace Inimigos;
 
 FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
+	limparGC();
+	limparListEnts();
+	inicializar(j1);
 }
 
 FaseUm::~FaseUm() {
@@ -13,12 +23,12 @@ FaseUm::~FaseUm() {
 }
 
 void FaseUm::criarInimigos(Jogador* j) {
-	criarInmFaceis(j);
-	criarIniMed();
+	criarDrones(j);
+	criarSoldados();
 }
 
-void FaseUm::criarIniMed() {
-	Inimigo::sementear();
+void FaseUm::criarSoldados() {
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	int MAX = rand()%4 + 3;
 	sf::Vector2f p(0.0f, 0.0f);
@@ -39,13 +49,14 @@ void FaseUm::criarIniMed() {
 		}
 
 		Soldado* s = new Soldado(p, "Texturas/Soldado/SoldadoInimigo.png");
+		s->setPos(p.x, p.y);
 		GC.incluirInimigo(s);
 		list_ents.incluir(s);
 	}
 }
 
-void FaseUm::criarObsMed() {
-	Inimigo::sementear();
+void FaseUm::criarArbustos() {
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 	int MAX = rand() % 3 + 3;
 
 	for (int i = 0;i < MAX;i++) {
@@ -67,12 +78,11 @@ void FaseUm::criarObsMed() {
 			GC.incluirObstaculo(a);
 			list_ents.incluir(a);
 	}
-
 }
 
 void FaseUm::criarObstaculos() {
 	criarPlataformas();
-	criarObsMed();
+	criarArbustos();
 
 }
 

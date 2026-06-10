@@ -2,17 +2,22 @@
 #include "Drone.h"
 #include "Plataforma.h"
 #include "Chao.h"
+
 using namespace Fases;
+using namespace Listas;
+using namespace Entidades;
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Inimigos;
 
 Fase::Fase(Jogador* j) :list_ents(), GC(j) {
 
 }
 
 Fase::~Fase() {
-	list_ents.limpar();
 }
 
-void Fase::criarInmFaceis(Jogador* j) {
+void Fase::criarDrones(Jogador* j) {
 	Inimigo::sementear();
 	int MAX = rand() % 3 + 5;
 
@@ -74,4 +79,12 @@ void Fase::criarPlataformas() {
 		GC.incluirObstaculo(p1);
 		list_ents.incluir(p1);
 	}
+}
+
+void Fase::limparGC() {
+	GC.limparListas();
+}
+
+void Fase::limparListEnts() {
+	list_ents.limpar();
 }

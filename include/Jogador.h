@@ -1,17 +1,24 @@
 #pragma once
 #include "Personagem.h"
-#include "Faca.h"
+
+namespace Entidades {
+    class Faca;
+    namespace Personagens {
+        namespace Inimigos {
+            class Inimigo;
+        }
+    }
+}
 
 namespace Entidades {
     namespace Personagens {
-        class Inimigo;
         class Jogador : public Personagem {
 
         protected:
             int pontos;
             int vidas;
             sf::RectangleShape figura;
-            Faca* faca;
+            Entidades::Faca* faca;
             bool pulavel;
             bool atacando;
             bool podeAtacar;
@@ -29,7 +36,7 @@ namespace Entidades {
             ~Jogador();
 
             void initFigura();
-            Faca* getFaca();
+            Entidades::Faca* getFaca();
             bool getDirecao();
             bool getAtacando();
             int getVidas();
@@ -42,8 +49,8 @@ namespace Entidades {
             void initInv();
             void attInv();
 
-            void danificar(Inimigo* pIn);
-            void colidir(Inimigo* pIn);
+            void danificar(Entidades::Personagens::Inimigos::Inimigo* pIn);
+            void colidir(Entidades::Personagens::Inimigos::Inimigo* pIn);
             void atacar();
             void executar();
             //void salvar();                TODO

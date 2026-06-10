@@ -6,7 +6,7 @@ using namespace std;
 using namespace Gerenciadores;
 
 Ente::Ente() : id(cont_id++) {}
-Ente::~Ente() { id = -1; }
+Ente::~Ente() { id = -1; pGG = nullptr; }
 
 void Ente::setGG(Gerenciador_Grafico* pG) {
     pGG = pG;
@@ -25,7 +25,7 @@ sf::Sprite Ente::getSprite() {
 
 void Ente::setText(const char* caminhoTextura, sf::RectangleShape colisao) {
     if (!texturaGeral.loadFromFile(caminhoTextura)) {
-        cout << "Textura Grama_QuadradoSemBorda.png nao carregada!" << endl;
+        cout << "Textura nao carregada!" << endl;
     }
     texturaGeral.setRepeated(true);
     sprite.setTexture(texturaGeral);

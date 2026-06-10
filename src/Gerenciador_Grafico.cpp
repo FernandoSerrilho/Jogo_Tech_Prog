@@ -5,8 +5,6 @@
 #include <iostream>
 using namespace std;
 
-using namespace Personagens;
-
 using namespace Gerenciadores;
 
 Gerenciador_Grafico* Gerenciador_Grafico::pGG = nullptr;
@@ -17,7 +15,7 @@ Gerenciador_Grafico::Gerenciador_Grafico() : janela(new sf::RenderWindow(sf::Vid
         cout << "Erro, janela não criada" << endl;
 }
 
-Gerenciador_Grafico::~Gerenciador_Grafico() {}
+Gerenciador_Grafico::~Gerenciador_Grafico() { pGG = nullptr;janela = nullptr; }
 
 void Gerenciador_Grafico::fechaJanela() {
     if(VerificajanelaAberta())
