@@ -23,7 +23,7 @@ namespace Gerenciadores {
 
     private:
         std::vector<Entidades::Personagens::Inimigos::Inimigo*> LIs;
-        Entidades::Personagens::Jogador* pJog1;
+        Entidades::Personagens::Jogador* pJog[2];
         std::vector<Entidades::Obstaculos::Obstaculo*>LOs;
         Entidades::Chao* pChao;
     private:
@@ -35,7 +35,7 @@ namespace Gerenciadores {
         void tratarColisoesInimsChao();
         void tratarColisoesJogsLims();
     public:
-        Gerenciador_Colisoes(Entidades::Personagens::Jogador* pJ);
+        Gerenciador_Colisoes(Entidades::Personagens::Jogador* pJ1=nullptr, Entidades::Personagens::Jogador* pJ2=nullptr);
         ~Gerenciador_Colisoes();
         void setChao(Entidades::Chao* pC);
         void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pi);

@@ -16,8 +16,8 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("txtFase", "Escolha a Fase:", 60, { 960.f, 450.f });
 	initText("btnFase1", "Fase 1", 40, { 600.f, 700.f });
 	initText("btnFase2", "Fase 2", 40, { 1320.f, 700.f });
-	initText("btn1Player", "1 Jogador", 40, { 600.f, 500.f });
-	initText("btn2Players", "2 Jogadores", 40, { 1320.f, 500.f });
+	initText("btnUmJogador", "1 Jogador", 40, { 600.f, 500.f });
+	initText("btnDoisJogadores", "2 Jogadores", 40, { 1320.f, 500.f });
 
 	initText("txtCerteza", "Tem certeza que deseja sair?", 30, { 960.f, 300.f });
 	initText("btnSim", "SIM", 40, { 750.f, 550.f });
@@ -49,7 +49,7 @@ void Menu::initText(const string& chave, const string& conteudo, unsigned int ta
 void Menu::executarMouse(const sf::Vector2f& mousePos) {
 	if (estadoAtual == MENU_PRINCIPAL) {
 		if (textos["btnJogar"].getGlobalBounds().contains(mousePos)) {
-			estadoAtual = SEL_FASE;
+			estadoAtual = SEL_JOGADORES;
 		}
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos)) {
 			estadoAtual = CONFIRMA_SAIR;
@@ -59,16 +59,28 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 		if (textos["btnFase1"].getGlobalBounds().contains(mousePos)) {
 			fase_selecionada = 1;
 			estadoAtual = JOGO_RODANDO;
-			pJogo->reviveJogador();
 			pJogo->reiniciarFaseUm();
 			estadoAnterior = SEL_FASE;
 		}
 		else if (textos["btnFase2"].getGlobalBounds().contains(mousePos)) {
 			fase_selecionada = 2;
 			estadoAtual = JOGO_RODANDO;
-			pJogo->reviveJogador();
 			pJogo->reiniciarFaseDois();
 			estadoAnterior = SEL_FASE;
+		}
+	}
+	else if (estadoAtual == SEL_JOGADORES) {
+		if (textos["btnUmJogador"].getGlobalBounds().contains(mousePos)) {
+			estadoAtual = SEL_FASE;
+			pJogo->desativarJ2();
+			pJogo->reviveJogador();
+			estadoAnterior = SEL_JOGADORES;
+		}
+		else if (textos["btnDoisJogadores"].getGlobalBounds().contains(mousePos)) {
+			estadoAtual = SEL_FASE;
+			pJogo->usarJ2();
+			pJogo->reviveJogador();
+			estadoAnterior = SEL_JOGADORES;
 		}
 	}
 	else if (estadoAtual == CONFIRMA_SAIR) {
@@ -241,6 +253,14 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFase"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase1"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase2"]);
+			pJogo->getGG()->getGerenciadorG()->displayJanela();
+		}
+
+		else if (estadoAtual == SEL_JOGADORES) {
+			pJogo->getGG()->getGerenciadorG()->limpaJanela();
+			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnUmJogador"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnDoisJogadores"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
 

@@ -11,15 +11,15 @@ namespace Fases {
 	private:
 		const int maxTanques;
 	protected:
-		void criarInimigos(Entidades::Personagens::Jogador* j);
+		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void criarTanques();
-		void criarMinasTerrestres(Entidades::Personagens::Jogador* j);
-		void criarObstaculos(Entidades::Personagens::Jogador* j);
+		void criarMinasTerrestres();
+		void criarObstaculos();
 		void criarCenario();
 	public:
-		FaseDois(Entidades::Personagens::Jogador* j1=nullptr);
+		FaseDois(Entidades::Personagens::Jogador* j1=nullptr, Entidades::Personagens::Jogador* j2 = nullptr);
 		~FaseDois();
-		void inicializar(Entidades::Personagens::Jogador* j1);
+		void inicializar(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void executar();
 		void desenhar();
 		bool statusInimigos();

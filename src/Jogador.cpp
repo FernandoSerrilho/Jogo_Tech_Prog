@@ -10,16 +10,32 @@ using namespace Entidades;
 using namespace Personagens;
 using namespace Inimigos;
 
-Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true), 
+Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true),
 modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , 
 olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
-    for (int i = 0;i < 3;i++) {
-        sf::Vector2f posi(25.0f + 60.0f * (float)i, 50.0f);
-        Coracoes[i] = new Coracao(posi,"Texturas/Jogador/CoracaoVermelho.png");
-    }
     initFigura();
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
+    float inicio;
+    if (n == 2) {
+        keys[0] = sf::Keyboard::Enter;
+        keys[1] = sf::Keyboard::Left;
+        keys[2] = sf::Keyboard::Right;
+        keys[3] = sf::Keyboard::Up;
+        inicio = 1725.0f;
+    }
+    else {
+        keys[0] = sf::Keyboard::E;
+        keys[1] = sf::Keyboard::A;
+        keys[2] = sf::Keyboard::D;
+        keys[3] = sf::Keyboard::W;
+        inicio = 25.0f;
+    }
+
+    for (int i = 0;i < 3;i++) {
+        sf::Vector2f posi(inicio + 60.0f * (float)i, 50.0f);
+        Coracoes[i] = new Coracao(posi, caminhoTexturaCoracao);
+    }
 }
 
 Jogador::~Jogador() { faca = nullptr;delete faca;vidas = -1;pontos = -1; }
@@ -36,7 +52,7 @@ bool Jogador::getDirecao() {return olhandoEsquerda;};
 
 Faca* Jogador::getFaca()  { return faca;}
 
-void Jogador::setVidas(int v) { vidas = v; if (v <= 0) setVivo(false); std::cout << vidas << std::endl; }
+void Jogador::setVidas(int v) { vidas = v; if (v <= 0) { setVivo(false); setPos(2500.0f, 2500.0f);} }
 
 void Jogador::setPos(float x, float y){
     pos.x = x;
@@ -121,7 +137,7 @@ void Jogador::danificar(Inimigo* pIn) {
 
 void Jogador::atacar() {
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !atacando && podeAtacar) {
+    if (sf::Keyboard::isKeyPressed(keys[0]) && !atacando && podeAtacar) {
         atacando = true;
         podeAtacar = false;
         relogioatq.restart();
@@ -180,17 +196,17 @@ void Jogador::mover() {
     else
         vel.x = velBase;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(keys[2])) {
         pos.x += vel.x;
 
         olhandoEsquerda = false;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    if (sf::Keyboard::isKeyPressed(keys[1])) {
         pos.x -= vel.x;
 
         olhandoEsquerda = true;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && pulavel) {
+    if (sf::Keyboard::isKeyPressed(keys[3]) && pulavel) {
         vel.y -= velpulo;
         setPulavel(false);
     }

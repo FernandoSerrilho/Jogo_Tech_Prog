@@ -21,12 +21,16 @@ class Jogo {
 private:
 	Gerenciadores::Gerenciador_Grafico* GG;
 	Entidades::Personagens::Jogador* j1;
+	Entidades::Personagens::Jogador* j2;
 	Fases::FaseUm* f1;
 	Fases::FaseDois* f2;
 	Menu* m;
+	bool j2Ativo;
 public:
 	Jogo();
 	~Jogo();
+	void usarJ2();
+	void desativarJ2();
 	void executar();
 	void executarf1();
 	void executarf2();
