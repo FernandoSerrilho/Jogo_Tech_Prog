@@ -127,6 +127,8 @@ void Drone::mover() {
         sf::Vector2f tamJ = alvo->getTam();
         float tamRy = tamD.y - tamJ.y;
 
+        vel.y = 0.2f * (float)nivel_maldade + 0.5f;
+
         if (posj.x - pos.x < 0)
             pos.x -= vel.x;
         if (posj.x - pos.x > 0)
