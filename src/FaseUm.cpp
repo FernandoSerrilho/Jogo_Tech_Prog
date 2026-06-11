@@ -74,8 +74,8 @@ void FaseUm::criarArbustos() {
 			p.y = 753.0f;
 		}
 
-			//Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
-			MinaTerrestre* a = new MinaTerrestre(sf::Vector2f(p.x,p.y),sf::Vector2f(29.0f,17.0f));
+			Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
+			//MinaTerrestre* a = new MinaTerrestre(sf::Vector2f(p.x,p.y),sf::Vector2f(29.0f,17.0f));
 			GC.incluirObstaculo(a);
 			list_ents.incluir(a);
 	}
