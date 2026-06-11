@@ -3,6 +3,7 @@
 
 namespace Entidades {
     class Faca;
+    class Coracao;
     namespace Personagens {
         namespace Inimigos {
             class Inimigo;
@@ -31,6 +32,7 @@ namespace Entidades {
             sf::Clock relogioatq;
             sf::Clock cooldownatq;
             float temp_inv;
+            Coracao* Coracoes[3];
         public:
             Jogador(const char* caminhoTextura = "");
             ~Jogador();

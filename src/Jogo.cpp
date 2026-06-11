@@ -44,11 +44,9 @@ void Jogo::reiniciarFaseDois() {
 }
 
 void Jogo::reviveJogador(){
-    if (!j1->getVivo()) {
         j1->setVidas(3);
         j1->setVivo(true);
         j1->setPos(100.0f,800.0f);
-    }
 }
 
 bool Jogo::jogadorVivo() { return j1->getVivo(); }

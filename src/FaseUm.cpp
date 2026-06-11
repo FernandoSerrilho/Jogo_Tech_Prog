@@ -81,7 +81,7 @@ void FaseUm::criarArbustos() {
 	}
 }
 
-void FaseUm::criarObstaculos() {
+void FaseUm::criarObstaculos(Jogador* j) {
 	criarPlataformas();
 	criarArbustos();
 
@@ -102,8 +102,7 @@ void FaseUm::executar() {
 
 void FaseUm::inicializar(Jogador* j1) {
 	criarCenario();
-	criarObstaculos();
-	criarPlataformas();
+	criarObstaculos(j1);
 	criarInimigos(j1);
 }
 

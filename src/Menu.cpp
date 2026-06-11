@@ -24,11 +24,12 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnNao", "NAO", 40, { 1170.f, 550.f });
 
 	initText("txtMorte", "MORREU!", 60, { 960.f, 400.f });
-	initText("txtFaseVencida", "INIMIGOS DERROTADOS!", 60, { 960.f, 400.f });
+	initText("txtFaseVencida", "INIMIGOS DERROTADOS!", 60, { 960.f, 300.f });
 	initText("btnMenu", "MENU", 40, { 960.f, 550.f });
 	initText("btnRestart", "RESTART", 40, { 960.f, 850.f });
 	initText("btnSairMorte", "SAIR", 40, { 960.f, 700.f });
 	initText("btnContinuar", "CONTINUAR", 40, { 960.f, 350.f });
+	initText("btnProxFase", "PROXIMA FASE", 40, { 960.f, 450.f });
 }
 
 Menu::~Menu() { bMenu = nullptr; textos.clear(); }
@@ -105,6 +106,22 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 			estadoAtual = CONFIRMA_SAIR;
 		else if (textos["btnMenu"].getGlobalBounds().contains(mousePos))
 			estadoAtual = MENU_PRINCIPAL;
+		else if (textos["btnProxFase"].getGlobalBounds().contains(mousePos)) {
+			estadoAtual = JOGO_RODANDO;
+			pJogo->reviveJogador();
+			if (getFase() == 1)
+				fase_selecionada++;
+			else
+				fase_selecionada--;
+		}
+		else if (textos["btnRestart"].getGlobalBounds().contains(mousePos)) {
+			estadoAtual = JOGO_RODANDO;
+			pJogo->reviveJogador();
+			if (getFase() == 1)
+				pJogo->reiniciarFaseUm();
+			else
+				pJogo->reiniciarFaseDois();
+		}
 	}
 }
 
@@ -236,6 +253,7 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFaseVencida"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnProxFase"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}

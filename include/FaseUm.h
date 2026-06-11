@@ -16,7 +16,7 @@ namespace Fases {
 		void criarInimigos(Entidades::Personagens::Jogador* j);
 		void criarSoldados();
 		void criarArbustos();
-		void criarObstaculos();
+		void criarObstaculos(Entidades::Personagens::Jogador* j);
 		void criarCenario();
 	public:
 		FaseUm(Entidades::Personagens::Jogador* j = nullptr);
