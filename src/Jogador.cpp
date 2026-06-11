@@ -1,6 +1,7 @@
 #include "Jogador.h"
 #include "Inimigo.h"
 #include "Faca.h"
+#include "Coracao.h"
 #include "Gerenciador_Grafico.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -10,7 +11,12 @@ using namespace Personagens;
 using namespace Inimigos;
 
 Jogador::Jogador(const char* caminhoTextura) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true), 
-modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)) {
+modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , 
+olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
+    for (int i = 0;i < 3;i++) {
+        sf::Vector2f posi(25.0f + 60.0f * (float)i, 50.0f);
+        Coracoes[i] = new Coracao(posi,"Texturas/Jogador/CoracaoVermelho.png");
+    }
     initFigura();
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
@@ -135,17 +141,9 @@ void Jogador::atacar() {
             podeAtacar = true;
         }
     }
-
-
-
  }
 
-
-
-
 void Jogador::executar() {
-
-
     mover();
     attInv();
     atacar();
@@ -154,6 +152,9 @@ void Jogador::executar() {
 
     if (atacando && faca) {
         faca->executar();
+    }
+    for (int i = 0;i < vidas;i++) {
+        Coracoes[i]->executar();
     }
 }
 

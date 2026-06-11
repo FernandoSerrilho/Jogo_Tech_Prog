@@ -13,8 +13,8 @@ namespace Fases {
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j);
 		void criarTanques();
-		void criarMinasTerrestres();
-		void criarObstaculos();
+		void criarMinasTerrestres(Entidades::Personagens::Jogador* j);
+		void criarObstaculos(Entidades::Personagens::Jogador* j);
 		void criarCenario();
 	public:
 		FaseDois(Entidades::Personagens::Jogador* j1=nullptr);

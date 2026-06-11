@@ -19,7 +19,7 @@ namespace Fases {
 		void criarPlataformas();
 		virtual void criarCenario() = 0;
 		virtual void criarInimigos(Entidades::Personagens::Jogador* j) = 0;
-		virtual void criarObstaculos() = 0;
+		virtual void criarObstaculos(Entidades::Personagens::Jogador* j) = 0;
 	public:
 		Fase(Entidades::Personagens::Jogador* j = nullptr);
 		~Fase();

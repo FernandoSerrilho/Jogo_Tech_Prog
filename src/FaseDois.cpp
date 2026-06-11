@@ -18,9 +18,7 @@ FaseDois::FaseDois(Jogador* pJ):Fase(pJ),maxTanques(rand()%3+3) {
 	inicializar(pJ);
 }
 
-FaseDois::~FaseDois() {
-	
-}
+FaseDois::~FaseDois() {}
 
 void FaseDois::criarInimigos(Jogador* j) {
 	criarDrones(j);
@@ -31,7 +29,7 @@ void FaseDois::criarTanques() {
 	
 }
 
-void FaseDois::criarMinasTerrestres() {
+void FaseDois::criarMinasTerrestres(Jogador* j) {
 	Entidades::Personagens::Inimigos::Inimigo::sementear();
 	int MAX = rand() % 3 + 3;
 
@@ -50,15 +48,15 @@ void FaseDois::criarMinasTerrestres() {
 			p.y = 760.0f;
 		}
 
-		MinaTerrestre* mT = new MinaTerrestre(sf::Vector2f(p.x, p.y), sf::Vector2f(29.0f, 10.0f));
+		MinaTerrestre* mT = new MinaTerrestre(sf::Vector2f(p.x, p.y), sf::Vector2f(29.0f, 10.0f),j);
 		GC.incluirObstaculo(mT);
 		list_ents.incluir(mT);
 	}
 }
 
-void FaseDois::criarObstaculos() {
+void FaseDois::criarObstaculos(Entidades::Personagens::Jogador* j) {
 	criarPlataformas();
-	criarMinasTerrestres();
+	criarMinasTerrestres(j);
 
 }
 
@@ -77,8 +75,7 @@ void FaseDois::executar() {
 
 void FaseDois::inicializar(Jogador* j1) {
 	criarCenario();
-	criarObstaculos();
-	criarPlataformas();
+	criarObstaculos(j1);
 	criarInimigos(j1);
 }
 
