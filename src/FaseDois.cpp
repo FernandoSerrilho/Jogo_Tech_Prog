@@ -3,6 +3,9 @@
 #include "BackGround.h"
 #include "MinaTerrestre.h"
 #include "Soldado.h"
+#include "Tanque.h"
+#include "Bala.h"
+#include <iostream>
 
 using namespace Gerenciadores;
 using namespace Listas;
@@ -22,11 +25,19 @@ FaseDois::~FaseDois() {}
 
 void FaseDois::criarInimigos(Jogador* j) {
 	criarDrones(j);
-	criarTanques();
+	criarTanques(j);
 }
 
-void FaseDois::criarTanques() {
-	
+void FaseDois::criarTanques(Jogador *j) {
+
+		Tanque* t1 = new Tanque("Texturas/Tanque/Tanque.png", j);
+		t1->setPos(1000.0f, 1000.0f);
+		Bala *b1 = new Bala(t1->getPos(),"Texturas/Faca/facadeitada.png");
+		b1->setVel(t1->getVelBala() / 10.0f,0.0F);
+		GC.IncluirProjetil(b1);
+		GC.incluirInimigo(t1);
+		list_ents.incluir(t1);
+		list_ents.incluir(b1);
 }
 
 void FaseDois::criarMinasTerrestres(Jogador* j) {

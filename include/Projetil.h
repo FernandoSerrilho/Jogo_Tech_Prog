@@ -4,6 +4,9 @@
 
 
 namespace Entidades {
+    namespace Personagens {
+        class Jogador;
+    }
 
 
     class Projetil : public Entidade {
@@ -16,6 +19,7 @@ namespace Entidades {
             ~Projetil();
 
             void executar();
+            virtual void danificar(Personagens::Jogador* pJ) = 0;
             //void salvar();    TODO;
 
     };

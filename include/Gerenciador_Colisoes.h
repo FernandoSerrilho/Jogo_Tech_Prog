@@ -6,6 +6,7 @@
 namespace Entidades {
     class Chao;
     class Entidade;
+    class Projetil;
     namespace Personagens {
         namespace Inimigos {
             class Inimigo;
@@ -25,9 +26,11 @@ namespace Gerenciadores {
         std::vector<Entidades::Personagens::Inimigos::Inimigo*> LIs;
         Entidades::Personagens::Jogador* pJog1;
         std::vector<Entidades::Obstaculos::Obstaculo*>LOs;
+        std::vector<Entidades::Projetil*>LPs;
         Entidades::Chao* pChao;
     private:
         const bool verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2);
+        void tratarColisoesJogsProjeteis();
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimigs();
         void tratarColisoesObstacInimigos();
@@ -38,6 +41,7 @@ namespace Gerenciadores {
         Gerenciador_Colisoes(Entidades::Personagens::Jogador* pJ);
         ~Gerenciador_Colisoes();
         void setChao(Entidades::Chao* pC);
+        void IncluirProjetil(Entidades::Projetil* pP);
         void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pi);
         void incluirObstaculo(Entidades::Obstaculos::Obstaculo* po);
         void executar();

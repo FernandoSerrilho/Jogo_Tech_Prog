@@ -3,6 +3,7 @@
 #include "Chao.h"
 #include "Inimigo.h"
 #include "Jogador.h"
+#include "Projetil.h"
 #include "Faca.h"
 #include <math.h>
 #include <iostream>
@@ -15,11 +16,19 @@ using namespace Inimigos;
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), pChao(NULL),LIs() {}
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() { LIs.clear(); LOs.clear(); pJog1 = nullptr;pChao = nullptr; }
+Gerenciador_Colisoes::~Gerenciador_Colisoes() { LIs.clear(); LOs.clear(); LPs.clear(); pJog1 = nullptr;pChao = nullptr; }
 
 void Gerenciador_Colisoes::limparListas() {
     LIs.clear();
     LOs.clear();
+    LPs.clear();
+}
+
+void Gerenciador_Colisoes::IncluirProjetil(Projetil* pP) {
+    if (pP) {
+        LPs.push_back(pP);
+    }
+
 }
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
@@ -40,6 +49,22 @@ void Gerenciador_Colisoes::setChao(Chao* pC) {
 
     pChao = pC;
 
+}
+
+void Gerenciador_Colisoes::tratarColisoesJogsProjeteis() {
+    if (!LPs.empty()) {
+        std::vector<Projetil*>::iterator it;
+
+        for (it = LPs.begin(); it != LPs.end(); it++) {
+            
+            Projetil* pP = *it;
+
+                if (verificarColisao(pP, pJog1)) {
+                    pP->danificar(pJog1);
+                }
+
+        }
+    }
 }
 
 void Gerenciador_Colisoes::tratarColisoesObstacInimigos() {

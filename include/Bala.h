@@ -18,9 +18,10 @@ namespace Entidades {
             sf::RectangleShape colisao;
 
         public:
-            Bala(const char* caminhoTextura = "", sf::Vector2f posicao);
+            Bala(sf::Vector2f posicao = sf::Vector2f(0.0f,0.0f), const char* caminhoTextura = "");
             ~Bala();
 
+            sf::FloatRect getBounds() const;
             void danificar(Personagens::Jogador* pJ);
             void mover();
             void executar();

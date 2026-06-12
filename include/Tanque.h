@@ -14,14 +14,16 @@ namespace Entidades {
                     Jogador* pJ;
                     Bala* pB;
                     sf::Clock relogiocooldown;
+                    bool podeAtirar;
                     float velBala;
                     float raio;
                     int vidas;
                     sf::RectangleShape figura;
                 public:
-                    Tanque(const char* caminhoTextura = "", Jogador* pJ);
+                    Tanque(const char* caminhoTextura = "", Jogador* pJ = nullptr);
                     ~Tanque();
                     
+                    float getVelBala();
                     void setBala(Bala* b);
                     void atirar();
 

@@ -12,7 +12,7 @@ namespace Fases {
 		const int maxTanques;
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j);
-		void criarTanques();
+		void criarTanques(Entidades::Personagens::Jogador* j);
 		void criarMinasTerrestres(Entidades::Personagens::Jogador* j);
 		void criarObstaculos(Entidades::Personagens::Jogador* j);
 		void criarCenario();
