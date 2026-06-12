@@ -1,5 +1,6 @@
 #pragma once
 #include "Inimigo.h"
+#include <vector>
 
 
 namespace Entidades {
@@ -12,10 +13,11 @@ namespace Entidades {
 
                 private: 
                     Jogador* pJ;
-                    Bala* pB;
+                    //Bala* pB;
+                    std::vector<Bala*> balas;
                     sf::Clock relogiocooldown;
                     bool podeAtirar;
-                    float velBala;
+                    float cooldown;
                     float raio;
                     int vidas;
                     sf::RectangleShape figura;
@@ -23,8 +25,11 @@ namespace Entidades {
                     Tanque(const char* caminhoTextura = "", Jogador* pJ = nullptr);
                     ~Tanque();
                     
-                    float getVelBala();
-                    void setBala(Bala* b);
+                    bool getpodeAtirar();
+                    void setPodeAtirar(bool p);
+
+                    void resetClock();
+                    void adicionarBala(Bala* b);
                     void atirar();
 
                     void setVidas(int v);

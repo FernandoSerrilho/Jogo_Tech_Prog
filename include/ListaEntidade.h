@@ -14,6 +14,8 @@ namespace Listas {
 	public:
 		ListaEntidade();
 		~ListaEntidade();
+		Lista<Entidades::Entidade>::Iterador begin();
+		Lista<Entidades::Entidade>::Iterador end();
 		void incluir(Entidades::Entidade* pE);
 		void percorrer();
 		void removeMortos();

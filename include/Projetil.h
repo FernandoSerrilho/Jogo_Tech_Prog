@@ -19,6 +19,8 @@ namespace Entidades {
             ~Projetil();
 
             void executar();
+            bool getAtivo();
+            void setAtivo(bool a);
             virtual void danificar(Personagens::Jogador* pJ) = 0;
             //void salvar();    TODO;
 

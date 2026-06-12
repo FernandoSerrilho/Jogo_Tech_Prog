@@ -12,18 +12,18 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
+FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2) {
 	limparGC();
 	limparListEnts();
-	inicializar(j1);
+	inicializar(j1,j2);
 }
 
 FaseUm::~FaseUm() {
 
 }
 
-void FaseUm::criarInimigos(Jogador* j) {
-	criarDrones(j);
+void FaseUm::criarInimigos(Jogador* j1,Jogador* j2) {
+	criarDrones(j1,j2);
 	criarSoldados();
 }
 
@@ -40,7 +40,7 @@ void FaseUm::criarSoldados() {
 		}
 
 		else if (i >= 2 && i < 4) {
-			p.x = 510.0f + 1000.0f * (i - 2);
+			p.x = 520.0f + 1000.0f * (i - 2);
 			p.y = 835.0f;
 		}
 		else if (i >= 4) {
@@ -81,7 +81,7 @@ void FaseUm::criarArbustos() {
 	}
 }
 
-void FaseUm::criarObstaculos(Jogador* j) {
+void FaseUm::criarObstaculos() {
 	criarPlataformas();
 	criarArbustos();
 
@@ -100,10 +100,10 @@ void FaseUm::executar() {
 	list_ents.percorrer();
 }
 
-void FaseUm::inicializar(Jogador* j1) {
+void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
 	criarCenario();
-	criarObstaculos(j1);
-	criarInimigos(j1);
+	criarObstaculos();
+	criarInimigos(j1,j2);
 }
 
 void FaseUm::desenhar() {

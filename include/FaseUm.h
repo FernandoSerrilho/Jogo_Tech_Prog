@@ -13,15 +13,15 @@ namespace Fases {
 	private:
 		const int maxIniMed = 2;
 	protected:
-		void criarInimigos(Entidades::Personagens::Jogador* j);
+		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void criarSoldados();
 		void criarArbustos();
-		void criarObstaculos(Entidades::Personagens::Jogador* j);
+		void criarObstaculos();
 		void criarCenario();
 	public:
-		FaseUm(Entidades::Personagens::Jogador* j = nullptr);
+		FaseUm(Entidades::Personagens::Jogador* j1 = nullptr, Entidades::Personagens::Jogador* j2 = nullptr);
 		~FaseUm();
-		void inicializar(Entidades::Personagens::Jogador* j1);
+		void inicializar(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void executar();
 		void desenhar();
 		bool statusInimigos();

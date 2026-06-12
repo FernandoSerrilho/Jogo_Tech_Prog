@@ -110,7 +110,7 @@ void Plataforma::obstaculizar(Inimigo* i1) {
         i1->setPos(boundsp.left + boundsj.width, pos.y);
     }
 
-    i1->setVel(velI.x,velI.y);
+   // i1->setVel(velI.x,velI.y);
 
 }
 

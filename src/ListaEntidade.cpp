@@ -11,6 +11,9 @@ ListaEntidade::~ListaEntidade() {
 	LEs.limpar();
 }
 
+Lista<Entidades::Entidade>::Iterador   ListaEntidade::begin() {return LEs.begin();}
+Lista<Entidades::Entidade>::Iterador   ListaEntidade::end() {return LEs.end();}
+
 void ListaEntidade::incluir(Entidade* pE) {
 	if (pE != nullptr)
 		LEs.incluir(pE);

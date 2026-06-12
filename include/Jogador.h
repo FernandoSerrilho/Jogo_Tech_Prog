@@ -33,8 +33,9 @@ namespace Entidades {
             sf::Clock cooldownatq;
             float temp_inv;
             Coracao* Coracoes[3];
+            sf::Keyboard::Key keys[4];
         public:
-            Jogador(const char* caminhoTextura = "");
+            Jogador(const char* caminhoTextura = "", const char* caminhoTexturaCoracao = "",int n =-1);
             ~Jogador();
 
             void initFigura();
