@@ -6,10 +6,13 @@ namespace Entidades {
 	}
 }
 
+class BackGround;
+
 namespace Fases {
 	class FaseDois :public Fase {
 	private:
 		const int maxTanques;
+		BackGround* pBG;
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void criarTanques();

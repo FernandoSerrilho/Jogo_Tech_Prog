@@ -8,10 +8,13 @@ namespace Entidades {
 	}
 }
 
+class BackGround;
+
 namespace Fases {
 	class FaseUm : public Fase {
 	private:
 		const int maxIniMed = 2;
+		BackGround* pBG;
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void criarSoldados();

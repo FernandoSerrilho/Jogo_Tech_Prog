@@ -12,14 +12,14 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2) {
+FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2),pBG(nullptr) {
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
 }
 
 FaseUm::~FaseUm() {
-
+	pBG = nullptr;
 }
 
 void FaseUm::criarInimigos(Jogador* j1,Jogador* j2) {
@@ -87,14 +87,14 @@ void FaseUm::criarObstaculos() {
 }
 
 void FaseUm::criarCenario() {
-	BackGround* b = new BackGround("Texturas/BackGround/Fundo.png");
-	list_ents.incluir(b);
+	pBG = new BackGround("Texturas/BackGround/Fundo.png");
 	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
 	GC.setChao(c);
 	list_ents.incluir(c);
 }
 
 void FaseUm::executar() {
+	pBG->executar();
 	GC.executar();
 	list_ents.percorrer();
 }
@@ -106,6 +106,7 @@ void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
 }
 
 void FaseUm::desenhar() {
+	pBG->executar();
 	list_ents.desenhar();
 }
 

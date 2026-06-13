@@ -5,7 +5,7 @@
     using namespace Entidades::Personagens;
 
     Faca::Faca(Jogador* pJ) : Entidade(), pJog(pJ), figura(sf::Vector2f(70.0f, 58.0f)) {
-        figura.setFillColor(sf::Color::White);
+
         setText("Texturas/Faca/FacaDeitada.png", figura);
     }
 

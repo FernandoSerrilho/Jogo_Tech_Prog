@@ -12,13 +12,13 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand()%3+3) {
+FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand()%3+3),pBG(nullptr) {
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
 }
 
-FaseDois::~FaseDois() {}
+FaseDois::~FaseDois() { pBG = nullptr; }
 
 void FaseDois::criarInimigos(Jogador* j1,Jogador* j2) {
 	criarDrones(j1,j2);
@@ -61,14 +61,14 @@ void FaseDois::criarObstaculos() {
 }
 
 void FaseDois::criarCenario() {
-	BackGround* b = new BackGround("Texturas/BackGround/BackgroundF2.png");
-	list_ents.incluir(b);
+	pBG= new BackGround("Texturas/BackGround/BackgroundF2.png");
 	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
 	GC.setChao(c);
 	list_ents.incluir(c);
 }
 
 void FaseDois::executar() {
+	pBG->executar();
 	GC.executar();
 	list_ents.percorrer();
 }
@@ -80,6 +80,7 @@ void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
 }
 
 void FaseDois::desenhar() {
+	pBG->executar();
 	list_ents.desenhar();
 }
 

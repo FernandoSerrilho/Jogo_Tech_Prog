@@ -4,7 +4,7 @@
 #include "Gerenciador_Grafico.h"
 #include <iostream>
 
-Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
+Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")),fonte(),n_jogs(0)
 ,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL),pJogo(j){
 	if (!fonte.loadFromFile("Texturas/Fontes/FonteTexto.ttf")) {
 		std::cout << "Erro ao carregar a fonte!" << std::endl;
@@ -32,7 +32,7 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnProxFase", "PROXIMA FASE", 40, { 960.f, 450.f });
 }
 
-Menu::~Menu() { bMenu = nullptr; textos.clear(); }
+Menu::~Menu() {textos.clear(); }
 
 int Menu::getFase() { return fase_selecionada; }
 
@@ -207,7 +207,7 @@ void Menu::executar() {
 		else if (estadoAtual == MENU_PRINCIPAL) {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
 			pJogo->reviveJogador();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+			bMenu->executar();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
@@ -249,7 +249,7 @@ void Menu::executar() {
 		}
 		else if (estadoAtual == SEL_FASE) {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+			bMenu->executar();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFase"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase1"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase2"]);
@@ -258,7 +258,7 @@ void Menu::executar() {
 
 		else if (estadoAtual == SEL_JOGADORES) {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+			bMenu->executar();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnUmJogador"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnDoisJogadores"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();

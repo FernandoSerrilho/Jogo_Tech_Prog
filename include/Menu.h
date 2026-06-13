@@ -4,10 +4,7 @@
 #include <string>
 using namespace std;
 
-namespace Entidades{
-	class BackGround;
-}
-using namespace Entidades;
+class BackGround;
 
 class Jogo;
 

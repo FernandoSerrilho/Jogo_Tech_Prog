@@ -3,7 +3,7 @@
 #include "Entidade.h"
 
 namespace Entidades {
-	class Coracao : public Entidade {
+	class Coracao : public Ente {
 	private:
 		sf::RectangleShape colisao;
 	public:
@@ -11,6 +11,5 @@ namespace Entidades {
 		Coracao(sf::Vector2f pos,const char* caminhoTextura = " ");
 		~Coracao();
 		void executar();
-		sf::FloatRect getBounds() const;
 	};
 }
