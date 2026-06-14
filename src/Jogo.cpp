@@ -28,6 +28,10 @@ void Jogo::desativarJ2() {
     j2Ativo = false;
 }
 
+Jogador* Jogo::getj1() { return j1; }
+
+Jogador* Jogo::getj2() { return j2; }
+
 const Gerenciador_Grafico* Jogo::getGG (){
     return GG;
 }

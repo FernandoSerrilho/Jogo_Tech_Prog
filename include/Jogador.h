@@ -1,5 +1,6 @@
 #pragma once
 #include "Personagem.h"
+#include <string>
 
 namespace Entidades {
     class Faca;
@@ -34,6 +35,7 @@ namespace Entidades {
             float temp_inv;
             Coracao* Coracoes[3];
             sf::Keyboard::Key keys[4];
+            std::string nome;
         public:
             Jogador(const char* caminhoTextura = "", const char* caminhoTexturaCoracao = "",int n =-1);
             ~Jogador();
@@ -63,6 +65,8 @@ namespace Entidades {
             sf::RectangleShape getFigura();
             sf::Vector2f getTam();
             sf::FloatRect getBounds() const;
+            void setNome(std::string s);
+            std::string getNome() const;
         };
     }
 }

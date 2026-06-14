@@ -21,6 +21,8 @@ public:
 		SEL_JOGADORES,
 		CONFIRMA_SAIR,
 		JOGO_RODANDO,
+		DIGITANDO_J1,
+		DIGITANDO_J2,
 		PAUSA
 	};
 private:

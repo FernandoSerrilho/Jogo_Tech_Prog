@@ -12,7 +12,7 @@ Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo(),figura
 	setPos(pos.x, pos.y);
 	setText(caminhoTextura, figura);
 	setVel(3.0f, 3.0f);
-	contraGravidade = 3.0f;
+	contraGravidade = 4.0f;
 }
 
 Soldado::~Soldado() { pJ = nullptr;vidas = -1; }
