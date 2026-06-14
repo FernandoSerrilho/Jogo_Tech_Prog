@@ -53,16 +53,21 @@ void Gerenciador_Colisoes::setChao(Chao* pC) {
 
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis() {
     if (!LPs.empty()) {
+        for (int i = 0; i < 2 ; i++) {
         std::vector<Projetil*>::iterator it;
 
         for (it = LPs.begin(); it != LPs.end(); it++) {
             
             Projetil* pP = *it;
 
-                if (verificarColisao(pP, pJog[0])) {
-                    pP->danificar(pJog[0]);
-                }
 
+              if (pP && pP->getAtivo()) {
+
+                if (verificarColisao(pP, pJog[i])) {
+                    pP->danificar(pJog[i]);
+                }
+            }
+        }
         }
     }
 }
@@ -208,6 +213,7 @@ void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsInimigs();
     tratarColisoesJogsObstacs();
     tratarColisoesObstacInimigos();
+    tratarColisoesJogsProjeteis();
     tratarColisoesJogsLims();
 }
 

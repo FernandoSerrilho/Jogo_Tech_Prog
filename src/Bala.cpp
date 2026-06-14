@@ -58,7 +58,8 @@ void Bala::executar() {
 
     if (pos.x < -50.0f || pos.x > 2000.0f || pos.y < -50.0f || pos.y > 1500.0f) {
         setAtivo(false);    
-        setPos(2500.0f, 2500.0f);     
+        setPos(2500.0f, 2500.0f);    
+        return; 
     }
 
     mover();

@@ -31,7 +31,7 @@ void FaseDois::criarInimigos(Jogador* j1,Jogador* j2) {
 void FaseDois::criarTanques(Jogador *j) {
 
 		for (int i = 0; i < maxTanques; i++) {
-        Tanque* t1 = new Tanque("Texturas/Tanque/Tanque.png", j);
+        Tanque* t1 = new Tanque("Texturas/Tanque/tanque.png", j);
         sf::Vector2f p(0.0f, 0.0f);
 
         if (i < 2) {

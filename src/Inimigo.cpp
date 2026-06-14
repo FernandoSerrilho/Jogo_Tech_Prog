@@ -7,7 +7,6 @@ using namespace Entidades::Personagens::Inimigos;
 
 Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false){
 
-    sementear();
     nivel_maldade = rand()%10 + 1;
 
 }
