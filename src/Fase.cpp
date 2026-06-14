@@ -2,22 +2,27 @@
 #include "Drone.h"
 #include "Plataforma.h"
 #include "Chao.h"
-using namespace Fases;
 
-Fase::Fase(Jogador* j) :list_ents(), GC(j) {
+using namespace Fases;
+using namespace Listas;
+using namespace Entidades;
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Inimigos;
+
+Fase::Fase(Jogador* j1,Jogador* j2) :list_ents(), GC(j1,j2) {
 
 }
 
 Fase::~Fase() {
-	list_ents.limpar();
 }
 
-void Fase::criarInmFaceis(Jogador* j) {
+void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 	Inimigo::sementear();
 	int MAX = rand() % 3 + 5;
 
 	for (int i = 0; i < MAX;i++) {
-		Drone* d1 = new Drone(NULL, "Texturas/Drone/drone_somente.png");
+		Drone* d1 = new Drone(NULL,NULL, "Texturas/Drone/drone_somente.png");
 		sf::Vector2f p(0.0f, 0.0f);
 		if (i < 2) {
 			p.x = 500.0f + 1000.0f * i;
@@ -37,7 +42,8 @@ void Fase::criarInmFaceis(Jogador* j) {
 			p.y = 480.0f;
 		}
 		d1->setPos(p.x, p.y);
-		d1->setJog(j);
+		d1->setJog(j1,0);
+		d1->setJog(j2, 1);
 		GC.incluirInimigo(d1);
 		list_ents.incluir(d1);
 	}
@@ -74,4 +80,12 @@ void Fase::criarPlataformas() {
 		GC.incluirObstaculo(p1);
 		list_ents.incluir(p1);
 	}
+}
+
+void Fase::limparGC() {
+	GC.limparListas();
+}
+
+void Fase::limparListEnts() {
+	list_ents.limpar();
 }

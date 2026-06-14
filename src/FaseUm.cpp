@@ -3,22 +3,32 @@
 #include "BackGround.h"
 #include "Arbusto.h"
 #include "Soldado.h"
-using namespace Entidades;
 
-FaseUm::FaseUm(Jogador* j1) : Fase(j1) {
+using namespace Gerenciadores;
+using namespace Listas;
+using namespace Fases;
+using namespace Entidades;
+using namespace Obstaculos;
+using namespace Personagens;
+using namespace Inimigos;
+
+FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2) {
+	limparGC();
+	limparListEnts();
+	inicializar(j1,j2);
 }
 
 FaseUm::~FaseUm() {
 
 }
 
-void FaseUm::criarInimigos(Jogador* j) {
-	criarInmFaceis(j);
-	criarIniMed();
+void FaseUm::criarInimigos(Jogador* j1,Jogador* j2) {
+	criarDrones(j1,j2);
+	criarSoldados();
 }
 
-void FaseUm::criarIniMed() {
-	Inimigo::sementear();
+void FaseUm::criarSoldados() {
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	int MAX = rand()%4 + 3;
 	sf::Vector2f p(0.0f, 0.0f);
@@ -30,7 +40,7 @@ void FaseUm::criarIniMed() {
 		}
 
 		else if (i >= 2 && i < 4) {
-			p.x = 510.0f + 1000.0f * (i - 2);
+			p.x = 520.0f + 1000.0f * (i - 2);
 			p.y = 835.0f;
 		}
 		else if (i >= 4) {
@@ -39,13 +49,14 @@ void FaseUm::criarIniMed() {
 		}
 
 		Soldado* s = new Soldado(p, "Texturas/Soldado/SoldadoInimigo.png");
+		s->setPos(p.x, p.y);
 		GC.incluirInimigo(s);
 		list_ents.incluir(s);
 	}
 }
 
-void FaseUm::criarObsMed() {
-	Inimigo::sementear();
+void FaseUm::criarArbustos() {
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 	int MAX = rand() % 3 + 3;
 
 	for (int i = 0;i < MAX;i++) {
@@ -64,15 +75,15 @@ void FaseUm::criarObsMed() {
 		}
 
 			Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
+			//MinaTerrestre* a = new MinaTerrestre(sf::Vector2f(p.x,p.y),sf::Vector2f(29.0f,17.0f));
 			GC.incluirObstaculo(a);
 			list_ents.incluir(a);
 	}
-
 }
 
 void FaseUm::criarObstaculos() {
 	criarPlataformas();
-	criarObsMed();
+	criarArbustos();
 
 }
 
@@ -89,11 +100,10 @@ void FaseUm::executar() {
 	list_ents.percorrer();
 }
 
-void FaseUm::inicializar(Jogador* j1) {
+void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
 	criarCenario();
 	criarObstaculos();
-	criarPlataformas();
-	criarInimigos(j1);
+	criarInimigos(j1,j2);
 }
 
 void FaseUm::desenhar() {

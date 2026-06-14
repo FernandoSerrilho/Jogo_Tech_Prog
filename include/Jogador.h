@@ -1,17 +1,25 @@
 #pragma once
 #include "Personagem.h"
-#include "Faca.h"
+
+namespace Entidades {
+    class Faca;
+    class Coracao;
+    namespace Personagens {
+        namespace Inimigos {
+            class Inimigo;
+        }
+    }
+}
 
 namespace Entidades {
     namespace Personagens {
-        class Inimigo;
         class Jogador : public Personagem {
 
         protected:
             int pontos;
             int vidas;
             sf::RectangleShape figura;
-            Faca* faca;
+            Entidades::Faca* faca;
             bool pulavel;
             bool atacando;
             bool podeAtacar;
@@ -24,12 +32,14 @@ namespace Entidades {
             sf::Clock relogioatq;
             sf::Clock cooldownatq;
             float temp_inv;
+            Coracao* Coracoes[3];
+            sf::Keyboard::Key keys[4];
         public:
-            Jogador(const char* caminhoTextura = "");
+            Jogador(const char* caminhoTextura = "", const char* caminhoTexturaCoracao = "",int n =-1);
             ~Jogador();
 
             void initFigura();
-            Faca* getFaca();
+            Entidades::Faca* getFaca();
             bool getDirecao();
             bool getAtacando();
             int getVidas();
@@ -42,8 +52,8 @@ namespace Entidades {
             void initInv();
             void attInv();
 
-            void danificar(Inimigo* pIn);
-            void colidir(Inimigo* pIn);
+            void danificar(Entidades::Personagens::Inimigos::Inimigo* pIn);
+            void colidir(Entidades::Personagens::Inimigos::Inimigo* pIn);
             void atacar();
             void executar();
             //void salvar();                TODO

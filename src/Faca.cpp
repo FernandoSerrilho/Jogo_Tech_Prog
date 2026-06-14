@@ -1,11 +1,8 @@
     #include "Faca.h"
     #include "Jogador.h"
 
- 
     using namespace Entidades;
     using namespace Entidades::Personagens;
-
-
 
     Faca::Faca(Jogador* pJ) : Entidade(), pJog(pJ), figura(sf::Vector2f(70.0f, 58.0f)) {
         figura.setFillColor(sf::Color::White);
@@ -13,8 +10,7 @@
     }
 
 
-    Faca::~Faca() {}
-
+    Faca::~Faca() { pJog = nullptr; }
 
     void Faca::initFigura() {
 

@@ -1,18 +1,35 @@
 #include "Gerenciador_Colisoes.h"
 #include "Obstaculo.h"
+#include "Chao.h"
+#include "Inimigo.h"
+#include "Jogador.h"
+#include "Projetil.h"
+#include "Faca.h"
 #include <math.h>
 #include <iostream>
 
 using namespace Gerenciadores;
 using namespace Entidades;
-using namespace Entidades::Personagens;
+using namespace Personagens;
+using namespace Obstaculos;
+using namespace Inimigos;
 
+Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ1, Jogador* pJ2) :pChao(NULL), LIs() { pJog[0] = pJ1; pJog[1] = pJ2; }
 
+Gerenciador_Colisoes::~Gerenciador_Colisoes() { LIs.clear(); LOs.clear(); pJog[0] = nullptr;pJog[1] = nullptr;pChao = nullptr; }
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* pJ) : pJog1(pJ), pChao(NULL),LIs() {}
+void Gerenciador_Colisoes::limparListas() {
+    LIs.clear();
+    LOs.clear();
+    LPs.clear();
+}
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
+void Gerenciador_Colisoes::IncluirProjetil(Projetil* pP) {
+    if (pP) {
+        LPs.push_back(pP);
+    }
 
+}
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pI) {
     if (pI) {
@@ -32,6 +49,27 @@ void Gerenciador_Colisoes::setChao(Chao* pC) {
 
     pChao = pC;
 
+}
+
+void Gerenciador_Colisoes::tratarColisoesJogsProjeteis() {
+    if (!LPs.empty()) {
+        for (int i = 0; i < 2 ; i++) {
+        std::vector<Projetil*>::iterator it;
+
+        for (it = LPs.begin(); it != LPs.end(); it++) {
+            
+            Projetil* pP = *it;
+
+
+              if (pP && pP->getAtivo()) {
+
+                if (verificarColisao(pP, pJog[i])) {
+                    pP->danificar(pJog[i]);
+                }
+            }
+        }
+        }
+    }
 }
 
 void Gerenciador_Colisoes::tratarColisoesObstacInimigos() {
@@ -67,26 +105,30 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) 
 
 void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
     if (!LIs.empty()) {
-        std::vector<Inimigo*>::iterator it = LIs.begin();
 
-        while (it != LIs.end()) {
-            Inimigo* pIn = *it;
-            if (*it) {
-                if (pIn->getVivo()) {
-                    if (verificarColisao(pJog1, pIn)) {
-                        pJog1->colidir(pIn);
+        for (int i = 0;i < 2;i++) {
+            if (pJog[i]) {
+                std::vector<Inimigo*>::iterator it = LIs.begin();
+                while (it != LIs.end()) {
+                    Inimigo* pIn = *it;
+                    if (*it) {
+                        if (pIn->getVivo()) {
+                            if (verificarColisao(pJog[i], pIn)) {
+                                pJog[i]->colidir(pIn);
+                            }
+                            if (pJog[i]->getAtacando() && verificarColisao(pJog[i]->getFaca(), pIn)) {
+                                pJog[i]->danificar(pIn);
+                            }
+                            it++;
+                        }
+                        else {
+                            it = LIs.erase(it);
+                        }
                     }
-                    if (pJog1->getAtacando() && verificarColisao(pJog1->getFaca(), pIn)) {
-                        pJog1->danificar(pIn);
+                    else {
+                        it = LIs.erase(it);
                     }
-                    it++;
                 }
-                else {
-                    it = LIs.erase(it);
-                }
-            }
-            else {
-                it = LIs.erase(it);
             }
         }
     }
@@ -94,10 +136,12 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
 
 void Gerenciador_Colisoes::tratarColisoesJogsChao() {
     if (pChao) {
-
-        if (verificarColisao(pJog1,pChao)) {
-            pChao->colidir(pJog1);
-
+        for (int i = 0;i < 2;i++) {
+            if (pJog[i]) {
+                if (verificarColisao(pJog[i], pChao)) {
+                    pChao->colidir(pJog[i]);
+                }
+            }
         }
     }
 }
@@ -117,43 +161,51 @@ void Gerenciador_Colisoes::tratarColisoesInimsChao() {
 }
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs() {
     if (!LOs.empty()) {
+        for (int i = 0;i < 2;i++) {
+            if (pJog[i]) {
+                std::vector<Obstaculo*>::iterator it;
+                it = LOs.begin();
+                while (it != LOs.end()) {
 
-        std::vector<Obstaculo*>::iterator it;
-        for (it = LOs.begin(); it != LOs.end(); it++) {
+                    Obstaculo* pOb = *it;
 
-            Obstaculo* pOb = *it;
-
-            if (verificarColisao(pJog1, pOb)) {
-
-                pOb->obstaculizar(pJog1);
-
+                    if (pOb) {
+                        if (pOb->getVivo()) {
+                            if (verificarColisao(pJog[i], pOb)) {
+                                pOb->obstaculizar(pJog[i]);
+                            }
+                            it++;
+                        }
+                        else
+                            it = LOs.erase(it);
+                    }
+                    else
+                        it = LOs.erase(it);
+                }
             }
         }
-
     }
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsLims() {
+    for (int i = 0;i < 2;i++) {
+        if (pJog[i]) {
+            sf::Vector2f pos = pJog[i]->getPos();
+            sf::FloatRect bounds = pJog[i]->getBounds();
 
-    sf::Vector2f pos = pJog1->getPos();
-    sf::FloatRect bounds = pJog1->getBounds();
 
+            if (pos.x <= 0.0f) {
 
-    if (pos.x <= 0.0f) {
+                pJog[i]->setPos(0.0f, pos.y);
+            }
+            if (pos.x + bounds.width >= 1920.0f) {
 
-        pJog1->setPos(0.0f,pos.y);
+                pJog[i]->setPos(1920.0f - bounds.width, pos.y);
+
+            }
+        }
     }
-    if (pos.x + bounds.width >= 1920.0f) {
-
-        pJog1->setPos(1920.0f - bounds.width, pos.y );
-
-    }
-
-
 }
-
-
-
 
 void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsChao();
@@ -161,6 +213,7 @@ void Gerenciador_Colisoes::executar() {
     tratarColisoesJogsInimigs();
     tratarColisoesJogsObstacs();
     tratarColisoesObstacInimigos();
+    tratarColisoesJogsProjeteis();
     tratarColisoesJogsLims();
 }
 

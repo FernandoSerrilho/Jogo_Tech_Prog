@@ -2,34 +2,35 @@
 
 #include <list>
 #include <vector>
-#include "Inimigo.h"
-#include "Jogador.h"
-#include "Chao.h"
-//#include "Obstaculo.h"
 
 namespace Entidades {
+    class Chao;
+    class Entidade;
+    class Projetil;
+    namespace Personagens {
+        namespace Inimigos {
+            class Inimigo;
+        }
+        class Jogador;
+    }
     namespace Obstaculos {
         class Obstaculo;
     }
 }
-using namespace Entidades::Obstaculos;
-
-
-using namespace Entidades;
-using namespace Personagens;
-using namespace Obstaculos;
 
 namespace Gerenciadores {
 
     class Gerenciador_Colisoes {
 
     private:
-        std::vector<Inimigo*> LIs;
-        Jogador* pJog1;
-        std::vector<Obstaculo*>LOs;
-        Chao* pChao;
+        std::vector<Entidades::Personagens::Inimigos::Inimigo*> LIs;
+        Entidades::Personagens::Jogador* pJog[2];
+        std::vector<Entidades::Obstaculos::Obstaculo*>LOs;
+        std::vector<Entidades::Projetil*>LPs;
+        Entidades::Chao* pChao;
     private:
-        const bool verificarColisao(Entidade* pe1, Entidade* pe2);
+        const bool verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2);
+        void tratarColisoesJogsProjeteis();
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimigs();
         void tratarColisoesObstacInimigos();
@@ -37,12 +38,14 @@ namespace Gerenciadores {
         void tratarColisoesInimsChao();
         void tratarColisoesJogsLims();
     public:
-        Gerenciador_Colisoes(Jogador* pJ);
+        Gerenciador_Colisoes(Entidades::Personagens::Jogador* pJ1=nullptr, Entidades::Personagens::Jogador* pJ2=nullptr);
         ~Gerenciador_Colisoes();
-        void setChao(Chao* pC);
-        void incluirInimigo(Inimigo* pi);
-        void incluirObstaculo(Obstaculo* po);
+        void setChao(Entidades::Chao* pC);
+        void IncluirProjetil(Entidades::Projetil* pP);
+        void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pi);
+        void incluirObstaculo(Entidades::Obstaculos::Obstaculo* po);
         void executar();
+        void limparListas();
         bool listaInimigosStatus();
     };
 

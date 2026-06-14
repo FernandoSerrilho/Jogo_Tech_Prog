@@ -3,12 +3,16 @@
 #include <iostream>
 using namespace std;
 using namespace Entidades;
+using namespace Listas;
 
 ListaEntidade::ListaEntidade() : LEs(), it(LEs.begin()) { LEs.limpar(); }
 
 ListaEntidade::~ListaEntidade() {
 	LEs.limpar();
 }
+
+Lista<Entidades::Entidade>::Iterador   ListaEntidade::begin() {return LEs.begin();}
+Lista<Entidades::Entidade>::Iterador   ListaEntidade::end() {return LEs.end();}
 
 void ListaEntidade::incluir(Entidade* pE) {
 	if (pE != nullptr)
@@ -27,10 +31,6 @@ void ListaEntidade::percorrer() {
 		if (e) {
 			if (e->getVivo()) {
 				e->executar();
-			}
-			else {
-				delete e;
-				LEs.remove(it);
 			}
 		}
 		it = aux;

@@ -1,29 +1,46 @@
 #pragma once
 
-#include "Gerenciador_Grafico.h"
-#include "Gerenciador_Colisoes.h"
-#include "Jogador.h"
-#include "FaseUm.h"
-#include "BackGround.h"
-#include "Chao.h"
-#include "Menu.h"
-using namespace Gerenciadores;
-using namespace Personagens;
+class Menu;
+
+namespace Gerenciadores {
+	class Gerenciador_Grafico;
+}
+
+namespace Entidades {
+	namespace Personagens {
+		class Jogador;
+	}
+}
+
+namespace Fases {
+	class FaseUm;
+	class FaseDois;
+}
 
 class Jogo {
 private:
-	Gerenciador_Grafico* GG;
-	Jogador* j1;
-	FaseUm* f1;
+	Gerenciadores::Gerenciador_Grafico* GG;
+	Entidades::Personagens::Jogador* j1;
+	Entidades::Personagens::Jogador* j2;
+	Fases::FaseUm* f1;
+	Fases::FaseDois* f2;
 	Menu* m;
+	bool j2Ativo;
 public:
 	Jogo();
 	~Jogo();
+	void usarJ2();
+	void desativarJ2();
 	void executar();
 	void executarf1();
-	const Gerenciador_Grafico* getGG();
-	void desenhar();
+	void executarf2();
+	const Gerenciadores::Gerenciador_Grafico* getGG();
+	void desenharf1();
+	void desenharf2();
+	void reiniciarFaseUm();
+	void reiniciarFaseDois();
 	void reviveJogador();
 	bool jogadorVivo();
-	bool statusIni();
+	bool statusInif1();
+	bool statusInif2();
 };

@@ -2,16 +2,15 @@
 #include "Jogador.h"
 #include <Windows.h>
 
-using namespace Personagens;
+using namespace Entidades::Personagens::Inimigos;
 
 
 Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false){
 
-    sementear();
     nivel_maldade = rand()%10 + 1;
 
 }
-Inimigo::~Inimigo() { nivel_maldade = -1;}
+Inimigo::~Inimigo() { nivel_maldade = -1; invulneravel = false; }
 
 void Inimigo::sementear() {
 

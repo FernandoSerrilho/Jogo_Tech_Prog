@@ -2,15 +2,20 @@
 #include "Jogador.h"
 #include <cmath>
 
+using namespace Entidades;
+using namespace Personagens;
+using namespace Inimigos;
+
 Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo(),figura(sf::Vector2f(58.0f,75.0f))
 ,vidas(4),temp_parado(0.5f),vetorParado(sf::Vector2f(0.0f,0.0f)),parado(false){
-	setText(caminhoTextura, figura);
-	setPos(pos.x,pos.y);
-	setVel(3.0f, 3.0f);
 	figura.setPosition(pos);
+	setPos(pos.x, pos.y);
+	setText(caminhoTextura, figura);
+	setVel(3.0f, 3.0f);
+	contraGravidade = 3.0f;
 }
 
-Soldado::~Soldado(){}
+Soldado::~Soldado() { pJ = nullptr;vidas = -1; }
 
 sf::RectangleShape Soldado::getFigura() {
 	return figura;

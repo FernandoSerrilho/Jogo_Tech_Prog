@@ -1,8 +1,7 @@
 #include "Obstaculo.h"
-#include "Jogador.h"
 
-using namespace Obstaculos;
 using namespace Entidades;
+using namespace Obstaculos;
 
-Obstaculo::Obstaculo(bool flag) : Entidade(), danoso(flag) {}
-Obstaculo::~Obstaculo() {}
+Obstaculo::Obstaculo(bool flag) : Entidade(), danoso(flag){}
+Obstaculo::~Obstaculo() { danoso = false; }
