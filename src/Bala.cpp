@@ -26,7 +26,7 @@ void Bala::danificar(Jogador* pJ) {
     if(pJ->getInvulneravel()) return;
 
     int v = pJ->getVidas();
-    v -= 2;
+    v--;
     pJ->setVidas(v);
 
 

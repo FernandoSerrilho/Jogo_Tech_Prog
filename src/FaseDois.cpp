@@ -57,7 +57,7 @@ void FaseDois::criarTanques(Jogador *j) {
 
 void FaseDois::criarProjeteis() {
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 25; i++) {
         	Bala* b1 = new Bala(sf::Vector2f(2500.0f, 2500.0f), "Texturas/Tanque/Bala.png");
 
         	b1->setAtivo(false); 
