@@ -96,6 +96,7 @@ void FaseDois::gerenciarProjeteis() {
 							b1->setAtivo(true);
 
 							t1->adicionarBala(b1);
+							b1->setTanque(t1);
 							t1->setPodeAtirar(false);
 
 							achouAtiva = true;

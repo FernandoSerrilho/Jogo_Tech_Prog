@@ -19,6 +19,8 @@ Bala::Bala(sf::Vector2f posicao,const char* caminhoTextura) : Projetil(),pTq(nul
 
 Bala::~Bala() { pTq = nullptr; }
 
+void Bala::setTanque(Tanque* t) {pTq = t;}
+
 
 void Bala::danificar(Jogador* pJ) {
 
@@ -30,6 +32,11 @@ void Bala::danificar(Jogador* pJ) {
 
 
     pJ->initInv();
+
+
+    int vTq = pTq->getVidas();
+    vTq++;
+    pTq->setVidas(vTq);
 
 
     setAtivo(false);
