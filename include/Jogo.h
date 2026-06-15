@@ -32,6 +32,8 @@ public:
 	void usarJ2();
 	void desativarJ2();
 	void executar();
+	Entidades::Personagens::Jogador* getj1();
+	Entidades::Personagens::Jogador* getj2();
 	void executarf1();
 	void executarf2();
 	const Gerenciadores::Gerenciador_Grafico* getGG();

@@ -15,7 +15,7 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand()%3+3) {
+FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand() % 4 + 3) {
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
@@ -39,11 +39,11 @@ void FaseDois::criarTanques(Jogador *j) {
             p.y = 800.0f;
         }
         else if (i >= 2 && i < 4) {
-            p.x = 200.0f + 700.0f * (i - 2);
+            p.x = 300.0f + 700.0f * (i - 2);
             p.y = 660.0f;
         }
         else {
-            p.x = 350.0f + 4000.0f * (i - 4);
+            p.x = 510.0f + 1000.0f * (i - 4);
             p.y = 530.0f;
         }
 

@@ -8,7 +8,7 @@ using namespace Entidades::Personagens;
 
 
 
-Bala::Bala(sf::Vector2f posicao,const char* caminhoTextura) : Projetil(), colisao(sf::Vector2f(20.0f,20.0f)){
+Bala::Bala(sf::Vector2f posicao,const char* caminhoTextura) : Projetil(), colisao(sf::Vector2f(26.0f,11.0f)){
 
     setText(caminhoTextura, colisao);
     setPos(posicao.x,posicao.y);

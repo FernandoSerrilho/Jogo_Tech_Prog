@@ -10,7 +10,7 @@ using namespace Entidades;
 using namespace Personagens;
 using namespace Inimigos;
 
-Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false) ,podeAtacar(true),
+Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false), podeAtacar(true),
 modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , 
 olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
     initFigura();
@@ -59,6 +59,10 @@ void Jogador::setPos(float x, float y){
     pos.y = y;
     figura.setPosition(x, y);
 }
+
+void Jogador::setNome(std::string s) {nome = s;}
+
+std::string Jogador::getNome() const { return nome; }
 
 void Jogador::setPulavel(bool p) { pulavel = p; }
 

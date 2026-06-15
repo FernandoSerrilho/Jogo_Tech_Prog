@@ -8,8 +8,8 @@
 using namespace Entidades::Personagens;
 using namespace Entidades::Personagens::Inimigos;
 
-Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), podeAtirar(false), cooldown(0.0f), vidas(5), figura(sf::Vector2f(100.0f, 80.0f)) {
-
+Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), podeAtirar(false), cooldown(0.0f), vidas(5), figura(sf::Vector2f(58.0f, 38.0f)) {
+    contraGravidade = 0.1f;
     initFigura();
     setText(caminhoTextura, figura);
     balas.clear();
@@ -25,7 +25,7 @@ Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), po
         cooldown = 3.0f;
     }
 
-    std::cout << "nivel maldade tanque" << nivel_maldade << "cooldown" << cooldown << std::endl;
+    std::cout << "nivel maldade tanque " << nivel_maldade << " cooldown " << cooldown << std::endl;
 
 
 }
@@ -90,14 +90,12 @@ void Tanque::mover() {
     vel.y += gravidade + contraGravidade;
 
 
-	pos.x += std::cos(tempo * 0.8f) * vel.x * 0.5f;
+	pos.x += std::cos(tempo * 0.5f) * vel.x * 0.2f;
 	pos.y += vel.y;
 
     setPos(pos.x,pos.y);
 	figura.setPosition(pos);
 	desenhar(pos);
-
-
 }
 
 void Tanque::executar() {
