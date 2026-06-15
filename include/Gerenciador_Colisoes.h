@@ -33,7 +33,7 @@ namespace Gerenciadores {
         void tratarColisoesJogsProjeteis();
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimigs();
-        void tratarColisoesObstacInimigos();
+        void tratarColisoesPlataformaInimigos();
         void tratarColisoesJogsChao();
         void tratarColisoesInimsChao();
         void tratarColisoesJogsLims();

@@ -18,9 +18,6 @@ namespace Entidades {
                     sf::Clock relogiocooldown;
                     bool podeAtirar;
                     float cooldown;
-                    float raio;
-                    int vidas;
-                    sf::RectangleShape figura;
                 public:
                     Tanque(const char* caminhoTextura = "", Jogador* pJ = nullptr);
                     ~Tanque();
@@ -32,15 +29,7 @@ namespace Entidades {
                     void adicionarBala(Bala* b);
                     void atirar();
 
-                    void setVidas(int v);
-                    int getVidas();
-
-                    sf::RectangleShape getFigura();
-                    void initFigura();
-                    sf::FloatRect getBounds() const;
-
-                    void danificar(Jogador* pJ);
-                    void colidir(Jogador* pJ);       
+                    void danificar(Jogador* pJ);     
                     void mover();
                     void executar();
 

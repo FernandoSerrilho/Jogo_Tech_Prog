@@ -18,8 +18,6 @@ namespace Entidades {
 
         protected:
             int pontos;
-            int vidas;
-            sf::RectangleShape figura;
             Entidades::Faca* faca;
             bool pulavel;
             bool atacando;
@@ -39,13 +37,9 @@ namespace Entidades {
         public:
             Jogador(const char* caminhoTextura = "", const char* caminhoTexturaCoracao = "",int n =-1);
             ~Jogador();
-
-            void initFigura();
             Entidades::Faca* getFaca();
             bool getDirecao();
             bool getAtacando();
-            int getVidas();
-            void setVidas(int v);
             void setPulavel(bool p);
             void setmodifiVelo(float v);
             bool verificaLent() const;
@@ -60,11 +54,6 @@ namespace Entidades {
             void executar();
             //void salvar();                TODO
             void mover();
-
-            void setPos(float x,float y);
-            sf::RectangleShape getFigura();
-            sf::Vector2f getTam();
-            sf::FloatRect getBounds() const;
             void setNome(std::string s);
             std::string getNome() const;
         };

@@ -10,10 +10,9 @@ sf::Vector2f Entidade::getPos() {return pos;}
 sf::Vector2f Entidade::getVel() {return vel;}
 
 void Entidade::setPos(float x, float y) {
-
     pos.x = x;
     pos.y = y;
-
+    getFigura().setPosition(pos);
 }
 
 void Entidade::setVel(float vx, float vy) {

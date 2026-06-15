@@ -9,45 +9,19 @@ using namespace Personagens;
 using namespace Inimigos;
 using namespace Obstaculos;
 
-Plataforma::Plataforma() :Obstaculo(), altura(0), colisao(sf::Vector2f(200.0f, (float)altura)) {
+Plataforma::Plataforma() :Obstaculo(), altura(rand()%10 + 25){
 
 }
 
-Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), colisao(sf::Vector2f(tam)), altura((int)pos.y) {
-    InitColi(tam, pos);
-    InitText();
+Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), altura(rand() % 10 + 25) {
+    tam.y = (float)altura;
+    setFigura(tam);
+    figura.setPosition(pos);
+    setText("Texturas/Grama/QuadradoPlat.png", figura);
     contraGravidade = -0.3f;
 }
 
 Plataforma::~Plataforma() { altura = -1; }
-
-void Plataforma::InitText() {
-    setText("Texturas/Grama/QuadradoPlat.png", colisao);
-}
-
-sf::FloatRect Plataforma::getBounds() const {
-    return colisao.getGlobalBounds();
-}
-
-void Plataforma::setDim(sf::Vector2f dim) {
-    colisao.setSize(dim);
-}
-
-void Plataforma::setPos(sf::Vector2f pos) {
-    colisao.setPosition(pos);
-    Entidade::setPos(pos.x,pos.y);
-}
-
-void Plataforma::InitColi(sf::Vector2f dim, sf::Vector2f pos) {
-    setDim(dim);
-    setPos(pos);
-}
-
-sf::RectangleShape Plataforma::getColi() {
-    return colisao;
-}
-
-
 
 void Plataforma::obstaculizar(Jogador* j1) {
 
@@ -109,14 +83,11 @@ void Plataforma::obstaculizar(Inimigo* i1) {
     else {
         i1->setPos(boundsp.left + boundsj.width, pos.y);
     }
-
-   // i1->setVel(velI.x,velI.y);
-
 }
 
 void Plataforma::executar() {
     sf::Vector2f posP = getPos();
     posP.y += (gravidade + contraGravidade);
-    setPos(posP);
-    desenhar(colisao.getPosition());
+    setPos(posP.x,posP.y);
+    desenhar(figura.getPosition());
 }

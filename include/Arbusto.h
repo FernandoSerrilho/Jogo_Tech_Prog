@@ -14,9 +14,6 @@ namespace Entidades {
 	namespace Obstaculos {
 		class Arbusto : public Obstaculo {
 		private:
-			sf::RectangleShape colisao;
-			sf::Texture textura;
-			sf::Sprite sprites;
 			float lentidao;
 		public:
 			Arbusto();
@@ -24,8 +21,6 @@ namespace Entidades {
 			~Arbusto();
 			void executar();
 			void obstaculizar(Entidades::Personagens::Jogador* j1);
-			void obstaculizar(Entidades::Personagens::Inimigos::Inimigo* i1);
-			sf::FloatRect getBounds() const;
 		};
 	}
 }

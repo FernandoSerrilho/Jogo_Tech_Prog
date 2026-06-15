@@ -6,28 +6,19 @@ using namespace Entidades;
 using namespace Personagens;
 using namespace Inimigos;
 
-Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo(),figura(sf::Vector2f(58.0f,75.0f))
-,vidas(4),temp_parado(0.5f),vetorParado(sf::Vector2f(0.0f,0.0f)),parado(false){
+Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo()
+,temp_parado(0.f),vetorParado(sf::Vector2f(0.0f,0.0f)),parado(false){
+	setFigura(sf::Vector2f(58.0f, 75.0f));
 	figura.setPosition(pos);
 	setPos(pos.x, pos.y);
 	setText(caminhoTextura, figura);
 	setVel(3.0f, 3.0f);
+	setVidas(4);
 	contraGravidade = 4.0f;
+	temp_parado = (rand() % 10 / 10.f) + 0.5f;
 }
 
-Soldado::~Soldado() { pJ = nullptr;vidas = -1; }
-
-sf::RectangleShape Soldado::getFigura() {
-	return figura;
-}
-
-sf::FloatRect Soldado::getBounds() const {
-	return figura.getGlobalBounds();
-}
-
-int Soldado::getVidas() { return vidas;}
-
-void Soldado::setVidas(int v) { vidas = v;}
+Soldado::~Soldado() { pJ = nullptr;}
 
 void Soldado::colidir(Jogador* j){}
 

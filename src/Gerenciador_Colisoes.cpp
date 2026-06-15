@@ -5,6 +5,7 @@
 #include "Jogador.h"
 #include "Projetil.h"
 #include "Faca.h"
+#include "Plataforma.h"
 #include <math.h>
 #include <iostream>
 
@@ -72,7 +73,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis() {
     }
 }
 
-void Gerenciador_Colisoes::tratarColisoesObstacInimigos() {
+void Gerenciador_Colisoes::tratarColisoesPlataformaInimigos() {
     if (!LIs.empty() && !LOs.empty()) {
 
         std::vector<Inimigo*>::iterator it;
@@ -81,10 +82,11 @@ void Gerenciador_Colisoes::tratarColisoesObstacInimigos() {
             Inimigo* pIn = *it;
             std::vector<Obstaculo*>::iterator it2;
             for (it2 = LOs.begin();it2 != LOs.end();it2++) {
-                Obstaculo* pOb = *it2;
-
-                if (verificarColisao(pOb, pIn)) {
-                    pOb->obstaculizar(pIn);
+                Plataforma* pPlat = dynamic_cast<Plataforma*>(*it2);
+                if (pPlat) {
+                    if (verificarColisao(pPlat, pIn)) {
+                        pPlat->obstaculizar(pIn);
+                    }
                 }
             }
         }
@@ -212,7 +214,7 @@ void Gerenciador_Colisoes::executar() {
     tratarColisoesInimsChao();
     tratarColisoesJogsInimigs();
     tratarColisoesJogsObstacs();
-    tratarColisoesObstacInimigos();
+    tratarColisoesPlataformaInimigos();
     tratarColisoesJogsProjeteis();
     tratarColisoesJogsLims();
 }

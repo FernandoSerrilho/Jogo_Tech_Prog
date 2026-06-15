@@ -5,35 +5,17 @@
 
 using namespace Entidades::Personagens::Inimigos;
 
-Drone::Drone(Jogador* p,Jogador* p1, const char* caminhoTextura) : Inimigo(), vidas(2), emKnockback(false), vetorKnockback(sf::Vector2f()), figura(sf::Vector2f(50.0f, 40.0f)) {
-    initFigura();
+Drone::Drone(Jogador* p,Jogador* p1, const char* caminhoTextura) : Inimigo(), emKnockback(false), vetorKnockback(sf::Vector2f()){
+    setFigura(sf::Vector2f(50.0f, 40.0f));
     setText(caminhoTextura, figura);
     pJ[0] = p;
     pJ[1] = p1;
+    setVidas(2);
+    setVel(0.2f * (float)nivel_maldade + 0.5f, 0.2f * (float)nivel_maldade + 0.5f);
+    figura.setPosition(pos);
     contraGravidade = -0.3f;
 }
-Drone::~Drone() { vidas = -1; emKnockback = false; vidas = -1; pJ[0] = nullptr;pJ[1] = nullptr;}
-
-void Drone::initFigura() {
-
-    figura.setFillColor(sf::Color::Red);
-    setPos(400, 600);
-    figura.setPosition(pos);
-    setVel(0.2f * (float)nivel_maldade + 0.5f, 0.2f * (float)nivel_maldade + 0.5f);
-}
-
-sf::RectangleShape Drone::getFigura() { return figura; }
-
-sf::FloatRect Drone::getBounds() const {
-
-    return figura.getGlobalBounds();
-
-}
-
-
-int Drone::getVidas() { return vidas;}
-
-void Drone::setVidas(int v) { vidas = v;}
+Drone::~Drone() { emKnockback = false; pJ[0] = nullptr;pJ[1] = nullptr; }
 
 void Drone::setJog(Jogador*j,int n) {
 
@@ -83,11 +65,6 @@ void Drone::executar() {
 	}
 }
 
-void Drone::colidir(Jogador* j) {
-
-  
-}
-
 void Drone::mover() {
     vel.y += gravidade + contraGravidade;
 
@@ -124,7 +101,7 @@ void Drone::mover() {
     if (alvo != nullptr && menorDistancia <= raio_det) {
         sf::Vector2f posj = alvo->getPos();
         sf::Vector2f tamD = figura.getSize();
-        sf::Vector2f tamJ = alvo->getTam();
+        sf::Vector2f tamJ = alvo->getFigura().getSize();
         float tamRy = tamD.y - tamJ.y;
 
         vel.y = 0.2f * (float)nivel_maldade + 0.5f;

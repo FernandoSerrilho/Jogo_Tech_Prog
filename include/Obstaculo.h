@@ -23,8 +23,6 @@ namespace Entidades {
 			virtual void executar() = 0;
 			//virtual void salvar() = 0;	TODO
 			virtual void obstaculizar(Entidades::Personagens::Jogador* j1) = 0;
-			virtual void obstaculizar(Entidades::Personagens::Inimigos::Inimigo* i1) = 0;
-
 		};
 	}
 }

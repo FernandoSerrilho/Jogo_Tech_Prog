@@ -17,11 +17,8 @@ namespace Entidades {
                 virtual ~Inimigo();
 
                 //void salvarDataBuffer();     TODO
-                virtual int getVidas() = 0;
-                virtual void setVidas(int v) = 0;
                 virtual void executar() = 0;
                 virtual void danificar(Jogador* p) = 0;
-                virtual void colidir(Jogador* j) = 0;
                 bool getInvulneravel() const;
                 void setInvulneravel(bool inv);
                 sf::Clock& getRelogioInv();

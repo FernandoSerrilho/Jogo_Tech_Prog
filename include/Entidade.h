@@ -25,7 +25,6 @@ class Entidade : public Ente {
         sf::Vector2f getVel();
         virtual void setPos(float x, float y);
         virtual void setVel(float vx, float vy);
-        virtual sf::FloatRect getBounds() const = 0;
         //virtual void salvar() = 0;          TODO
 
 };

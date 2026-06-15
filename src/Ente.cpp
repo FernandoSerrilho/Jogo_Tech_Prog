@@ -12,6 +12,12 @@ void Ente::setGG(Gerenciador_Grafico* pG) {
     pGG = pG;
 }
 
+sf::RectangleShape Ente::getFigura() { return figura; }
+
+void Ente::setFigura(sf::Vector2f tam) { figura.setSize(tam); }
+
+sf::FloatRect Ente::getBounds() { return figura.getGlobalBounds(); }
+
 void Ente::desenhar(sf::Vector2f posicao) {
     if (pGG) {
     sprite.setPosition(posicao);

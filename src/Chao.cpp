@@ -5,26 +5,19 @@ using namespace Entidades;
 using namespace Entidades::Personagens;
 
 Chao::Chao(const char* caminhoTextura) {
-	colisao.setPosition(0.0f, 1080.0f - 50.0f);
-	setPos(0.0f, 1080.0f - 50.0f);
 	sf::Vector2f tam(1920.0f, 50.0f);
-	colisao.setSize(tam);
-	setText(caminhoTextura, colisao);
-
+	setFigura(tam);
+	figura.setPosition(0.0f, 1080.0f - 50.0f);
+	setPos(0.0f, 1080.0f - 50.0f);
+	setText(caminhoTextura, getFigura());
 	contraGravidade = -0.3f;
 }
 
 Chao::~Chao() {}
 
 void Chao::executar() {
-
 	setPos(pos.x,pos.y + gravidade + contraGravidade);
-
-	desenhar(colisao.getPosition());
-}
-
-sf::FloatRect Chao::getBounds() const {
-	return colisao.getGlobalBounds();
+	desenhar(figura.getPosition());
 }
 
 void Chao::colidir(Entidade* pE) {

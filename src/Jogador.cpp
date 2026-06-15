@@ -10,12 +10,14 @@ using namespace Entidades;
 using namespace Personagens;
 using namespace Inimigos;
 
-Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), pontos(0), vidas(3), figura(sf::Vector2f(58.0f, 75.0f)), atacando(false), podeAtacar(true),
+Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), pontos(0), atacando(false), podeAtacar(true),
 modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , 
 olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
-    initFigura();
+    setFigura(sf::Vector2f(58.0f, 75.0f));
     setText(caminhoTextura, figura);
     setPos(100.0f,800.0f);
+    figura.setPosition(pos);
+    setVidas(3);
     float inicio;
     if (n == 2) {
         keys[0] = sf::Keyboard::Enter;
@@ -38,27 +40,11 @@ olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
     }
 }
 
-Jogador::~Jogador() { faca = nullptr;delete faca;vidas = -1;pontos = -1; }
-
-void Jogador::initFigura() {
-
-    figura.setFillColor(sf::Color::Blue);
-    figura.setPosition(pos);
-}
-
-int Jogador::getVidas() { return vidas; }
+Jogador::~Jogador() { faca = nullptr;delete faca;pontos = -1; }
 
 bool Jogador::getDirecao() {return olhandoEsquerda;};
 
 Faca* Jogador::getFaca()  { return faca;}
-
-void Jogador::setVidas(int v) { vidas = v; if (v <= 0) { setVivo(false); setPos(2500.0f, 2500.0f);} }
-
-void Jogador::setPos(float x, float y){
-    pos.x = x;
-    pos.y = y;
-    figura.setPosition(x, y);
-}
 
 void Jogador::setNome(std::string s) {nome = s;}
 
@@ -84,26 +70,14 @@ void Jogador::attInv() {
 
 }
 
-sf::RectangleShape Jogador::getFigura() { return figura; }
-
-sf::Vector2f Jogador::getTam() { return figura.getSize(); }
-
 bool Jogador::getAtacando() { return atacando;}
 
 void Jogador::setmodifiVelo(float v) { modifiVelo = v; }
-
-
-sf::FloatRect Jogador::getBounds() const {
-
-    return figura.getGlobalBounds();
-
-}
 
 void Jogador::colidir(Inimigo* pIn) {
 
     pIn->danificar(this);
 }
-
 
 void Jogador::danificar(Inimigo* pIn) {
 
@@ -164,17 +138,23 @@ void Jogador::atacar() {
  }
 
 void Jogador::executar() {
-    mover();
-    attInv();
-    atacar();
+    if (getVidas() > 0) {
+        mover();
+        attInv();
+        atacar();
 
-    desenhar(getPos());
+        desenhar(getPos());
 
-    if (atacando && faca) {
-        faca->executar();
+        if (atacando && faca) {
+            faca->executar();
+        }
+        for (int i = 0;i < getVidas();i++) {
+            Coracoes[i]->executar();
+        }
     }
-    for (int i = 0;i < vidas;i++) {
-        Coracoes[i]->executar();
+    else {
+        setVivo(false);
+        setPos(2500.f, 2500.f);
     }
 }
 
@@ -191,7 +171,6 @@ void Jogador::mover() {
 
     float velpulo = 10.0f;
     float tam = 1080.0f -50.0f;
-
 
     vel.y += gravidade + contraGravidade;
 
@@ -218,5 +197,6 @@ void Jogador::mover() {
     pos.y += vel.y;
 
     setPos(pos.x,pos.y);
+    figura.setPosition(pos);
     modifiVelo = 1.0f;
 }

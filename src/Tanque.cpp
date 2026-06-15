@@ -8,12 +8,13 @@
 using namespace Entidades::Personagens;
 using namespace Entidades::Personagens::Inimigos;
 
-Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), podeAtirar(false), cooldown(0.0f), vidas(5), figura(sf::Vector2f(58.0f, 38.0f)) {
+Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), podeAtirar(false), cooldown(0.0f){
     contraGravidade = 0.1f;
-    initFigura();
+    setFigura(sf::Vector2f(58.0f, 38.0f));
     setText(caminhoTextura, figura);
+    figura.setPosition(pos);
     balas.clear();
-
+    setVidas(5);
 
     if (nivel_maldade <= 3 ) {
         cooldown = 7.0f;
@@ -29,7 +30,7 @@ Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), po
 
 
 }
-Tanque::~Tanque() {vidas = -1; pJ = nullptr; balas.clear();}
+Tanque::~Tanque() { pJ = nullptr; balas.clear();}
 
 bool Tanque::getpodeAtirar() { return podeAtirar;}
 void Tanque::setPodeAtirar(bool p) {podeAtirar = p;};
@@ -41,22 +42,7 @@ void Tanque::adicionarBala(Bala* b) {
 
  }
 
-void Tanque::setVidas(int v) { vidas = v;}
-int Tanque::getVidas() {return vidas;}
-
-sf::RectangleShape Tanque::getFigura() {return figura;}
-
 void Tanque::resetClock() { relogiocooldown.restart();}
-
-void Tanque::initFigura() {
-    
-    figura.setFillColor(sf::Color::Yellow);
-    setPos(400, 600);
-    figura.setPosition(pos);
-
-}
-
-sf::FloatRect Tanque::getBounds() const {return figura.getGlobalBounds();}
 
 void Tanque::danificar(Jogador* pJ) {
 
@@ -70,7 +56,6 @@ void Tanque::danificar(Jogador* pJ) {
     pJ->initInv();
 
 }
-void Tanque::colidir(Jogador* pJ) {}
 
 void Tanque::atirar() {
 
