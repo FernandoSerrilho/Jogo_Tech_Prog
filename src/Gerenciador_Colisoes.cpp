@@ -27,7 +27,7 @@ void Gerenciador_Colisoes::limparListas() {
 
 void Gerenciador_Colisoes::IncluirProjetil(Projetil* pP) {
     if (pP) {
-        LPs.push_back(pP);
+        LPs.insert(pP);
     }
 
 }
@@ -55,7 +55,7 @@ void Gerenciador_Colisoes::setChao(Chao* pC) {
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis() {
     if (!LPs.empty()) {
         for (int i = 0; i < 2 ; i++) {
-        std::vector<Projetil*>::iterator it;
+        std::set<Projetil*>::iterator it;
 
         for (it = LPs.begin(); it != LPs.end(); it++) {
             
@@ -76,7 +76,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis() {
 void Gerenciador_Colisoes::tratarColisoesPlataformaInimigos() {
     if (!LIs.empty() && !LOs.empty()) {
 
-        std::vector<Inimigo*>::iterator it;
+        std::list<Inimigo*>::iterator it;
         for (it = LIs.begin(); it != LIs.end(); it++) {
 
             Inimigo* pIn = *it;
@@ -110,7 +110,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs() {
 
         for (int i = 0;i < 2;i++) {
             if (pJog[i]) {
-                std::vector<Inimigo*>::iterator it = LIs.begin();
+                std::list<Inimigo*>::iterator it = LIs.begin();
                 while (it != LIs.end()) {
                     Inimigo* pIn = *it;
                     if (*it) {
@@ -150,7 +150,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsChao() {
 
 void Gerenciador_Colisoes::tratarColisoesInimsChao() {
     if (pChao && !LIs.empty()) {
-        std::vector<Inimigo*>::iterator it;
+        std::list<Inimigo*>::iterator it;
         for (it = LIs.begin(); it != LIs.end(); it++) {
             Inimigo* pIn = *it;
             if (pIn && pIn->getVivo()) {

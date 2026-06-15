@@ -2,6 +2,7 @@
 
 #include <list>
 #include <vector>
+#include <set>
 
 namespace Entidades {
     class Chao;
@@ -23,10 +24,10 @@ namespace Gerenciadores {
     class Gerenciador_Colisoes {
 
     private:
-        std::vector<Entidades::Personagens::Inimigos::Inimigo*> LIs;
+        std::list<Entidades::Personagens::Inimigos::Inimigo*> LIs;
         Entidades::Personagens::Jogador* pJog[2];
         std::vector<Entidades::Obstaculos::Obstaculo*>LOs;
-        std::vector<Entidades::Projetil*>LPs;
+        std::set<Entidades::Projetil*>LPs;
         Entidades::Chao* pChao;
     private:
         const bool verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2);
