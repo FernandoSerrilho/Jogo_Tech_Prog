@@ -30,7 +30,9 @@ void Drone::danificar(Jogador* p) {
     int v = p->getVidas();
     v -= 1;
     p->setVidas(v);
-
+    vel.x += 0.5f;
+    vel.y += 0.5f;
+    setVel(vel.x, vel.y);
 
     p->initInv();
 

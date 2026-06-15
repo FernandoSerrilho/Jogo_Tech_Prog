@@ -51,10 +51,11 @@ void Tanque::danificar(Jogador* pJ) {
     int v = pJ->getVidas();
     v -= 1;
     pJ->setVidas(v);
-
+    int VidasTanque = getVidas();
+    VidasTanque++;
+    setVidas(VidasTanque);
 
     pJ->initInv();
-
 }
 
 void Tanque::atirar() {

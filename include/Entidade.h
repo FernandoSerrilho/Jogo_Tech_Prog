@@ -23,8 +23,8 @@ class Entidade : public Ente {
         bool getVivo();
         sf::Vector2f getPos();
         sf::Vector2f getVel();
-        virtual void setPos(float x, float y);
-        virtual void setVel(float vx, float vy);
+        void setPos(float x, float y);
+        void setVel(float vx, float vy);
         //virtual void salvar() = 0;          TODO
 
 };

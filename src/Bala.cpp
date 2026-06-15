@@ -1,24 +1,23 @@
 #include "Bala.h"
 #include "Jogador.h"
+#include "Tanque.h"
 #include <iostream>
 
 
 using namespace Entidades;
-using namespace Entidades::Personagens;
+using namespace Personagens;
+using namespace Inimigos;
 
 
 
-Bala::Bala(sf::Vector2f posicao,const char* caminhoTextura) : Projetil(), colisao(sf::Vector2f(26.0f,11.0f)){
-
-    setText(caminhoTextura, colisao);
+Bala::Bala(sf::Vector2f posicao,const char* caminhoTextura) : Projetil(),pTq(nullptr){
+    setFigura(sf::Vector2f(26.0f, 11.0f));
+    figura.setPosition(posicao);
+    setText(caminhoTextura, figura);
     setPos(posicao.x,posicao.y);
-    colisao.setPosition(posicao);
-
-    
-
 }
 
-Bala::~Bala() {}
+Bala::~Bala() { pTq = nullptr; }
 
 
 void Bala::danificar(Jogador* pJ) {
@@ -38,19 +37,15 @@ void Bala::danificar(Jogador* pJ) {
 
 }
 
-sf::FloatRect Bala::getBounds() const {return colisao.getGlobalBounds();}
-
 void Bala::mover() {
 
     setVel(-5.0f,0.0f);
     float posx = pos.x + vel.x;
     
-
     setPos(posx, pos.y);
-    colisao.setPosition(posx, pos.y);
+    figura.setPosition(posx, pos.y);
 
     desenhar(pos);
-
 }
 
 void Bala::executar() {

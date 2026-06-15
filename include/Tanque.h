@@ -8,12 +8,10 @@ namespace Entidades {
     namespace Personagens {
             class Jogador;
         namespace Inimigos {
-
             class Tanque : public Inimigo {
 
                 private: 
                     Jogador* pJ;
-                    //Bala* pB;
                     std::vector<Bala*> balas;
                     sf::Clock relogiocooldown;
                     bool podeAtirar;

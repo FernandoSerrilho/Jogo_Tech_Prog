@@ -20,8 +20,6 @@ Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo()
 
 Soldado::~Soldado() { pJ = nullptr;}
 
-void Soldado::colidir(Jogador* j){}
-
 void Soldado::danificar(Jogador* j) {
 	if (j->getInvulneravel()) return;
 	
@@ -38,9 +36,6 @@ void Soldado::danificar(Jogador* j) {
 }
 
 void Soldado::mover() {
-
-
-
 	if (parado) {
 
 		if (relogioParado.getElapsedTime().asSeconds() < temp_parado) {

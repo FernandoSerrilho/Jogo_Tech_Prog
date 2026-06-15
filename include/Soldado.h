@@ -17,7 +17,6 @@ namespace Entidades {
 				~Soldado();
 				void executar();
 				void danificar(Jogador* j);
-				void colidir(Jogador* j);
 				void mover();
 			};
 		}

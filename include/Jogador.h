@@ -2,9 +2,9 @@
 #include "Personagem.h"
 #include <string>
 
+class Coracao;
 namespace Entidades {
     class Faca;
-    class Coracao;
     namespace Personagens {
         namespace Inimigos {
             class Inimigo;

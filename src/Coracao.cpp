@@ -1,25 +1,16 @@
 #include "Coracao.h"
-using namespace Entidades;
 
 Coracao::Coracao(){}
 
-Coracao::Coracao(sf::Vector2f pos,const char* caminhoTextura) {
-	colisao.setPosition(pos.x, pos.y);
-	setPos(pos.x, pos.y);
+Coracao::Coracao(sf::Vector2f pos,const char* caminhoTextura):Ente() {
 	sf::Vector2f tam(48.0f, 45.0f);
-	colisao.setSize(tam);
-	setText(caminhoTextura, colisao);
-
-	contraGravidade = -0.3f;
+	setFigura(tam);
+	figura.setPosition(pos.x, pos.y);
+	setText(caminhoTextura, figura);
 }
 
 Coracao::~Coracao() {}
 
 void Coracao::executar() {
-	setPos(pos.x,pos.y + gravidade + contraGravidade);
-	desenhar(colisao.getPosition());
-}
-
-sf::FloatRect Coracao::getBounds() const {
-	return colisao.getGlobalBounds();
+	desenhar(figura.getPosition());
 }

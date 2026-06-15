@@ -40,7 +40,7 @@ olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
     }
 }
 
-Jogador::~Jogador() { faca = nullptr;delete faca;pontos = -1; }
+Jogador::~Jogador() { faca = nullptr;delete faca;pontos = -1;for (int i = 0;i < 3;i++) {Coracoes[i] = nullptr;}}
 
 bool Jogador::getDirecao() {return olhandoEsquerda;};
 
@@ -66,8 +66,6 @@ void Jogador::attInv() {
     if (invulneravel && relogioInv.getElapsedTime().asSeconds() >= temp_inv) {
         invulneravel = false;
     }
-
-
 }
 
 bool Jogador::getAtacando() { return atacando;}
@@ -89,6 +87,7 @@ void Jogador::danificar(Inimigo* pIn) {
     int v = pIn->getVidas();
 
     v -= 1;
+    pIn->setVidas(v);
 
     pIn->setInvulneravel(true);
     pIn->getRelogioInv().restart();
@@ -97,17 +96,13 @@ void Jogador::danificar(Inimigo* pIn) {
 
         pIn->setVivo(false);
 
-        pIn->setPos(2500.0f,2500.0f);
+        pIn->setPos(2500.0f, 2500.0f);
 
         std::cout << "morreu" << std::endl;
 
         return;
     }
-
-    pIn->setVidas(v);
-
     std::cout << "vidas:" << v << std::endl;
-
 }
 
 
@@ -119,12 +114,9 @@ void Jogador::atacar() {
         atacando = true;
         podeAtacar = false;
         relogioatq.restart();
-
     }
-
         faca->initFigura();
-        
-
+      
     if (atacando && relogioatq.getElapsedTime().asSeconds() >= 0.2f) {
         atacando = false;
         cooldownatq.restart();

@@ -7,26 +7,19 @@ namespace Entidades {
         class Jogador;
     }
 }
-
+    
 namespace Entidades {
-
     class Faca : public Entidade {
 
-        private:
-            sf::RectangleShape figura;
-            Personagens::Jogador* pJog;
+    private:
+        Entidades::Personagens::Jogador* pJog;
 
-        public:
-            Faca(Personagens::Jogador* pJ);
-            ~Faca();
+    public:
+        Faca(Entidades::Personagens::Jogador* pJ);
+        ~Faca();
 
         void initFigura();
         void executar();
-        sf::RectangleShape* getFigura();
-        sf::FloatRect getBounds() const;
 
     };
-
-
-
 }

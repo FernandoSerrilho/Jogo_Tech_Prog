@@ -1,16 +1,12 @@
 #pragma once
 
-#include "Entidade.h"
+#include "Ente.h"
 
-namespace Entidades {
-	class Coracao : public Entidade {
+	class Coracao : public Ente {
 	private:
-		sf::RectangleShape colisao;
 	public:
 		Coracao();
 		Coracao(sf::Vector2f pos,const char* caminhoTextura = " ");
 		~Coracao();
 		void executar();
-		sf::FloatRect getBounds() const;
 	};
-}
