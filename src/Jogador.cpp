@@ -78,31 +78,32 @@ void Jogador::colidir(Inimigo* pIn) {
 }
 
 void Jogador::danificar(Inimigo* pIn) {
+    try {
+        if (pIn == nullptr) 
+            throw nullptr;
+       
+        if (pIn->getInvulneravel())
+            return;
 
+        int v = pIn->getVidas();
+        v -= 1;
+        pIn->setVidas(v);
 
-    if (pIn->getInvulneravel()) {
-        return;
+        pIn->setInvulneravel(true);
+        pIn->getRelogioInv().restart();
+
+        if (v <= 0) {
+            pIn->setVivo(false);
+            pIn->setPos(2500.0f, 2500.0f);
+            std::cout << "morreu" << std::endl;
+            return;
+        }
+        std::cout << "vidas:" << v << std::endl;
+
     }
-
-    int v = pIn->getVidas();
-
-    v -= 1;
-    pIn->setVidas(v);
-
-    pIn->setInvulneravel(true);
-    pIn->getRelogioInv().restart();
-
-    if (v <= 0) {
-
-        pIn->setVivo(false);
-
-        pIn->setPos(2500.0f, 2500.0f);
-
-        std::cout << "morreu" << std::endl;
-
-        return;
+    catch (...) {
+        std::cerr << "Erro: Ponteiro pra inimigo eh nulo "<< std::endl;
     }
-    std::cout << "vidas:" << v << std::endl;
 }
 
 
