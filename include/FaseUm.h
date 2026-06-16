@@ -11,7 +11,8 @@ namespace Entidades {
 namespace Fases {
 	class FaseUm : public Fase {
 	private:
-		const int maxIniMed = 2;
+		const int maxSoldados;
+		const int maxArbustos;
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 		void criarSoldados();

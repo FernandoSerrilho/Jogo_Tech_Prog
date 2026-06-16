@@ -7,7 +7,6 @@ namespace Entidades {
 		namespace Inimigos {
 			class Soldado : public Inimigo {
 			private:
-				Jogador* pJ;
 				sf::Clock relogioParado;
 				float temp_parado;
 				sf::Vector2f vetorParado;

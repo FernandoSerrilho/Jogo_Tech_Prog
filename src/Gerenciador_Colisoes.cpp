@@ -94,7 +94,7 @@ void Gerenciador_Colisoes::tratarColisoesPlataformaInimigos() {
     }
 }
 
-const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) {
+const bool Gerenciador_Colisoes::verificarColisao(EntidadeBase* pe1, EntidadeBase* pe2) {
 
     if (pe1 != NULL && pe2 != NULL) {
 

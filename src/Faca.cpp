@@ -1,10 +1,9 @@
     #include "Faca.h"
     #include "Jogador.h"
 
-    using namespace Entidades;
     using namespace Entidades::Personagens;
 
-    Faca::Faca(Jogador* pJ): Entidade(), pJog(pJ) {
+    Faca::Faca(Jogador* pJ): EntidadeBase(), pJog(pJ) {
         setFigura(sf::Vector2f(70.0f, 58.0f));
         setText("Texturas/Faca/FacaDeitada.png", figura);
     }

@@ -22,8 +22,6 @@ Arbusto::~Arbusto(){
 }
 
 void Arbusto::executar() {
-
-
 	setPos(pos.x,pos.y + gravidade + contraGravidade);
 	desenhar(figura.getPosition());
 }

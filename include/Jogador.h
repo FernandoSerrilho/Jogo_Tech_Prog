@@ -3,8 +3,8 @@
 #include <string>
 
 class Coracao;
+class Faca;
 namespace Entidades {
-    class Faca;
     namespace Personagens {
         namespace Inimigos {
             class Inimigo;
@@ -18,7 +18,7 @@ namespace Entidades {
 
         protected:
             int pontos;
-            Entidades::Faca* faca;
+            Faca* faca;
             bool pulavel;
             bool atacando;
             bool podeAtacar;
@@ -37,7 +37,7 @@ namespace Entidades {
         public:
             Jogador(const char* caminhoTextura = "", const char* caminhoTexturaCoracao = "",int n =-1);
             ~Jogador();
-            Entidades::Faca* getFaca();
+            Faca* getFaca();
             bool getDirecao();
             bool getAtacando();
             void setPulavel(bool p);

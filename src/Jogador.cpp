@@ -95,11 +95,8 @@ void Jogador::danificar(Inimigo* pIn) {
         if (v <= 0) {
             pIn->setVivo(false);
             pIn->setPos(2500.0f, 2500.0f);
-            std::cout << "morreu" << std::endl;
             return;
         }
-        std::cout << "vidas:" << v << std::endl;
-
     }
     catch (...) {
         std::cerr << "Erro: Ponteiro pra inimigo eh nulo "<< std::endl;

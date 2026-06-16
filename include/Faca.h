@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Entidade.h"
+#include "EntidadeBase.h"
 
 namespace Entidades {
     namespace Personagens {
         class Jogador;
     }
 }
-    
-namespace Entidades {
-    class Faca : public Entidade {
+
+    class Faca : public EntidadeBase {
 
     private:
         Entidades::Personagens::Jogador* pJog;
@@ -17,9 +16,7 @@ namespace Entidades {
     public:
         Faca(Entidades::Personagens::Jogador* pJ);
         ~Faca();
-
         void initFigura();
         void executar();
 
     };
-}

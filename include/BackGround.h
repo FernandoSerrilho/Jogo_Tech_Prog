@@ -1,15 +1,10 @@
 #pragma once
 
-#include "Entidade.h"
+#include "EntidadeBase.h"
 
-namespace Entidades {
-	class BackGround : public Entidade {
-	private:
-		sf::RectangleShape colisao;
+	class BackGround : public EntidadeBase {
 	public:
 		BackGround(const char* caminhoTextura = "");
 		~BackGround();
-		sf::FloatRect getBounds() const;
 		void executar();
 	};
-}

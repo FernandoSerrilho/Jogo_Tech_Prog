@@ -1,25 +1,25 @@
-#include "ListaEntidade.h"
+#include "ListaEntidades.h"
 #include "Entidade.h"
 #include <iostream>
 using namespace std;
 using namespace Entidades;
 using namespace Listas;
 
-ListaEntidade::ListaEntidade() : LEs(), it(LEs.begin()) { LEs.limpar(); }
+ListaEntidades::ListaEntidades() : LEs(), it(LEs.begin()) { LEs.limpar(); }
 
-ListaEntidade::~ListaEntidade() {
+ListaEntidades::~ListaEntidades() {
 	LEs.limpar();
 }
 
-Lista<Entidades::Entidade>::Iterador   ListaEntidade::begin() {return LEs.begin();}
-Lista<Entidades::Entidade>::Iterador   ListaEntidade::end() {return LEs.end();}
+Lista<Entidades::Entidade>::Iterador   ListaEntidades::begin() {return LEs.begin();}
+Lista<Entidades::Entidade>::Iterador   ListaEntidades::end() {return LEs.end();}
 
-void ListaEntidade::incluir(Entidade* pE) {
+void ListaEntidades::incluir(Entidade* pE) {
 	if (pE != nullptr)
 		LEs.incluir(pE);
 }
 
-void ListaEntidade::percorrer() {
+void ListaEntidades::percorrer() {
 	Lista<Entidade>::Iterador it = LEs.begin();
 
 	while (it != LEs.end()) {
@@ -37,7 +37,7 @@ void ListaEntidade::percorrer() {
 	}
 }
 
-void ListaEntidade::removeMortos() {
+void ListaEntidades::removeMortos() {
 	Lista<Entidade>::Iterador it = LEs.begin();
 
 	while (it != LEs.end()) {
@@ -52,11 +52,11 @@ void ListaEntidade::removeMortos() {
 
 }
 
-void ListaEntidade::limpar() {
+void ListaEntidades::limpar() {
 	LEs.limpar();
 }
 
-void ListaEntidade::desenhar() {
+void ListaEntidades::desenhar() {
 	Lista<Entidade>::Iterador it = LEs.begin();
 
 	while (it != LEs.end()) {

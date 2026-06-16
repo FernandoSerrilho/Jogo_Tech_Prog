@@ -1,14 +1,11 @@
 #pragma once
-#include "Ente.h"
+#include "EntidadeBase.h"
 
 namespace Entidades {
-
-class Entidade : public Ente {
+    class Entidade : public EntidadeBase {
 
     protected:
-        sf::Vector2f pos;
         sf::Vector2f vel;
-        bool vivo;
         //std::ostream& buffer;               TODO
         float gravidade;
         float contraGravidade;
@@ -19,14 +16,8 @@ class Entidade : public Ente {
         // void salvarDataBuffer();           TODO
     public:
         virtual void executar() = 0;
-        void setVivo(bool v);
-        bool getVivo();
-        sf::Vector2f getPos();
         sf::Vector2f getVel();
-        void setPos(float x, float y);
         void setVel(float vx, float vy);
         //virtual void salvar() = 0;          TODO
-
-};
-
+    };
 }

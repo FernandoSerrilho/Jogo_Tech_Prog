@@ -15,7 +15,7 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand() % 4 + 3) {
+FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand() % 4 + 3),maxMinas(rand() % 3 + 3) {
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
@@ -25,13 +25,13 @@ FaseDois::~FaseDois() {}
 
 void FaseDois::criarInimigos(Jogador* j1,Jogador* j2) {
 	criarDrones(j1,j2);
-	criarTanques(j1);
+	criarTanques();
 }
 
-void FaseDois::criarTanques(Jogador *j) {
+void FaseDois::criarTanques() {
 
 		for (int i = 0; i < maxTanques; i++) {
-        Tanque* t1 = new Tanque("Texturas/Tanque/tanque.png", j);
+        Tanque* t1 = new Tanque("Texturas/Tanque/tanque.png");
         sf::Vector2f p(0.0f, 0.0f);
 
         if (i < 2) {
@@ -113,9 +113,8 @@ void FaseDois::gerenciarProjeteis() {
 
 void FaseDois::criarMinasTerrestres() {
 	Entidades::Personagens::Inimigos::Inimigo::sementear();
-	int MAX = rand() % 3 + 3;
 
-	for (int i = 0;i < MAX;i++) {
+	for (int i = 0;i < maxMinas;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
 		if (i < 1) {
 			p.x = 950.0f;
@@ -144,13 +143,15 @@ void FaseDois::criarObstaculos() {
 
 void FaseDois::criarCenario() {
 	BackGround* b = new BackGround("Texturas/BackGround/BackgroundF2.png");
-	list_ents.incluir(b);
-	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
+	bgFase = b;
+	Chao* c = new Chao("Texturas/Grama/Chao2.png");
 	GC.setChao(c);
-	list_ents.incluir(c);
+	chaoFase = c;
 }
 
 void FaseDois::executar() {
+	bgFase->executar();
+	chaoFase->executar();
 	gerenciarProjeteis();
 	list_ents.percorrer();
 	GC.executar();
@@ -164,6 +165,8 @@ void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
 }
 
 void FaseDois::desenhar() {
+	bgFase->executar();
+	chaoFase->executar();
 	list_ents.desenhar();
 }
 

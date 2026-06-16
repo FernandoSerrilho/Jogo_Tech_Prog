@@ -7,13 +7,13 @@ namespace Entidades {
 }
 
 namespace Listas {
-	class ListaEntidade {
+	class ListaEntidades {
 	private:
 		Lista<Entidades::Entidade> LEs;
 		Lista<Entidades::Entidade>::Iterador it;
 	public:
-		ListaEntidade();
-		~ListaEntidade();
+		ListaEntidades();
+		~ListaEntidades();
 		Lista<Entidades::Entidade>::Iterador begin();
 		Lista<Entidades::Entidade>::Iterador end();
 		void incluir(Entidades::Entidade* pE);

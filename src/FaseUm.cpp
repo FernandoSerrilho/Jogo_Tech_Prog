@@ -12,7 +12,7 @@ using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
-FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2) {
+FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2),maxSoldados(rand() % 4 + 3),maxArbustos(rand() % 3 + 3) {
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
@@ -30,10 +30,9 @@ void FaseUm::criarInimigos(Jogador* j1,Jogador* j2) {
 void FaseUm::criarSoldados() {
 	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
-	int MAX = rand()%4 + 3;
 	sf::Vector2f p(0.0f, 0.0f);
 
-	for (int i = 0;i < MAX;i++) {
+	for (int i = 0;i < maxSoldados;i++) {
 		if (i < 2) {
 			p.x = 700.0f + 400 * i;
 			p.y = 957.0f;
@@ -57,9 +56,8 @@ void FaseUm::criarSoldados() {
 
 void FaseUm::criarArbustos() {
 	Entidades::Personagens::Inimigos::Inimigo::sementear();
-	int MAX = rand() % 3 + 3;
 
-	for (int i = 0;i < MAX;i++) {
+	for (int i = 0;i < maxArbustos;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
 		if (i < 1) {
 			p.x = 950.0f;
@@ -75,7 +73,6 @@ void FaseUm::criarArbustos() {
 		}
 
 			Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
-			//MinaTerrestre* a = new MinaTerrestre(sf::Vector2f(p.x,p.y),sf::Vector2f(29.0f,17.0f));
 			GC.incluirObstaculo(a);
 			list_ents.incluir(a);
 	}
@@ -89,13 +86,15 @@ void FaseUm::criarObstaculos() {
 
 void FaseUm::criarCenario() {
 	BackGround* b = new BackGround("Texturas/BackGround/Fundo.png");
-	list_ents.incluir(b);
+	bgFase = b;
 	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
 	GC.setChao(c);
-	list_ents.incluir(c);
+	chaoFase = c;
 }
 
 void FaseUm::executar() {
+	bgFase->executar();
+	chaoFase->executar();
 	GC.executar();
 	list_ents.percorrer();
 }
@@ -107,6 +106,8 @@ void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
 }
 
 void FaseUm::desenhar() {
+	bgFase->executar();
+	chaoFase->executar();
 	list_ents.desenhar();
 }
 

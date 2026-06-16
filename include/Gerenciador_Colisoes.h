@@ -4,8 +4,9 @@
 #include <vector>
 #include <set>
 
+class EntidadeBase;
+class Chao;
 namespace Entidades {
-    class Chao;
     class Entidade;
     class Projetil;
     namespace Personagens {
@@ -28,9 +29,9 @@ namespace Gerenciadores {
         Entidades::Personagens::Jogador* pJog[2];
         std::vector<Entidades::Obstaculos::Obstaculo*>LOs;
         std::set<Entidades::Projetil*>LPs;
-        Entidades::Chao* pChao;
+        Chao* pChao;
     private:
-        const bool verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2);
+        const bool verificarColisao(EntidadeBase* pe1, EntidadeBase* pe2);
         void tratarColisoesJogsProjeteis();
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimigs();
@@ -41,7 +42,7 @@ namespace Gerenciadores {
     public:
         Gerenciador_Colisoes(Entidades::Personagens::Jogador* pJ1=nullptr, Entidades::Personagens::Jogador* pJ2=nullptr);
         ~Gerenciador_Colisoes();
-        void setChao(Entidades::Chao* pC);
+        void setChao(Chao* pC);
         void IncluirProjetil(Entidades::Projetil* pP);
         void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pi);
         void incluirObstaculo(Entidades::Obstaculos::Obstaculo* po);

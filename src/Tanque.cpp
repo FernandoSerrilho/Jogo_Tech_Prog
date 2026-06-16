@@ -8,7 +8,7 @@
 using namespace Entidades::Personagens;
 using namespace Entidades::Personagens::Inimigos;
 
-Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), podeAtirar(false), cooldown(0.0f){
+Tanque::Tanque(const char* caminhoTextura) : Inimigo(), podeAtirar(false), cooldown(0.0f){
     contraGravidade = 0.1f;
     setFigura(sf::Vector2f(58.0f, 38.0f));
     setText(caminhoTextura, figura);
@@ -25,12 +25,8 @@ Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), po
     else {
         cooldown = 3.0f;
     }
-
-    std::cout << "nivel maldade tanque " << nivel_maldade << " cooldown " << cooldown << std::endl;
-
-
 }
-Tanque::~Tanque() { pJ = nullptr; balas.clear();}
+Tanque::~Tanque() {balas.clear();}
 
 bool Tanque::getpodeAtirar() { return podeAtirar;}
 void Tanque::setPodeAtirar(bool p) {podeAtirar = p;};

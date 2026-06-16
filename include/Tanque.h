@@ -11,13 +11,12 @@ namespace Entidades {
             class Tanque : public Inimigo {
 
                 private: 
-                    Jogador* pJ;
                     std::vector<Bala*> balas;
                     sf::Clock relogiocooldown;
                     bool podeAtirar;
                     float cooldown;
                 public:
-                    Tanque(const char* caminhoTextura = "", Jogador* pJ = nullptr);
+                    Tanque(const char* caminhoTextura = "");
                     ~Tanque();
                     
                     bool getpodeAtirar();
