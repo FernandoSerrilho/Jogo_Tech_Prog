@@ -2,7 +2,6 @@
 #include "Entidade.h"
 #include <iostream>
 using namespace std;
-using namespace Entidades;
 using namespace Listas;
 
 ListaEntidades::ListaEntidades() : LEs(), it(LEs.begin()) { LEs.limpar(); }
@@ -11,8 +10,8 @@ ListaEntidades::~ListaEntidades() {
 	LEs.limpar();
 }
 
-Lista<Entidades::Entidade>::Iterador   ListaEntidades::begin() {return LEs.begin();}
-Lista<Entidades::Entidade>::Iterador   ListaEntidades::end() {return LEs.end();}
+Lista<Entidade>::Iterador   ListaEntidades::begin() {return LEs.begin();}
+Lista<Entidade>::Iterador   ListaEntidades::end() {return LEs.end();}
 
 void ListaEntidades::incluir(Entidade* pE) {
 	if (pE != nullptr)

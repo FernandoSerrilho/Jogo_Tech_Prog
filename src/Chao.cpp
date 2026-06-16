@@ -4,7 +4,7 @@
 using namespace Entidades;
 using namespace Entidades::Personagens;
 
-Chao::Chao(const char* caminhoTextura) {
+Chao::Chao(const char* caminhoTextura):Entidade() {
 	sf::Vector2f tam(1920.0f, 50.0f);
 	setFigura(tam);
 	figura.setPosition(0.0f, 1080.0f - 50.0f);
@@ -18,7 +18,7 @@ void Chao::executar() {
 	desenhar(figura.getPosition());
 }
 
-void Chao::colidir(Entidade* pE) {
+void Chao::colidir(EntidadePertinente* pE) {
 
 	sf::FloatRect boundsc = getBounds();
 	sf::FloatRect boundse = pE->getBounds();

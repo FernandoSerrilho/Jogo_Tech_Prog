@@ -1,9 +1,9 @@
 #pragma once
-#include "Entidade.h"
+#include "EntidadePertinente.h"
 
 namespace Entidades {
     namespace Personagens {
-        class Personagem : public Entidade {
+        class Personagem : public EntidadePertinente {
 
         protected:
             int num_vidas;

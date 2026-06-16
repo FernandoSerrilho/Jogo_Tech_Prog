@@ -4,10 +4,10 @@
 #include <vector>
 #include <set>
 
-class EntidadeBase;
+class Entidade;
 class Chao;
 namespace Entidades {
-    class Entidade;
+    class EntidadePertinente;
     class Projetil;
     namespace Personagens {
         namespace Inimigos {
@@ -31,7 +31,7 @@ namespace Gerenciadores {
         std::set<Entidades::Projetil*>LPs;
         Chao* pChao;
     private:
-        const bool verificarColisao(EntidadeBase* pe1, EntidadeBase* pe2);
+        const bool verificarColisao(Entidade* pe1, Entidade* pe2);
         void tratarColisoesJogsProjeteis();
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimigs();

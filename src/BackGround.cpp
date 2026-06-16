@@ -1,6 +1,6 @@
 #include "BackGround.h"
 
-BackGround::BackGround(const char* caminhoTextura) {
+BackGround::BackGround(const char* caminhoTextura):Entidade() {
 	setFigura(sf::Vector2f(1920.0f, 1080.0f));
 	setPos(0.0f, 0.0f);
 	Ente::setText(caminhoTextura, figura);

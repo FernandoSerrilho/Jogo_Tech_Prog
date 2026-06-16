@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entidade.h"
+#include "EntidadePertinente.h"
 
 
 namespace Entidades {
@@ -9,7 +9,7 @@ namespace Entidades {
     }
 
 
-    class Projetil : public Entidade {
+    class Projetil : public EntidadePertinente {
 
         protected:
             bool ativo;

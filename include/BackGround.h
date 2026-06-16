@@ -1,8 +1,8 @@
 #pragma once
 
-#include "EntidadeBase.h"
+#include "Entidade.h"
 
-	class BackGround : public EntidadeBase {
+	class BackGround : public Entidade {
 	public:
 		BackGround(const char* caminhoTextura = "");
 		~BackGround();

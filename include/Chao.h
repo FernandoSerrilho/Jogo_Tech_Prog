@@ -1,15 +1,14 @@
 #pragma once
-
-#include "EntidadeBase.h"
+#include "Entidade.h"
 namespace Entidades {
-	class Entidade;
+	class EntidadePertinente;
 }
 
-	class Chao : public EntidadeBase {
+	class Chao : public Entidade {
 	private:
 	public:
 		Chao(const char* caminhoTextura = " ");
 		~Chao();
 		void executar();
-		void colidir(Entidades::Entidade* pE);
+		void colidir(Entidades::EntidadePertinente* pE);
 	};

@@ -10,7 +10,7 @@ namespace Entidades {
 	namespace Personagens{
 		class Jogador;
 	}
-	class Entidade;
+	class EntidadePertinente;
 }
 
 namespace Fases {

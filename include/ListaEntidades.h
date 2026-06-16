@@ -2,21 +2,19 @@
 
 #include "Lista.h"
 
-namespace Entidades {
 	class Entidade;
-}
 
 namespace Listas {
 	class ListaEntidades {
 	private:
-		Lista<Entidades::Entidade> LEs;
-		Lista<Entidades::Entidade>::Iterador it;
+		Lista<Entidade> LEs;
+		Lista<Entidade>::Iterador it;
 	public:
 		ListaEntidades();
 		~ListaEntidades();
-		Lista<Entidades::Entidade>::Iterador begin();
-		Lista<Entidades::Entidade>::Iterador end();
-		void incluir(Entidades::Entidade* pE);
+		Lista<Entidade>::Iterador begin();
+		Lista<Entidade>::Iterador end();
+		void incluir(Entidade* pE);
 		void percorrer();
 		void removeMortos();
 		void desenhar();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EntidadeBase.h"
+#include "Entidade.h"
 
 namespace Entidades {
     namespace Personagens {
@@ -8,7 +8,7 @@ namespace Entidades {
     }
 }
 
-    class Faca : public EntidadeBase {
+    class Faca : public Entidade {
 
     private:
         Entidades::Personagens::Jogador* pJog;

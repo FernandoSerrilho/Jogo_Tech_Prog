@@ -1,8 +1,8 @@
 #pragma once
 
-#include "EntidadeBase.h"
+#include "Entidade.h"
 
-	class Coracao : public EntidadeBase {
+	class Coracao : public Entidade {
 	private:
 	public:
 		Coracao();

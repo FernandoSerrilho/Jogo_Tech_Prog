@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entidade.h"
+#include "EntidadePertinente.h"
 
 namespace Entidades {
 	namespace Personagens {
@@ -13,7 +13,7 @@ namespace Entidades {
 
 namespace Entidades {
 	namespace Obstaculos {
-		class Obstaculo :public Entidade {
+		class Obstaculo :public EntidadePertinente {
 		private:
 			bool danoso;
 		public:
