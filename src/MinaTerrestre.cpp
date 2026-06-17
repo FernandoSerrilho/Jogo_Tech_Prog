@@ -47,7 +47,7 @@ void MinaTerrestre::explodir(Jogador* J) {
 }
 
 void MinaTerrestre::executar() {
-	setPos(pos.x, pos.y + gravidade + contraGravidade);
+
 	if (tempoAtivo) {
 		float tempo = tempoExplosao.getElapsedTime().asSeconds();
 		if (tempo <= 0.6f) {
@@ -65,4 +65,6 @@ void MinaTerrestre::executar() {
 	else {
 		desenhar(figura.getPosition());
 	}
+
+	gravitar();
 }

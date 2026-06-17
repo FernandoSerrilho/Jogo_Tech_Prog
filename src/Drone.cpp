@@ -68,7 +68,6 @@ void Drone::executar() {
 }
 
 void Drone::mover() {
-    vel.y += gravidade + contraGravidade;
 
     if (emKnockback) {
         if (relogioKnockback.getElapsedTime().asSeconds() < 0.3f) {
@@ -106,23 +105,27 @@ void Drone::mover() {
         sf::Vector2f tamJ = alvo->getFigura().getSize();
         float tamRy = tamD.y - tamJ.y;
 
-        vel.y = 0.2f * (float)nivel_maldade + 0.5f;
+        float velperseguicao = 0.2f * (float)nivel_maldade + 0.5f;
 
-        if (posj.x - pos.x < 0)
+        if (posj.x - pos.x < 0.0f)
             pos.x -= vel.x;
-        if (posj.x - pos.x > 0)
+        if (posj.x - pos.x > 0.0f)
             pos.x += vel.x;
-        if (posj.y - pos.y - tamRy < 0)
-            pos.y -= vel.y;
-        if (posj.y - pos.y - tamRy > 0)
-            pos.y += vel.y;
-        figura.setPosition(pos);
+        if (posj.y - pos.y - tamRy < -5.0f)
+            vel.y =  -velperseguicao;
+        if (posj.y - pos.y - tamRy > 5.0f)
+            vel.y = velperseguicao;
     }
     else {
         static sf::Clock relogio;
         float tempo = relogio.getElapsedTime().asSeconds();
 
         pos.x += std::cos(tempo * 0.8f) * vel.x * 0.5f;
-        figura.setPosition(pos);
     }
+
+    gravitar();
+
+    setPos(pos.x, pos.y);
+    figura.setPosition(pos);
+
 }

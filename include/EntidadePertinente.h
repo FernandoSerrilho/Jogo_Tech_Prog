@@ -18,6 +18,7 @@ namespace Entidades {
         virtual void executar() = 0;
         sf::Vector2f getVel();
         void setVel(float vx, float vy);
+        void gravitar();
         //virtual void salvar() = 0;          TODO
     };
 }

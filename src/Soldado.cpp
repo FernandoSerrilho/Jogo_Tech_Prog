@@ -57,7 +57,7 @@ void Soldado::mover() {
 
 
 	pos.x += std::cos(tempo * 0.8f) * vel.x * 0.5f;
-	pos.y += gravidade + contraGravidade;
+	gravitar();
 
 	figura.setPosition(pos);
 	desenhar(pos);

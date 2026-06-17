@@ -4,7 +4,7 @@
 #include "MinaTerrestre.h"
 #include "Soldado.h"
 #include "Tanque.h"
-#include "Bala.h"
+#include "Projetil.h"
 #include <iostream>
 
 using namespace Gerenciadores;
@@ -58,7 +58,7 @@ void FaseDois::criarTanques() {
 void FaseDois::criarProjeteis() {
 
 		for (int i = 0; i < 25; i++) {
-        	Bala* b1 = new Bala(sf::Vector2f(2500.0f, 2500.0f), "Texturas/Tanque/Bala.png");
+        	Projetil* b1 = new Projetil(sf::Vector2f(2500.0f, 2500.0f), "Texturas/Tanque/Bala.png");
 
         	b1->setAtivo(false); 
         	GC.IncluirProjetil(b1);
@@ -88,7 +88,7 @@ void FaseDois::gerenciarProjeteis() {
 					Entidade* eBala = *itBala;
 
 					if (eBala) {
-						Bala* b1 = dynamic_cast<Bala*>(eBala);
+						Projetil* b1 = dynamic_cast<Projetil*>(eBala);
 
 						if (b1 && !b1->getAtivo()) {
 

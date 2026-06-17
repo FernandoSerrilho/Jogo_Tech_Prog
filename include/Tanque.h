@@ -4,14 +4,14 @@
 
 
 namespace Entidades {
-        class Bala;
+        class Projetil;
     namespace Personagens {
             class Jogador;
         namespace Inimigos {
             class Tanque : public Inimigo {
 
                 private: 
-                    std::vector<Bala*> balas;
+                    std::vector<Projetil*> balas;
                     sf::Clock relogiocooldown;
                     bool podeAtirar;
                     float cooldown;
@@ -23,7 +23,7 @@ namespace Entidades {
                     void setPodeAtirar(bool p);
 
                     void resetClock();
-                    void adicionarBala(Bala* b);
+                    void adicionarBala(Projetil* b);
                     void atirar();
 
                     void danificar(Jogador* pJ);     
