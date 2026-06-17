@@ -12,6 +12,7 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	}
 	initText("txtTituloJogo", "MILITARY ZONE", 90, { 960.f, 150.f });
 	initText("btnJogar", "JOGAR", 40, { 960.f, 450.f });
+	initText("btnRanking", "RANKING", 40, { 960.f, 575.f });
 	initText("btnSair", "SAIR", 40, { 960.f, 700.f });
 
 	initText("txtFase", "Escolha a Fase:", 60, { 960.f, 450.f });
@@ -293,6 +294,7 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRanking"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
