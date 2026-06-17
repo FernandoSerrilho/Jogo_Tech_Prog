@@ -16,7 +16,3 @@ void Entidade::setVivo(bool v) { vivo = v;}
 bool Entidade::getVivo() {return vivo;}
 
 
-
-
-
-

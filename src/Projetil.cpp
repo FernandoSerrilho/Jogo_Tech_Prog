@@ -12,6 +12,8 @@ Projetil::Projetil(sf::Vector2f posicao, const char* caminhoTextura) : EntidadeP
     figura.setPosition(posicao);
     setText(caminhoTextura, figura);
     setPos(posicao.x,posicao.y);
+
+    contraGravidade = -0.3f;
 }
 
 Projetil::~Projetil() { pTq = nullptr;}
@@ -63,6 +65,8 @@ void Projetil::executar() {
         setPos(2500.0f, 2500.0f);    
         return; 
     }
+
+    gravitar();
 
     mover();
 
