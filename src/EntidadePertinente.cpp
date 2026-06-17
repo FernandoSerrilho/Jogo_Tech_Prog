@@ -21,10 +21,10 @@ void EntidadePertinente::gravitar() {
     float acel_resultante = gravidade + contraGravidade;
 
     // t = 1.0f
+     // y = y0 + v0t + (at²)/2
+    pos.y += vel.y + (acel_resultante/2.0f);
     // v = v0 + at
     vel.y += acel_resultante;
-    // y = y0 + v0t + (at²)/2
-    pos.y += vel.y + (acel_resultante/2.0f);
 
 
 }
