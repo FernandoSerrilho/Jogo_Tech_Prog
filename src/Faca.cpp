@@ -1,7 +1,6 @@
     #include "Faca.h"
     #include "Jogador.h"
 
-    using namespace Entidades;
     using namespace Entidades::Personagens;
 
     Faca::Faca(Jogador* pJ): Entidade(), pJog(pJ) {

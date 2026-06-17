@@ -10,9 +10,10 @@ namespace Fases {
 	class FaseDois :public Fase {
 	private:
 		const int maxTanques;
+		const int maxMinas;
 	protected:
 		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
-		void criarTanques(Entidades::Personagens::Jogador* j1);
+		void criarTanques();
 		void criarProjeteis();
 		void gerenciarProjeteis();
 		void criarMinasTerrestres();

@@ -95,11 +95,8 @@ void Jogador::danificar(Inimigo* pIn) {
         if (v <= 0) {
             pIn->setVivo(false);
             pIn->setPos(2500.0f, 2500.0f);
-            std::cout << "morreu" << std::endl;
             return;
         }
-        std::cout << "vidas:" << v << std::endl;
-
     }
     catch (...) {
         std::cerr << "Erro: Ponteiro pra inimigo eh nulo "<< std::endl;
@@ -165,7 +162,7 @@ void Jogador::mover() {
     float velpulo = 10.0f;
     float tam = 1080.0f -50.0f;
 
-    vel.y += gravidade + contraGravidade;
+    gravitar();
 
     if (verificaLent())
         vel.x = velBase * modifiVelo;
@@ -185,9 +182,9 @@ void Jogador::mover() {
     if (sf::Keyboard::isKeyPressed(keys[3]) && pulavel) {
         vel.y -= velpulo;
         setPulavel(false);
+        pos.y += vel.y;
     }
 
-    pos.y += vel.y;
 
     setPos(pos.x,pos.y);
     figura.setPosition(pos);

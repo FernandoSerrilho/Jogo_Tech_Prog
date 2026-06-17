@@ -14,7 +14,13 @@ $(TARGET): $(OBJS)
 src/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+run: all
+	@echo Executando o jogo...
+	bin\jogo.exe
+
+clean-run: clean run
+
 clean:
 	del /Q /F src\*.o bin\*.exe
 
-.PHONY: all clean
+.PHONY: all clean run clean-run

@@ -10,18 +10,16 @@ using namespace Personagens;
 using namespace Obstaculos;
 using namespace Inimigos;
 
-Fase::Fase(Jogador* j1,Jogador* j2) :list_ents(), GC(j1,j2) {
+Fase::Fase(Jogador* j1,Jogador* j2) :list_ents(), GC(j1,j2),maxDrones(rand() % 3 + 5),maxPlataformas(rand() % 3 + 9),bgFase(nullptr),chaoFase(nullptr) {
 
 }
 
-Fase::~Fase() {
-}
+Fase::~Fase() { bgFase = nullptr; }
 
 void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 	Inimigo::sementear();
-	int MAX = rand() % 3 + 5;
 
-	for (int i = 0; i < MAX;i++) {
+	for (int i = 0; i < maxDrones;i++) {
 		Drone* d1 = new Drone(NULL,NULL, "Texturas/Drone/drone_somente.png");
 		sf::Vector2f p(0.0f, 0.0f);
 		if (i < 2) {
@@ -51,9 +49,8 @@ void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 
 void Fase::criarPlataformas() {
 	Inimigo::sementear();
-	int MAX = rand()%3 + 9;
 
-	for (int i = 0;i < MAX;i++) {
+	for (int i = 0;i < maxPlataformas;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
 		if (i < 2) {
 			p.x = 400.0f + 1000.0f * i;

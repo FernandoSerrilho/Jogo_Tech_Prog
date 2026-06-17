@@ -1,6 +1,6 @@
 #include "Tanque.h"
 #include "Jogador.h"
-#include "Bala.h"
+#include "Projetil.h"
 #include <cmath>
 #include <iostream>
 
@@ -8,7 +8,7 @@
 using namespace Entidades::Personagens;
 using namespace Entidades::Personagens::Inimigos;
 
-Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), podeAtirar(false), cooldown(0.0f){
+Tanque::Tanque(const char* caminhoTextura) : Inimigo(), podeAtirar(false), cooldown(0.0f){
     contraGravidade = 0.1f;
     setFigura(sf::Vector2f(58.0f, 38.0f));
     setText(caminhoTextura, figura);
@@ -25,16 +25,12 @@ Tanque::Tanque(const char* caminhoTextura, Jogador* pJ) : Inimigo() , pJ(pJ), po
     else {
         cooldown = 3.0f;
     }
-
-    std::cout << "nivel maldade tanque " << nivel_maldade << " cooldown " << cooldown << std::endl;
-
-
 }
-Tanque::~Tanque() { pJ = nullptr; balas.clear();}
+Tanque::~Tanque() {balas.clear();}
 
 bool Tanque::getpodeAtirar() { return podeAtirar;}
 void Tanque::setPodeAtirar(bool p) {podeAtirar = p;};
-void Tanque::adicionarBala(Bala* b) { 
+void Tanque::adicionarBala(Projetil* b) { 
 
     if (b != nullptr) {
         balas.push_back(b);
@@ -73,11 +69,11 @@ void Tanque::mover() {
     static sf::Clock relogio;
 	float tempo = relogio.getElapsedTime().asSeconds();
 
-    vel.y += gravidade + contraGravidade;
 
 
 	pos.x += std::cos(tempo * 0.5f) * vel.x * 0.2f;
-	pos.y += vel.y;
+	
+    gravitar();
 
     setPos(pos.x,pos.y);
 	figura.setPosition(pos);
@@ -87,7 +83,7 @@ void Tanque::mover() {
 void Tanque::executar() {
 
 
-    std::vector<Bala*>::iterator it = balas.begin();
+    std::vector<Projetil*>::iterator it = balas.begin();
 
     while (it != balas.end()) {
         if ((*it) == nullptr || !(*it)->getAtivo()) {

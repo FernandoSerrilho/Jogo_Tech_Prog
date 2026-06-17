@@ -22,9 +22,7 @@ Arbusto::~Arbusto(){
 }
 
 void Arbusto::executar() {
-
-
-	setPos(pos.x,pos.y + gravidade + contraGravidade);
+	gravitar();
 	desenhar(figura.getPosition());
 }
 

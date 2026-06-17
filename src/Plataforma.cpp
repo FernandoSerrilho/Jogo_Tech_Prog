@@ -88,7 +88,7 @@ void Plataforma::obstaculizar(Inimigo* i1) {
 
 void Plataforma::executar() {
     sf::Vector2f posP = getPos();
-    posP.y += (gravidade + contraGravidade);
+    gravitar();
     setPos(posP.x,posP.y);
     desenhar(figura.getPosition());
 }

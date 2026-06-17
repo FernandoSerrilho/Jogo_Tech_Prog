@@ -7,8 +7,7 @@ namespace Entidades {
         class Jogador;
     }
 }
-    
-namespace Entidades {
+
     class Faca : public Entidade {
 
     private:
@@ -17,9 +16,7 @@ namespace Entidades {
     public:
         Faca(Entidades::Personagens::Jogador* pJ);
         ~Faca();
-
         void initFigura();
         void executar();
 
     };
-}

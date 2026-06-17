@@ -15,10 +15,10 @@ Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo()
 	setVel(3.0f, 3.0f);
 	setVidas(4);
 	contraGravidade = 4.0f;
-	temp_parado = (rand() % 10 / 10.f) + 0.5f;
+	temp_parado = ((rand() % 10  + (10-nivel_maldade))/ 10.f);
 }
 
-Soldado::~Soldado() { pJ = nullptr;}
+Soldado::~Soldado() {}
 
 void Soldado::danificar(Jogador* j) {
 	if (j->getInvulneravel()) return;
@@ -57,7 +57,7 @@ void Soldado::mover() {
 
 
 	pos.x += std::cos(tempo * 0.8f) * vel.x * 0.5f;
-	pos.y += gravidade + contraGravidade;
+	gravitar();
 
 	figura.setPosition(pos);
 	desenhar(pos);

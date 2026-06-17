@@ -1,26 +1,24 @@
 #include "Chao.h"
 #include "Jogador.h"
-using namespace Entidades;
 
+using namespace Entidades;
 using namespace Entidades::Personagens;
 
-Chao::Chao(const char* caminhoTextura) {
+Chao::Chao(const char* caminhoTextura):Entidade() {
 	sf::Vector2f tam(1920.0f, 50.0f);
 	setFigura(tam);
 	figura.setPosition(0.0f, 1080.0f - 50.0f);
 	setPos(0.0f, 1080.0f - 50.0f);
 	setText(caminhoTextura, getFigura());
-	contraGravidade = -0.3f;
 }
 
 Chao::~Chao() {}
 
 void Chao::executar() {
-	setPos(pos.x,pos.y + gravidade + contraGravidade);
 	desenhar(figura.getPosition());
 }
 
-void Chao::colidir(Entidade* pE) {
+void Chao::colidir(EntidadePertinente* pE) {
 
 	sf::FloatRect boundsc = getBounds();
 	sf::FloatRect boundse = pE->getBounds();
@@ -33,9 +31,9 @@ void Chao::colidir(Entidade* pE) {
 
 		Jogador* pJ = dynamic_cast<Jogador*>(pE);
 
-		if (pJ != nullptr) {{
+		if (pJ != nullptr) {
 			pJ->setPulavel(true);
-		}}
+		}
 
 	}
 
