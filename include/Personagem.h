@@ -13,9 +13,9 @@ namespace Entidades {
 
             void setVidas(int v);
             int getVidas();
-            //void salvarDataBuffer();          TODO
+            void salvarDataBuffer();          
             virtual void executar() = 0;
-            //virtual void salvar() = 0;        TODO
+            virtual void salvar() = 0;        
             virtual void mover() = 0;
 
         };

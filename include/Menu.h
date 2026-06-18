@@ -12,6 +12,7 @@ class Menu : public Ente {
 public:
 	enum EstadoMenu {
 		MENU_PRINCIPAL,
+		RANKING,
 		MENU_MORTE,
 		FASE_VENCIDA,
 		SEL_FASE,
@@ -42,5 +43,6 @@ public:
 	EstadoMenu getEstado() { return estadoAtual; }
 	int getFase();
 	int getQtdJogadores ();
+	void desenharRanking();
 	void executar();
 };

@@ -14,6 +14,7 @@ Drone::Drone(Jogador* p,Jogador* p1, const char* caminhoTextura) : Inimigo(), em
     setVel(0.2f * (float)nivel_maldade + 0.5f, 0.2f * (float)nivel_maldade + 0.5f);
     figura.setPosition(pos);
     contraGravidade = -0.3f;
+    pontosPorInimigo = 3;
 }
 Drone::~Drone() { emKnockback = false; pJ[0] = nullptr;pJ[1] = nullptr; }
 
@@ -127,5 +128,6 @@ void Drone::mover() {
 
     setPos(pos.x, pos.y);
     figura.setPosition(pos);
-
 }
+
+void Drone::salvar() {}

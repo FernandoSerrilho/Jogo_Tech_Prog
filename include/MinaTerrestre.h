@@ -27,6 +27,7 @@ namespace Entidades{
 				void explodir(Entidades::Personagens::Jogador* pJ);
 				void obstaculizar(Entidades::Personagens::Jogador* pJ);
 				void executar();
+				void salvar();
 		};
 	}
 }

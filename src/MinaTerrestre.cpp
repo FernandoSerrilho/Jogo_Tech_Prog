@@ -68,3 +68,5 @@ void MinaTerrestre::executar() {
 
 	gravitar();
 }
+
+void MinaTerrestre::salvar() {}

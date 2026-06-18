@@ -72,3 +72,5 @@ void Projetil::executar() {
 
 }
 
+void Projetil::salvar(){}
+

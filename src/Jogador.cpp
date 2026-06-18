@@ -48,6 +48,10 @@ Faca* Jogador::getFaca()  { return faca;}
 
 void Jogador::setNome(std::string s) {nome = s;}
 
+int Jogador::getPontos() { return pontos; }
+
+void Jogador::setPontos(int n) { pontos=n; }
+
 std::string Jogador::getNome() const { return nome; }
 
 void Jogador::setPulavel(bool p) { pulavel = p; }
@@ -95,6 +99,7 @@ void Jogador::danificar(Inimigo* pIn) {
         if (v <= 0) {
             pIn->setVivo(false);
             pIn->setPos(2500.0f, 2500.0f);
+            pontos += pIn->getPontos();
             return;
         }
     }
@@ -190,3 +195,5 @@ void Jogador::mover() {
     figura.setPosition(pos);
     modifiVelo = 1.0f;
 }
+
+void Jogador::salvar(){}

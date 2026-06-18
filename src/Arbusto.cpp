@@ -30,3 +30,5 @@ void Arbusto::obstaculizar(Jogador* j1) {
     j1->setLent(true);
     j1->setmodifiVelo(lentidao);
 }
+
+void Arbusto::salvar() {}

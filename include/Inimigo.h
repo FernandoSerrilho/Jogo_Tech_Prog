@@ -10,21 +10,22 @@ namespace Entidades {
 
             protected:
                 int nivel_maldade;
+                int pontosPorInimigo;
                 bool invulneravel;
                 sf::Clock relogioinv;
             public:
                 Inimigo();
                 virtual ~Inimigo();
 
-                //void salvarDataBuffer();     TODO
+                void salvarDataBuffer();     
                 virtual void executar() = 0;
                 virtual void danificar(Jogador* p) = 0;
                 bool getInvulneravel() const;
                 void setInvulneravel(bool inv);
                 sf::Clock& getRelogioInv();
-                //virtual void salva() = 0;    TODO
+                virtual void salvar() = 0;    
                 static void sementear();
-
+                int getPontos();
             };
         }
     }

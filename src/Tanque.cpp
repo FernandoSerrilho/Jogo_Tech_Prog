@@ -15,6 +15,7 @@ Tanque::Tanque(const char* caminhoTextura) : Inimigo(), podeAtirar(false), coold
     figura.setPosition(pos);
     balas.clear();
     setVidas(5);
+    pontosPorInimigo = 7;
 
     if (nivel_maldade <= 3 ) {
         cooldown = 7.0f;
@@ -105,3 +106,5 @@ void Tanque::executar() {
     mover();
     atirar();
 }
+
+void Tanque::salvar() {}

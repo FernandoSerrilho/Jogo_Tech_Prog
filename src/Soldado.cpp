@@ -16,6 +16,7 @@ Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo()
 	setVidas(4);
 	contraGravidade = 4.0f;
 	temp_parado = ((rand() % 10  + (10-nivel_maldade))/ 10.f);
+	pontosPorInimigo = 5;
 }
 
 Soldado::~Soldado() {}
@@ -70,3 +71,5 @@ void Soldado::executar() {
 	}
 	mover();
 }
+
+void Soldado::salvar() {}

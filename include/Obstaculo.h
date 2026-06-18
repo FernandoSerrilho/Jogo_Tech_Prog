@@ -19,9 +19,9 @@ namespace Entidades {
 		public:
 			Obstaculo(bool flag = false);
 			~Obstaculo();
-			//void salvarDataBuffer();		TODO
+			void salvarDataBuffer();		
 			virtual void executar() = 0;
-			//virtual void salvar() = 0;	TODO
+			virtual void salvar() = 0;	
 			virtual void obstaculizar(Entidades::Personagens::Jogador* j1) = 0;
 		};
 	}

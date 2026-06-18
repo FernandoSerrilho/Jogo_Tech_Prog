@@ -47,12 +47,14 @@ namespace Entidades {
             bool getInvulneravel();
             void initInv();
             void attInv();
+            int getPontos();
+            void setPontos(int n);
 
             void danificar(Entidades::Personagens::Inimigos::Inimigo* pIn);
             void colidir(Entidades::Personagens::Inimigos::Inimigo* pIn);
             void atacar();
             void executar();
-            //void salvar();                TODO
+            void salvar();                
             void mover();
             void setNome(std::string s);
             std::string getNome() const;

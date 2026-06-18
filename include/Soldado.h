@@ -17,6 +17,7 @@ namespace Entidades {
 				void executar();
 				void danificar(Jogador* j);
 				void mover();
+				void salvar();
 			};
 		}
 	}

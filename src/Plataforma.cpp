@@ -92,3 +92,5 @@ void Plataforma::executar() {
     setPos(posP.x,posP.y);
     desenhar(figura.getPosition());
 }
+
+void Plataforma::salvar() {}

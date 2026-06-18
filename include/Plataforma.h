@@ -23,6 +23,7 @@ namespace Entidades {
 			void executar();
 			void obstaculizar(Entidades::Personagens::Jogador* j1);
 			void obstaculizar(Entidades::Personagens::Inimigos::Inimigo* i1);
+			void salvar();
 		};
 	}
 }
