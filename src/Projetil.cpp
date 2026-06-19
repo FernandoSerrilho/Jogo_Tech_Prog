@@ -72,3 +72,12 @@ void Projetil::executar() {
 
 }
 
+void Projetil::salvar() {
+    salvarDataBuffer();
+
+    if (buffer) {
+        buffer << ativo << " " << pTq << "\n";
+    }
+
+
+}

@@ -2,6 +2,9 @@
 #include "Drone.h"
 #include "Plataforma.h"
 #include "Chao.h"
+#include "Jogador.h"
+#include <iostream>
+#include <cstdio>
 
 using namespace Fases;
 using namespace Listas;
@@ -10,11 +13,15 @@ using namespace Personagens;
 using namespace Obstaculos;
 using namespace Inimigos;
 
-Fase::Fase(Jogador* j1,Jogador* j2) :list_ents(), GC(j1,j2),maxDrones(rand() % 3 + 5),maxPlataformas(rand() % 3 + 9),bgFase(nullptr),chaoFase(nullptr) {
+Fase::Fase(Jogador* j1,Jogador* j2) :list_ents(), GC(j1,j2),maxDrones(rand() % 3 + 5),maxPlataformas(rand() % 3 + 9),bgFase(nullptr),chaoFase(nullptr) , num_fase(0) {
 
 }
 
 Fase::~Fase() { bgFase = nullptr; }
+
+void Fase::incluirEntidade(Entidade* e) {
+	list_ents.incluir(e);
+}
 
 void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 	Inimigo::sementear();
@@ -43,7 +50,9 @@ void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 		d1->setJog(j1,0);
 		d1->setJog(j2, 1);
 		GC.incluirInimigo(d1);
-		list_ents.incluir(d1);
+		incluirEntidade(d1);
+
+		std::cout <<"drone id:" << d1->getID() << std::endl;
 	}
 }
 
@@ -75,7 +84,7 @@ void Fase::criarPlataformas() {
 		}
 		Plataforma* p1 = new Plataforma(sf::Vector2f(p.x,p.y), sf::Vector2f(300.0f, 42.0f));
 		GC.incluirObstaculo(p1);
-		list_ents.incluir(p1);
+		incluirEntidade(p1);
 	}
 }
 
@@ -85,4 +94,35 @@ void Fase::limparGC() {
 
 void Fase::limparListEnts() {
 	list_ents.limpar();
+}
+
+void Fase::salvarFase() {
+
+	std::remove("save.txt");
+
+	GS.abrirArquivo("save.txt");
+	std::ofstream& buffer = Gerenciador_Salvamento::getArquivo();
+
+	if (buffer) {
+		buffer << num_fase << "\n";
+	}
+
+	Lista<Entidade>::Iterador it = list_ents.begin();
+	while (it != list_ents.end()) {
+
+		Entidade* e = *it;
+
+		if (e) {
+		EntidadePertinente* eP = dynamic_cast<EntidadePertinente*>(e);
+
+		if (eP) {
+			eP->salvar();
+		}
+		}
+
+		++it;
+	}
+
+	GS.fecharArquivo();
+
 }

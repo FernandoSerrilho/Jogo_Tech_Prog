@@ -18,6 +18,7 @@ namespace Entidades {
 
         protected:
             int pontos;
+            int num_jog;
             Faca* faca;
             bool pulavel;
             bool atacando;
@@ -52,7 +53,7 @@ namespace Entidades {
             void colidir(Entidades::Personagens::Inimigos::Inimigo* pIn);
             void atacar();
             void executar();
-            //void salvar();                TODO
+            void salvar();             
             void mover();
             void setNome(std::string s);
             std::string getNome() const;

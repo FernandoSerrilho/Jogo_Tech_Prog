@@ -24,6 +24,7 @@ private:
 	Entidades::Personagens::Jogador* j2;
 	Fases::FaseUm* f1;
 	Fases::FaseDois* f2;
+	int faseatual;
 	Menu* m;
 	bool j2Ativo;
 public:
@@ -31,6 +32,9 @@ public:
 	~Jogo();
 	void usarJ2();
 	void desativarJ2();
+	int getFase();
+	void salvarJogo();
+	void carregarJogo();
 	void executar();
 	Entidades::Personagens::Jogador* getj1();
 	Entidades::Personagens::Jogador* getj2();

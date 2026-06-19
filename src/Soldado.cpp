@@ -70,3 +70,14 @@ void Soldado::executar() {
 	}
 	mover();
 }
+
+
+void Soldado::salvar() {
+
+	salvarDataBuffer();
+
+	if (buffer) {
+		buffer << parado << " " << temp_parado << "\n"; 
+	}
+
+}

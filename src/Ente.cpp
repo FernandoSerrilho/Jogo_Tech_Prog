@@ -5,8 +5,10 @@ using namespace std;
 
 using namespace Gerenciadores;
 
-Ente::Ente() : id(cont_id++) {}
+Ente::Ente() : id(cont_id++) { /*std::cout << "Criado objeto com Id:" << cont_id << " Tipo: " << typeid(*this).name() << std::endl; */}
 Ente::~Ente() { id = -1; pGG = nullptr; }
+
+int Ente::getID() {return id;}
 
 void Ente::setGG(Gerenciador_Grafico* pG) {
     pGG = pG;

@@ -30,7 +30,7 @@ namespace Entidades {
 
             bool getAtivo();
             void setAtivo(bool a);
-            //void salvar();    TODO;
+            void salvar();
 
     };
 

@@ -105,3 +105,13 @@ void Tanque::executar() {
     mover();
     atirar();
 }
+
+void Tanque::salvar() {
+
+    salvarDataBuffer();
+
+    if (buffer) {
+        buffer << podeAtirar << " " << cooldown << "\n";
+    }
+
+}

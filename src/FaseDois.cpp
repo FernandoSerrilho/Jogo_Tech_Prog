@@ -1,4 +1,5 @@
 #include "FaseDois.h"
+#include "Jogador.h"
 #include "Chao.h"
 #include "BackGround.h"
 #include "MinaTerrestre.h"
@@ -16,6 +17,7 @@ using namespace Personagens;
 using namespace Inimigos;
 
 FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand() % 4 + 3),maxMinas(rand() % 3 + 3) {
+	num_fase = 2;
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
@@ -50,7 +52,7 @@ void FaseDois::criarTanques() {
         t1->setPos(p.x, p.y);
 
         GC.incluirInimigo(t1);
-        list_ents.incluir(t1);
+        incluirEntidade(t1);
     }
 
 }
@@ -62,7 +64,7 @@ void FaseDois::criarProjeteis() {
 
         	b1->setAtivo(false); 
         	GC.IncluirProjetil(b1);
-        	list_ents.incluir(b1);
+        	incluirEntidade(b1);
     	}
 
 	
@@ -131,7 +133,7 @@ void FaseDois::criarMinasTerrestres() {
 
 		MinaTerrestre* mT = new MinaTerrestre(sf::Vector2f(p.x, p.y), sf::Vector2f(29.0f, 10.0f));
 		GC.incluirObstaculo(mT);
-		list_ents.incluir(mT);
+		incluirEntidade(mT);
 	}
 }
 
@@ -158,6 +160,8 @@ void FaseDois::executar() {
 }
 
 void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
+	incluirEntidade(j1);
+	if (j2->getVivo()) {incluirEntidade(j2);} 
 	criarCenario();
 	criarObstaculos();
 	criarInimigos(j1,j2);

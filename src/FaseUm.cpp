@@ -1,4 +1,5 @@
 #include "FaseUm.h"
+#include "Jogador.h"
 #include "Chao.h"
 #include "BackGround.h"
 #include "Arbusto.h"
@@ -13,6 +14,7 @@ using namespace Personagens;
 using namespace Inimigos;
 
 FaseUm::FaseUm(Jogador* j1,Jogador* j2) : Fase(j1,j2),maxSoldados(rand() % 4 + 3),maxArbustos(rand() % 3 + 3) {
+	num_fase = 1;
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
@@ -50,7 +52,7 @@ void FaseUm::criarSoldados() {
 		Soldado* s = new Soldado(p, "Texturas/Soldado/SoldadoInimigo.png");
 		s->setPos(p.x, p.y);
 		GC.incluirInimigo(s);
-		list_ents.incluir(s);
+		incluirEntidade(s);
 	}
 }
 
@@ -74,7 +76,7 @@ void FaseUm::criarArbustos() {
 
 			Arbusto* a = new Arbusto(sf::Vector2f(p.x,p.y), sf::Vector2f(29.0f, 17.0f));
 			GC.incluirObstaculo(a);
-			list_ents.incluir(a);
+			incluirEntidade(a);
 	}
 }
 
@@ -100,6 +102,8 @@ void FaseUm::executar() {
 }
 
 void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
+	incluirEntidade(j1);
+	if (j2) {incluirEntidade(j2);}
 	criarCenario();
 	criarObstaculos();
 	criarInimigos(j1,j2);

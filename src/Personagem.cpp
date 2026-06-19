@@ -7,4 +7,12 @@ Personagem::~Personagem() { num_vidas = -1; }
 void Personagem::setVidas(int v) { num_vidas = v; }
 int Personagem::getVidas() { return num_vidas; }
 
+void Personagem::salvarDataBuffer() {
 
+    Entidades::EntidadePertinente::salvarDataBuffer();
+
+    if (buffer) {
+        buffer << num_vidas << " ";
+    }
+
+}

@@ -22,3 +22,14 @@ void Inimigo::sementear() {
 bool Inimigo::getInvulneravel() const { return invulneravel; }
 void Inimigo::setInvulneravel(bool inv) { invulneravel = inv; }
 sf::Clock& Inimigo::getRelogioInv() { return relogioinv; }
+
+
+void Inimigo::salvarDataBuffer() {
+
+    Entidades::EntidadePertinente::salvarDataBuffer();
+
+    if (buffer) {
+        buffer << nivel_maldade << " " << invulneravel << " ";
+    }
+
+}

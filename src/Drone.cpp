@@ -129,3 +129,15 @@ void Drone::mover() {
     figura.setPosition(pos);
 
 }
+
+void Drone::salvar() {
+
+    salvarDataBuffer();
+
+    if (buffer) {
+
+        buffer << emKnockback << "\n";
+    }
+
+
+}

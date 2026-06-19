@@ -68,3 +68,13 @@ void MinaTerrestre::executar() {
 
 	gravitar();
 }
+
+void MinaTerrestre::salvar() {
+
+	salvarDataBuffer();
+
+	if (buffer) {
+		buffer << tempoAtivacao << " " << raio << " " << tempoAtivo << "\n";
+	}
+
+}

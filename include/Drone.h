@@ -21,6 +21,7 @@ namespace Entidades {
                 void executar();
                 void mover();
                 void colidir(Jogador* j);
+                void salvar();
             };
         }
     }

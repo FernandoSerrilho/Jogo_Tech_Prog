@@ -11,8 +11,9 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 		std::cout << "Erro ao carregar a fonte!" << std::endl;
 	}
 	initText("txtTituloJogo", "MILITARY ZONE", 90, { 960.f, 150.f });
-	initText("btnJogar", "JOGAR", 40, { 960.f, 450.f });
-	initText("btnSair", "SAIR", 40, { 960.f, 700.f });
+	initText("btnJogar", "JOGAR", 40, { 960.f, 400.f });
+	initText("btnCarregar", "CARREGAR JOGO", 40, {960.f , 530.f});
+	initText("btnSair", "SAIR", 40, { 960.f, 660.f });
 
 	initText("txtFase", "Escolha a Fase:", 60, { 960.f, 450.f });
 	initText("btnFase1", "Fase 1", 40, { 600.f, 700.f });
@@ -33,6 +34,7 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnRestart", "RESTART", 40, { 960.f, 850.f });
 	initText("btnSairMorte", "SAIR", 40, { 960.f, 700.f });
 	initText("btnContinuar", "CONTINUAR", 40, { 960.f, 350.f });
+	initText("btnSalvar", "SALVAR JOGO", 40 , {960.f , 450.f});
 	initText("btnProxFase", "PROXIMA FASE", 40, { 960.f, 450.f });
 }
 
@@ -54,6 +56,15 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 	if (estadoAtual == MENU_PRINCIPAL) {
 		if (textos["btnJogar"].getGlobalBounds().contains(mousePos)) {
 			estadoAtual = SEL_JOGADORES;
+		}
+		else if (textos["btnCarregar"].getGlobalBounds().contains(mousePos)) {
+			pJogo->carregarJogo();
+
+			estadoAtual = JOGO_RODANDO;
+
+			fase_selecionada = pJogo->getFase();
+
+			estadoAnterior = MENU_PRINCIPAL;
 		}
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos)) {
 			estadoAtual = CONFIRMA_SAIR;
@@ -107,6 +118,11 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 	else if (estadoAtual == PAUSA) {
 		if (textos["btnContinuar"].getGlobalBounds().contains(mousePos))
 			estadoAtual = JOGO_RODANDO;
+		else if (textos["btnSalvar"].getGlobalBounds().contains(mousePos)) {
+			pJogo->salvarJogo();
+
+			textos["btnSalvar"].setFillColor(sf::Color::Green);
+		}
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos))
 			estadoAtual = CONFIRMA_SAIR;
 		else if (textos["btnMenu"].getGlobalBounds().contains(mousePos))
@@ -293,6 +309,7 @@ void Menu::executar() {
 			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnCarregar"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
@@ -318,6 +335,7 @@ void Menu::executar() {
 			else
 				pJogo->desenharf2();
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnContinuar"]);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSalvar"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
 			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
 			pJogo->getGG()->getGerenciadorG()->displayJanela();

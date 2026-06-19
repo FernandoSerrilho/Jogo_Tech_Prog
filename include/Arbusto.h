@@ -21,6 +21,7 @@ namespace Entidades {
 			~Arbusto();
 			void executar();
 			void obstaculizar(Entidades::Personagens::Jogador* j1);
+			void salvar();
 		};
 	}
 }

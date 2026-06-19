@@ -20,6 +20,7 @@ class Ente {
         Ente();
         virtual ~Ente();
         virtual void executar() = 0;
+        int getID();
         void desenhar(sf::Vector2f posicao);
         static void setGG(Gerenciador_Grafico *pG);
         void setText(const char* caminhoTextura, sf::RectangleShape colisao);
