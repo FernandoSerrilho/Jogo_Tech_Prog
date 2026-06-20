@@ -11,7 +11,7 @@
 using namespace Gerenciadores;
 using namespace Listas;
 using namespace Fases;
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
@@ -72,22 +72,22 @@ void FaseDois::criarProjeteis() {
 
 void FaseDois::gerenciarProjeteis() {
 
-	Lista<Entidade>::Iterador it = list_ents.begin();
+	Lista<Entidades::Entidade>::Iterador it = list_ents.begin();
 
 	while (it != list_ents.end()) {
-		Entidade* e = *it;
+		Entidades::Entidade* e = *it;
 
 		if (e && e->getVivo()) {
 			Tanque* t1 = dynamic_cast<Tanque*>(e);
 
 			if (t1 && t1->getpodeAtirar()) {
 
-				Lista<Entidade>::Iterador itBala = list_ents.begin();
+				Lista<Entidades::Entidade>::Iterador itBala = list_ents.begin();
 				bool achouAtiva = false;
 
 				while (itBala != list_ents.end() && !achouAtiva) {
 
-					Entidade* eBala = *itBala;
+					Entidades::Entidade* eBala = *itBala;
 
 					if (eBala) {
 						Projetil* b1 = dynamic_cast<Projetil*>(eBala);
@@ -114,7 +114,7 @@ void FaseDois::gerenciarProjeteis() {
 }
 
 void FaseDois::criarMinasTerrestres() {
-	Entidades::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
 
 	for (int i = 0;i < maxMinas;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
@@ -144,9 +144,9 @@ void FaseDois::criarObstaculos() {
 }
 
 void FaseDois::criarCenario() {
-	BackGround* b = new BackGround("Texturas/BackGround/BackgroundF2.png");
+	Entidades::BackGround* b = new Entidades::BackGround("Texturas/BackGround/BackgroundF2.png");
 	bgFase = b;
-	Chao* c = new Chao("Texturas/Grama/Chao2.png");
+	Entidades::Chao* c = new Entidades::Chao("Texturas/Grama/Chao2.png");
 	GC.setChao(c);
 	chaoFase = c;
 }
@@ -161,7 +161,7 @@ void FaseDois::executar() {
 
 void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
 	incluirEntidade(j1);
-	if (j2->getVivo()) {incluirEntidade(j2);} 
+	if (j2 && j2->getVivo()) {incluirEntidade(j2);} 
 	criarCenario();
 	criarObstaculos();
 	criarInimigos(j1,j2);

@@ -8,7 +8,7 @@
 using namespace Gerenciadores;
 using namespace Listas;
 using namespace Fases;
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
@@ -30,7 +30,7 @@ void FaseUm::criarInimigos(Jogador* j1,Jogador* j2) {
 }
 
 void FaseUm::criarSoldados() {
-	Entidades::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
 
 	sf::Vector2f p(0.0f, 0.0f);
 
@@ -57,7 +57,7 @@ void FaseUm::criarSoldados() {
 }
 
 void FaseUm::criarArbustos() {
-	Entidades::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
 
 	for (int i = 0;i < maxArbustos;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
@@ -87,9 +87,9 @@ void FaseUm::criarObstaculos() {
 }
 
 void FaseUm::criarCenario() {
-	BackGround* b = new BackGround("Texturas/BackGround/Fundo.png");
+	Entidades::BackGround* b = new Entidades::BackGround("Texturas/BackGround/Fundo.png");
 	bgFase = b;
-	Chao* c = new Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
+	Entidades::Chao* c = new Entidades::Chao("Texturas/Grama/Grama_QuadradoSemBorda.png");
 	GC.setChao(c);
 	chaoFase = c;
 }

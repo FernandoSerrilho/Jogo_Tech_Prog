@@ -1,7 +1,8 @@
 #pragma once
 #include "Ente.h"
 
-class Entidade : public Ente {
+namespace Entidades {
+    class Entidade : public Ente {
 
     protected:
         sf::Vector2f pos;
@@ -14,4 +15,5 @@ class Entidade : public Ente {
         bool getVivo();
         sf::Vector2f getPos();
         void setPos(float x, float y);
-};
+    };
+}

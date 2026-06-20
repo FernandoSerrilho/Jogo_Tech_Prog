@@ -2,7 +2,7 @@
 #include "Gerenciador_Salvamento.h"
 #include <iostream>
 
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Gerenciadores;
 
 

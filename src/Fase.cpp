@@ -1,14 +1,15 @@
 #include "Fase.h"
 #include "Drone.h"
 #include "Plataforma.h"
-#include "Chao.h"
 #include "Jogador.h"
+#include "Entidade.h"
 #include <iostream>
 #include <cstdio>
 
 using namespace Fases;
 using namespace Listas;
 using namespace Entidades;
+using namespace EntidadesPertinentes;
 using namespace Personagens;
 using namespace Obstaculos;
 using namespace Inimigos;
@@ -17,7 +18,7 @@ Fase::Fase(Jogador* j1,Jogador* j2) :list_ents(), GC(j1,j2),maxDrones(rand() % 3
 
 }
 
-Fase::~Fase() { bgFase = nullptr; }
+Fase::~Fase() { bgFase = nullptr; chaoFase = nullptr; }
 
 void Fase::incluirEntidade(Entidade* e) {
 	list_ents.incluir(e);
@@ -115,9 +116,9 @@ void Fase::salvarFase() {
 		if (e) {
 		EntidadePertinente* eP = dynamic_cast<EntidadePertinente*>(e);
 
-		if (eP) {
-			eP->salvar();
-		}
+			if (eP) {
+				eP->salvar();
+			}
 		}
 
 		++it;

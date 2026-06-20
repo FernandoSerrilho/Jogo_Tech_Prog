@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 using namespace Listas;
+using namespace Entidades;
 
 ListaEntidades::ListaEntidades() : LEs(), it(LEs.begin()) { LEs.limpar(); }
 

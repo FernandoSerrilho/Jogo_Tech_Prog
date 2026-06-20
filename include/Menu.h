@@ -2,11 +2,18 @@
 
 #include "Ente.h"
 #include <string>
+#include <vector>
 using namespace std;
 
-class BackGround;
-
 class Jogo;
+namespace Entidades {
+	class BackGround;
+	namespace EntidadesPertinentes {
+		namespace Personagens {
+			class Jogador;
+		}
+	}
+}
 
 class Menu : public Ente {
 public:
@@ -14,6 +21,8 @@ public:
 		MENU_PRINCIPAL,
 		MENU_MORTE,
 		FASE_VENCIDA,
+		SEL_RANKING,
+		RANKING,
 		SEL_FASE,
 		SEL_JOGADORES,
 		CONFIRMA_SAIR,
@@ -27,14 +36,21 @@ private:
 	EstadoMenu estadoAtual;
 	EstadoMenu estadoAnterior;
 	sf::Font fonte;
-	BackGround* bMenu;
+	Entidades::BackGround* bMenu;
 
+	std::vector<Entidades::EntidadesPertinentes::Personagens::Jogador*> ranking;
 	map<string, sf::Text> textos;
 
 	int n_jogs;
 	int fase_selecionada;
+	const int MAX_RANKING;
+	bool addJogador;
 
 	void initText(const string& chave, const string& conteudo, unsigned int tamanho, sf::Vector2f posicao);
+	void carregarRanking(const char* caminhoRanking);
+	void gravarRanking(const char* caminhoRanking);
+	void trataRanking(Entidades::EntidadesPertinentes::Personagens::Jogador* j, const char* caminhoRanking);
+	void addJogadorRanking(const char* caminhoRanking);
 public:
 	Menu(Jogo* pJ = nullptr);
 	~Menu();
@@ -43,4 +59,6 @@ public:
 	int getFase();
 	int getQtdJogadores ();
 	void executar();
+	void desenhaRanking(const char* caminhoRanking);
+	void limpaRanking();
 };

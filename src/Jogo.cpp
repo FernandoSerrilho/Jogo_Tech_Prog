@@ -7,7 +7,7 @@
 
 using namespace Fases;
 using namespace Gerenciadores;
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 
 
@@ -27,6 +27,7 @@ void Jogo::usarJ2() {
 
 void Jogo::desativarJ2() {
     j2Ativo = false;
+    j2->setVivo(false);
 }
 
 int Jogo::getFase() {return faseatual;}

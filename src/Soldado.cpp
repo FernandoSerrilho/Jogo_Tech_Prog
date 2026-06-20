@@ -2,7 +2,7 @@
 #include "Jogador.h"
 #include <cmath>
 
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 using namespace Inimigos;
 
@@ -16,6 +16,7 @@ Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo()
 	setVidas(4);
 	contraGravidade = 4.0f;
 	temp_parado = ((rand() % 10  + (10-nivel_maldade))/ 10.f);
+	pontosDados = num_vidas + nivel_maldade;
 }
 
 Soldado::~Soldado() {}

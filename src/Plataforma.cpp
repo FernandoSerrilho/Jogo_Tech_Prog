@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 using namespace Inimigos;
 using namespace Obstaculos;

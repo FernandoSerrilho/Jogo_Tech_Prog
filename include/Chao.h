@@ -1,8 +1,9 @@
 #pragma once
 #include "Entidade.h"
 namespace Entidades {
-	class EntidadePertinente;
-}
+	namespace EntidadesPertinentes {
+		class EntidadePertinente;
+	}
 
 	class Chao : public Entidade {
 	private:
@@ -10,5 +11,6 @@ namespace Entidades {
 		Chao(const char* caminhoTextura = " ");
 		~Chao();
 		void executar();
-		void colidir(Entidades::EntidadePertinente* pE);
+		void colidir(Entidades::EntidadesPertinentes::EntidadePertinente* pE);
 	};
+}

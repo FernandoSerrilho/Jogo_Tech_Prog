@@ -4,16 +4,21 @@
 #include "Gerenciador_Grafico.h"
 #include "Jogador.h"
 #include <iostream>
-using namespace Entidades::Personagens;
-Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
-,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL),pJogo(j){
+#include <algorithm>
+
+using namespace Entidades::EntidadesPertinentes::Personagens;
+Menu::Menu(Jogo* j):bMenu(new Entidades::BackGround("Texturas/BackGround/Menu.png")), fonte(),n_jogs(0)
+,fase_selecionada(0),estadoAtual(MENU_PRINCIPAL),estadoAnterior(MENU_PRINCIPAL),pJogo(j),MAX_RANKING(10),addJogador(true){
+	limpaRanking();
 	if (!fonte.loadFromFile("Texturas/Fontes/FonteTexto.ttf")) {
 		std::cout << "Erro ao carregar a fonte!" << std::endl;
 	}
 	initText("txtTituloJogo", "MILITARY ZONE", 90, { 960.f, 150.f });
 	initText("btnJogar", "JOGAR", 40, { 960.f, 400.f });
+	initText("btnRanking", "RANKING", 40, { 960.f, 660.f });
 	initText("btnCarregar", "CARREGAR JOGO", 40, {960.f , 530.f});
-	initText("btnSair", "SAIR", 40, { 960.f, 660.f });
+	initText("btnSair", "SAIR", 40, { 960.f, 790.f });
+	initText("btnSairRanking", "SAIR", 40, { 960.f, 900.f });
 
 	initText("txtFase", "Escolha a Fase:", 60, { 960.f, 450.f });
 	initText("btnFase1", "Fase 1", 40, { 600.f, 700.f });
@@ -38,7 +43,8 @@ Menu::Menu(Jogo* j):bMenu(new BackGround("Texturas/BackGround/Menu.png")), fonte
 	initText("btnProxFase", "PROXIMA FASE", 40, { 960.f, 450.f });
 }
 
-Menu::~Menu() { bMenu = nullptr; textos.clear(); }
+Menu::~Menu() { bMenu = nullptr; textos.clear();limpaRanking();
+}
 
 int Menu::getFase() { return fase_selecionada; }
 
@@ -68,6 +74,24 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 		}
 		else if (textos["btnSair"].getGlobalBounds().contains(mousePos)) {
 			estadoAtual = CONFIRMA_SAIR;
+		}
+		else if (textos["btnRanking"].getGlobalBounds().contains(mousePos)) {
+			limpaRanking();
+			estadoAtual = SEL_RANKING;
+		}
+	}
+	else if (estadoAtual == SEL_RANKING) {
+		if (textos["btnFase1"].getGlobalBounds().contains(mousePos)) {
+			fase_selecionada = 1;
+			carregarRanking("rankingFase1.txt");
+			estadoAnterior = SEL_RANKING;
+			estadoAtual = RANKING;
+		}
+		else if (textos["btnFase2"].getGlobalBounds().contains(mousePos)) {
+			fase_selecionada = 2;
+			carregarRanking("rankingFase2.txt");
+			estadoAnterior = SEL_RANKING;
+			estadoAtual = RANKING;
 		}
 	}
 	else if (estadoAtual == SEL_FASE) {
@@ -115,6 +139,12 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 			estadoAtual = MENU_PRINCIPAL; 
 		}
 	}
+	else if (estadoAtual == RANKING) {
+		if (textos["btnSairRanking"].getGlobalBounds().contains(mousePos)) {
+			limpaRanking();
+			estadoAtual = MENU_PRINCIPAL;
+		}
+	}
 	else if (estadoAtual == PAUSA) {
 		if (textos["btnContinuar"].getGlobalBounds().contains(mousePos))
 			estadoAtual = JOGO_RODANDO;
@@ -154,6 +184,7 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 				fase_selecionada++;
 			else
 				fase_selecionada--;
+			addJogador = true;
 		}
 		else if (textos["btnRestart"].getGlobalBounds().contains(mousePos)) {
 			estadoAtual = JOGO_RODANDO;
@@ -162,6 +193,7 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 				pJogo->reiniciarFaseUm();
 			else
 				pJogo->reiniciarFaseDois();
+			addJogador = true;
 		}
 	}
 }
@@ -176,41 +208,41 @@ void Menu::executar() {
 			if (event.type == sf::Event::Closed) {
 				pJogo->getGG()->getGerenciadorG()->fechaJanela();
 			}
-				else if (event.type == sf::Event::KeyPressed) {
-						if (event.key.code == sf::Keyboard::Escape) {
-							if (estadoAtual == JOGO_RODANDO) {
-								estadoAtual = PAUSA;
-							}
-							else if (estadoAtual == PAUSA) {
-								estadoAtual = JOGO_RODANDO;
-							}
-							else if (estadoAtual == CONFIRMA_SAIR) {
-								estadoAtual = estadoAnterior;
-							}
+			else if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					if (estadoAtual == JOGO_RODANDO) {
+						estadoAtual = PAUSA;
 					}
-				}
-				else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-					if (estadoAtual == MENU_PRINCIPAL && textos["btnSair"].getGlobalBounds().contains(mousePos)) {
-						estadoAnterior = MENU_PRINCIPAL;
-						estadoAtual = CONFIRMA_SAIR;
-					}
-					else if (estadoAtual == PAUSA && textos["btnSair"].getGlobalBounds().contains(mousePos)) {
-						estadoAnterior = PAUSA; 
-						estadoAtual = CONFIRMA_SAIR;
+					else if (estadoAtual == PAUSA) {
+						estadoAtual = JOGO_RODANDO;
 					}
 					else if (estadoAtual == CONFIRMA_SAIR) {
-						if (textos["btnSim"].getGlobalBounds().contains(mousePos)) {
-							pJogo->getGG()->getGerenciadorG()->fechaJanela();
-						}
-						else if (textos["btnNao"].getGlobalBounds().contains(mousePos)) {
-							estadoAtual = estadoAnterior; 
-						}
-					}
-					else {
-						executarMouse(mousePos); 
+						estadoAtual = estadoAnterior;
 					}
 				}
-				else if (event.type == sf::Event::TextEntered) {
+			}
+			else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				if (estadoAtual == MENU_PRINCIPAL && textos["btnSair"].getGlobalBounds().contains(mousePos)) {
+					estadoAnterior = MENU_PRINCIPAL;
+					estadoAtual = CONFIRMA_SAIR;
+				}
+				else if (estadoAtual == PAUSA && textos["btnSair"].getGlobalBounds().contains(mousePos)) {
+					estadoAnterior = PAUSA;
+					estadoAtual = CONFIRMA_SAIR;
+				}
+				else if (estadoAtual == CONFIRMA_SAIR) {
+					if (textos["btnSim"].getGlobalBounds().contains(mousePos)) {
+						pJogo->getGG()->getGerenciadorG()->fechaJanela();
+					}
+					else if (textos["btnNao"].getGlobalBounds().contains(mousePos)) {
+						estadoAtual = estadoAnterior;
+					}
+				}
+				else {
+					executarMouse(mousePos);
+				}
+			}
+			else if (event.type == sf::Event::TextEntered) {
 				if (estadoAtual == DIGITANDO_J1) {
 					Jogador* pJ = pJogo->getj1();
 					if (pJ) {
@@ -302,95 +334,203 @@ void Menu::executar() {
 				estadoAtual = MENU_MORTE;
 			}
 		}
-
-		else if (estadoAtual == MENU_PRINCIPAL) {
+		else {
 			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->reviveJogador();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnCarregar"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
+			if (estadoAtual == MENU_PRINCIPAL) {
+				limpaRanking();
+				addJogador = true;
+				pJogo->reviveJogador();
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtTituloJogo"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnJogar"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnCarregar"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRanking"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
+			}
 
-		else if (estadoAtual == CONFIRMA_SAIR) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			if (estadoAnterior == PAUSA) {
+			else if (estadoAtual == CONFIRMA_SAIR) {
+				if (estadoAnterior == PAUSA) {
+					if (getFase() == 1)
+						pJogo->desenharf1();
+					else
+						pJogo->desenharf2();
+				}
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtCerteza"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSim"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnNao"]);
+			}
+
+			else if (estadoAtual == PAUSA) {
 				if (getFase() == 1)
 					pJogo->desenharf1();
 				else
 					pJogo->desenharf2();
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnContinuar"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSalvar"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
 			}
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtCerteza"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSim"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnNao"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
+			else if (estadoAtual == MENU_MORTE) {
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtMorte"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
+			}
+			else if (estadoAtual == SEL_RANKING) {
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase1"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase2"]);
+			}
+			else if (estadoAtual == RANKING) {
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				if(fase_selecionada == 1)
+					desenhaRanking("rankingFase1.txt");
+				else if (fase_selecionada == 2)
+					desenhaRanking("rankingFase2.txt");
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairRanking"]);
+			}
+			else if (estadoAtual == SEL_FASE) {
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFase"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase1"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase2"]);
+			}
 
-		else if (estadoAtual == PAUSA) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			if(getFase()==1)
-				pJogo->desenharf1();
-			else
-				pJogo->desenharf2();
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnContinuar"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSalvar"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSair"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
-		else if (estadoAtual == MENU_MORTE) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtMorte"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
-		else if (estadoAtual == SEL_FASE) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFase"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase1"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnFase2"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
+			else if (estadoAtual == SEL_JOGADORES) {
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnUmJogador"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnDoisJogadores"]);
+			}
 
-		else if (estadoAtual == SEL_JOGADORES) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnUmJogador"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnDoisJogadores"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
-
-		else if (estadoAtual == FASE_VENCIDA) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			if(getFase()==1)
-				pJogo->desenharf1();
-			else
-				pJogo->desenharf2();
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFaseVencida"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnProxFase"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
-		else if (estadoAtual == DIGITANDO_J1) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtJ1"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtNomeAtual"]);
-			pJogo->getGG()->getGerenciadorG()->displayJanela();
-		}
-		else if (estadoAtual == DIGITANDO_J2) {
-			pJogo->getGG()->getGerenciadorG()->limpaJanela();
-			pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtJ2"]);
-			pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtNomeAtual"]);
+			else if (estadoAtual == FASE_VENCIDA) {
+				if (getFase() == 1)
+					pJogo->desenharf1();
+				else
+					pJogo->desenharf2();
+				if (addJogador) {
+					if(fase_selecionada==1)
+						addJogadorRanking("rankingFase1.txt");
+					else if (fase_selecionada==2)
+						addJogadorRanking("rankingFase2.txt");
+					addJogador = false;
+				}
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtFaseVencida"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnMenu"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnRestart"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnProxFase"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["btnSairMorte"]);
+			}
+			else if (estadoAtual == DIGITANDO_J1) {
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtJ1"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtNomeAtual"]);
+			}
+			else if (estadoAtual == DIGITANDO_J2) {
+				pJogo->getGG()->getGerenciadorG()->desenharEnte(bMenu);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtJ2"]);
+				pJogo->getGG()->getGerenciadorG()->desenharTexto(textos["txtNomeAtual"]);
+			}
 			pJogo->getGG()->getGerenciadorG()->displayJanela();
 		}
 	}
+}
+
+void Menu::gravarRanking(const char* caminhoRanking) {
+	std::ofstream arquivo(caminhoRanking);
+
+	if (!arquivo.is_open()) {
+		std::cerr << "Erro ao abrir o arquivo para salvar o ranking!" << std::endl;
+		return;
+	}
+
+	for (int i = 0;i < ranking.size();i++) {
+		Jogador* j = ranking[i];
+		arquivo << j->getNome() << " " << j->getPontos() << "\n";
+	}
+
+	arquivo.close();
+}
+
+void Menu::carregarRanking(const char* caminhoRanking) {
+	limpaRanking();
+	std::string nome;
+	int pontos;
+	std::ifstream arquivo(caminhoRanking);
+
+	if (!arquivo.is_open())
+		return;
+
+	while (arquivo >> nome >> pontos) {
+		Jogador* j = new Jogador();
+		j->setNome(nome);
+		j->setPontos(pontos);
+		ranking.push_back(j);
+	}
+	arquivo.close();
+}
+
+void Menu::trataRanking(Jogador* j, const char* caminhoRanking) {
+	carregarRanking(caminhoRanking);
+
+	if (ranking.size() >= MAX_RANKING && j->getPontos() <= ranking.back()->getPontos())
+		return;
+	
+	Jogador* novoElemento = new Jogador();
+	novoElemento->setNome(j->getNome());
+	novoElemento->setPontos(j->getPontos());
+
+	ranking.push_back(novoElemento);
+	std::sort(ranking.begin(), ranking.end(), [](Jogador* a, Jogador* b) {return a->getPontos() > b->getPontos();});
+
+	if (ranking.size() > MAX_RANKING) {
+		delete ranking.back();
+		ranking.pop_back();
+	}
+	gravarRanking(caminhoRanking);
+}
+
+void Menu::addJogadorRanking(const char* caminhoRanking) {
+	if (pJogo->getj1()) {
+		if (pJogo->getj1()->getVivo()) {
+			trataRanking(pJogo->getj1(),caminhoRanking);
+		}
+	}
+	if (pJogo->getj2()) {
+		if (pJogo->getj2()->getVivo()) {
+			trataRanking(pJogo->getj2(),caminhoRanking);
+		}
+	}
+}
+
+void Menu::desenhaRanking(const char* caminhoRanking) {
+	sf::Text textoRanking;
+	textoRanking.setFont(fonte);
+	textoRanking.setFillColor(sf::Color::White);
+
+	textoRanking.setCharacterSize(35);
+	float posYini = 280.f;
+	float espaco = 50.f;
+
+	for (size_t i = 0; i < ranking.size(); i++) {
+		if (ranking[i] != nullptr) {
+			std::string conteudo = std::to_string(i + 1) + ". " +
+				ranking[i]->getNome() + " ...... " +
+				std::to_string(ranking[i]->getPontos()) + " pts";
+
+			textoRanking.setString(conteudo);
+			float posX = 960.f - textoRanking.getGlobalBounds().width / 2.f;
+			float posY = posYini + (i * espaco);
+			textoRanking.setPosition(posX, posY);
+			pJogo->getGG()->getGerenciadorG()->desenharTexto(textoRanking);
+		}
+	}
+}
+
+void Menu::limpaRanking() {
+	std::vector<Jogador*>::iterator it = ranking.begin();
+	while (it != ranking.end()) {
+		delete* it;
+		it++;
+	}
+	ranking.clear();
 }

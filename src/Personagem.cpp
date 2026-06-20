@@ -1,6 +1,6 @@
 #include "Personagem.h"
 
-using namespace Entidades::Personagens;
+using namespace Entidades::EntidadesPertinentes::Personagens;
 
 Personagem::Personagem(int vidas): EntidadePertinente(), num_vidas(vidas) {}
 Personagem::~Personagem() { num_vidas = -1; }
@@ -9,7 +9,7 @@ int Personagem::getVidas() { return num_vidas; }
 
 void Personagem::salvarDataBuffer() {
 
-    Entidades::EntidadePertinente::salvarDataBuffer();
+    EntidadePertinente::salvarDataBuffer();
 
     if (buffer) {
         buffer << num_vidas << " ";

@@ -1,4 +1,5 @@
 #include "Entidade.h"
+using namespace Entidades;
 
 Entidade::Entidade() : Ente(), pos(0.0f,500.0f),vivo(true){}
 Entidade::~Entidade() { vivo = false; }

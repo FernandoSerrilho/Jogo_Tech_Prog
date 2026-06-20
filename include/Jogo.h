@@ -7,8 +7,10 @@ namespace Gerenciadores {
 }
 
 namespace Entidades {
-	namespace Personagens {
-		class Jogador;
+	namespace EntidadesPertinentes {
+		namespace Personagens {
+			class Jogador;
+		}
 	}
 }
 
@@ -20,8 +22,8 @@ namespace Fases {
 class Jogo {
 private:
 	Gerenciadores::Gerenciador_Grafico* GG;
-	Entidades::Personagens::Jogador* j1;
-	Entidades::Personagens::Jogador* j2;
+	Entidades::EntidadesPertinentes::Personagens::Jogador* j1;
+	Entidades::EntidadesPertinentes::Personagens::Jogador* j2;
 	Fases::FaseUm* f1;
 	Fases::FaseDois* f2;
 	int faseatual;
@@ -36,8 +38,8 @@ public:
 	void salvarJogo();
 	void carregarJogo();
 	void executar();
-	Entidades::Personagens::Jogador* getj1();
-	Entidades::Personagens::Jogador* getj2();
+	Entidades::EntidadesPertinentes::Personagens::Jogador* getj1();
+	Entidades::EntidadesPertinentes::Personagens::Jogador* getj2();
 	void executarf1();
 	void executarf2();
 	const Gerenciadores::Gerenciador_Grafico* getGG();

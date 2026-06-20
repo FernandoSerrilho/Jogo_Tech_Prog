@@ -7,7 +7,8 @@
 #include <iostream>
 
 using namespace Entidades;
-using namespace Personagens;
+using namespace EntidadesPertinentes::Personagens;
+//using namespace Personagens;
 using namespace Inimigos;
 
 Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), num_jog(n), pontos(0), atacando(false), podeAtacar(true),
@@ -93,6 +94,7 @@ void Jogador::danificar(Inimigo* pIn) {
         pIn->getRelogioInv().restart();
 
         if (v <= 0) {
+            pontos += pIn->getPontos();
             pIn->setVivo(false);
             pIn->setPos(2500.0f, 2500.0f);
             return;
@@ -201,3 +203,7 @@ void Jogador::salvar() {
     }
 
 }
+
+int Jogador::getPontos() { return pontos; }
+
+void Jogador::setPontos(int n) { pontos = n; }

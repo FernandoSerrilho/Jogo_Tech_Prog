@@ -3,8 +3,10 @@
 #include "Fase.h"
 
 namespace Entidades {
-	namespace Personagens {
-		class Jogador;
+	namespace EntidadesPertinentes {
+		namespace Personagens {
+			class Jogador;
+		}
 	}
 }
 
@@ -14,15 +16,15 @@ namespace Fases {
 		const int maxSoldados;
 		const int maxArbustos;
 	protected:
-		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
+		void criarInimigos(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
 		void criarSoldados();
 		void criarArbustos();
 		void criarObstaculos();
 		void criarCenario();
 	public:
-		FaseUm(Entidades::Personagens::Jogador* j1 = nullptr, Entidades::Personagens::Jogador* j2 = nullptr);
+		FaseUm(Entidades::EntidadesPertinentes::Personagens::Jogador* j1 = nullptr, Entidades::EntidadesPertinentes::Personagens::Jogador* j2 = nullptr);
 		~FaseUm();
-		void inicializar(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
+		void inicializar(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
 		void executar();
 		void desenhar();
 		bool statusInimigos();

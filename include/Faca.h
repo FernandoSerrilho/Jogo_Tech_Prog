@@ -3,20 +3,22 @@
 #include "Entidade.h"
 
 namespace Entidades {
-    namespace Personagens {
-        class Jogador;
+    namespace EntidadesPertinentes {
+        namespace Personagens {
+            class Jogador;
+        }
     }
-}
 
     class Faca : public Entidade {
 
     private:
-        Entidades::Personagens::Jogador* pJog;
+        Entidades::EntidadesPertinentes::Personagens::Jogador* pJog;
 
     public:
-        Faca(Entidades::Personagens::Jogador* pJ);
+        Faca(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
         ~Faca();
         void initFigura();
         void executar();
 
     };
+}

@@ -4,9 +4,9 @@
 #include <cmath>
 #include <iostream>
 
-
-using namespace Entidades::Personagens;
-using namespace Entidades::Personagens::Inimigos;
+using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades::EntidadesPertinentes::Personagens;
+using namespace Inimigos;
 
 Tanque::Tanque(const char* caminhoTextura) : Inimigo(), podeAtirar(false), cooldown(0.0f){
     contraGravidade = 0.1f;
@@ -15,6 +15,7 @@ Tanque::Tanque(const char* caminhoTextura) : Inimigo(), podeAtirar(false), coold
     figura.setPosition(pos);
     balas.clear();
     setVidas(5);
+    pontosDados = num_vidas + nivel_maldade;
 
     if (nivel_maldade <= 3 ) {
         cooldown = 7.0f;
