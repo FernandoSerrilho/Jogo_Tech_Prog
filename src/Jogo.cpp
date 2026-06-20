@@ -147,7 +147,7 @@ void Jogo::salvarJogo() {
 }
 
 void Jogo::carregarJogo() {
-    std::ifstream arquivoSave("save.txt");
+/*    std::ifstream arquivoSave("save.txt");
     if (!arquivoSave.is_open()) {
         std:: cerr << "Sem save encontrado \n";
         return;
@@ -204,6 +204,6 @@ void Jogo::carregarJogo() {
     }
 
 
-
+*/
 
 }
