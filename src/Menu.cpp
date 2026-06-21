@@ -133,7 +133,6 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 	}
 	else if (estadoAtual == CONFIRMA_SAIR) {
 		if (textos["btnSim"].getGlobalBounds().contains(mousePos)) {
-			pJogo->salvarJogo();
 			pJogo->getGG()->getGerenciadorG()->fechaJanela();
 		}
 		else if (textos["btnNao"].getGlobalBounds().contains(mousePos)) {
@@ -207,7 +206,6 @@ void Menu::executar() {
 		sf::Event event;
 		while (pJogo->getGG()->getGerenciadorG()->getJanela()->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				pJogo->salvarJogo();
 				pJogo->getGG()->getGerenciadorG()->fechaJanela();
 			}
 			else if (event.type == sf::Event::KeyPressed) {
