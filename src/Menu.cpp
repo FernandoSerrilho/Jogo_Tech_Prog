@@ -33,7 +33,7 @@ Menu::Menu(Jogo* j):bMenu(new Entidades::BackGround("Texturas/BackGround/Menu.pn
 	initText("btnSim", "SIM", 40, { 750.f, 550.f });
 	initText("btnNao", "NAO", 40, { 1170.f, 550.f });
 
-	initText("txtMorte", "MORREU!", 60, { 960.f, 400.f });
+	initText("txtMorte", "JOGADOR(ES) DERROTADO(S)!", 60, { 960.f, 400.f });
 	initText("txtFaseVencida", "INIMIGOS DERROTADOS!", 60, { 960.f, 300.f });
 	initText("btnMenu", "MENU", 40, { 960.f, 550.f });
 	initText("btnRestart", "RESTART", 40, { 960.f, 850.f });
@@ -133,6 +133,7 @@ void Menu::executarMouse(const sf::Vector2f& mousePos) {
 	}
 	else if (estadoAtual == CONFIRMA_SAIR) {
 		if (textos["btnSim"].getGlobalBounds().contains(mousePos)) {
+			pJogo->salvarJogo();
 			pJogo->getGG()->getGerenciadorG()->fechaJanela();
 		}
 		else if (textos["btnNao"].getGlobalBounds().contains(mousePos)) {
@@ -206,6 +207,7 @@ void Menu::executar() {
 		sf::Event event;
 		while (pJogo->getGG()->getGerenciadorG()->getJanela()->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
+				pJogo->salvarJogo();
 				pJogo->getGG()->getGerenciadorG()->fechaJanela();
 			}
 			else if (event.type == sf::Event::KeyPressed) {
