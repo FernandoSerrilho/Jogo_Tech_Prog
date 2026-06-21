@@ -109,6 +109,50 @@ void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
 	criarInimigos(j1,j2);
 }
 
+void FaseUm::carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) {
+
+	limparGC();
+    limparListEnts();
+
+    std::string tipoLido;
+    while (arquivo >> tipoLido) {
+        int id; float px, py, vx, vy; bool vivo;
+        arquivo >> id >> px >> py >> vx >> vy >> vivo;
+
+        if (carregarEntidadeemComum(tipoLido, id, px, py, vx, vy, vivo, arquivo, j1, j2, j2Ativo)) {
+            continue;
+        }
+        else if (tipoLido == "Soldado") {
+            int vidas, nivel; bool inv, parado; float tempoParado;
+            arquivo >> vidas >> nivel >> inv >> parado >> tempoParado;
+
+            Soldado* s = new Soldado(sf::Vector2f(px, py), "Texturas/Soldado/SoldadoInimigo.png");
+            s->setPos(px, py);
+            s->setVel(vx, vy);
+            s->setVivo(vivo);
+            s->setVidas(vidas);
+            s->setNivelMaldade(nivel);
+            s->setInvulneravel(inv);
+            s->setParado(parado);
+            incluirInimigo(s);
+        }
+        else if (tipoLido == "Arbusto") {
+            bool danoso; float lentidao;
+            arquivo >> danoso >> lentidao;
+
+            Arbusto* a = new Arbusto(sf::Vector2f(px, py), sf::Vector2f(29.0f, 17.0f));
+            a->setPos(px, py);
+            a->setVivo(vivo);
+            incluirObstaculo(a);
+        }
+        else {
+            std::string lixo;
+            std::getline(arquivo, lixo);
+        }
+    }
+}
+
+
 void FaseUm::desenhar() {
 	bgFase->executar();
 	chaoFase->executar();

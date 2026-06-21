@@ -118,6 +118,62 @@ void Fase::limparListEnts() {
 	list_ents.limpar();
 }
 
+bool Fase::carregarEntidadeemComum(const std::string& tipoLido, int id, float px, float py, float vx, float vy, bool vivo,std::ifstream& arquivo, Jogador* j1, Jogador* j2, bool& j2Ativo) {
+ if (tipoLido == "Jogador") {
+        int vidas, num_jog, pontos;
+        bool pulavel, atacando, podeAtacar, lento, invulneravel, olhandoEsquerda;
+        std::string nomeLido;
+
+        arquivo >> vidas;
+        arquivo >> nomeLido >> num_jog >> pontos >> pulavel >> atacando >> podeAtacar >> lento >> invulneravel >> olhandoEsquerda;
+
+        Jogador* j = (num_jog == 1) ? j1 : j2;
+        if (j) {
+            j->setPos(px, py);
+            j->setVel(vx, vy);
+            j->setVivo(vivo);
+            j->setVidas(vidas);
+            j->setNome(nomeLido);
+            j->setPontos(pontos);
+            j->setPulavel(pulavel);
+            j->setLent(lento);
+            incluirEntidade(j);
+
+            if (num_jog == 2) { j2Ativo = true; }
+        }
+        return true;
+    }
+    else if (tipoLido == "Drone") {
+        int vidas, nivel; bool inv, emKnock;
+        arquivo >> vidas >> nivel >> inv >> emKnock;
+
+        Drone* d = new Drone(j1, j2, "Texturas/Drone/drone_somente.png");
+        d->setPos(px, py);
+        d->setVel(vx, vy);
+        d->setVivo(vivo);
+        d->setVidas(vidas);
+        d->setNivelMaldade(nivel);
+        d->setInvulneravel(inv);
+        d->setEmKnockback(emKnock);
+        incluirInimigo(d);
+        return true;
+    }
+    else if (tipoLido == "Plataforma") {
+        bool danoso; int altura;
+        arquivo >> danoso >> altura;
+
+        Plataforma* p = new Plataforma(sf::Vector2f(px, py), sf::Vector2f(300.0f, 42.0f));
+        p->setPos(px, py);
+        p->setVivo(vivo);
+        incluirObstaculo(p);
+        return true;
+    }
+
+    return false;
+}
+
+
+
 void Fase::salvarFase() {
 
 	std::remove("save.txt");

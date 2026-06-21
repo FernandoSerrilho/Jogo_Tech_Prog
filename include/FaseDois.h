@@ -26,6 +26,8 @@ namespace Fases {
 		~FaseDois();
 		void inicializar(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
 		void executar();
+		void carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,
+				Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo);
 		void desenhar();
 		bool statusInimigos();
 	};

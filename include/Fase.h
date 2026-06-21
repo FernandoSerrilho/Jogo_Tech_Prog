@@ -43,5 +43,9 @@ namespace Entidades {
 			void limparListEnts();
 			virtual void executar() = 0;
 			void salvarFase();
+			bool carregarEntidadeemComum(const std::string& tipoLido, int id, float px ,float py , float vx, float vy, bool vivo ,std::ifstream& arquivo,
+				 Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo);
+			virtual void carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,
+				Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) = 0;
 		};
 	}

@@ -104,10 +104,6 @@ void Jogo::executar() {
 void Jogo::executarf1() {
     GG->limpaJanela();
     f1->executar();
-    //if (j1->getVivo()) 
-       // j1->executar();
- //   if(j2Ativo && j2)
-     //   j2->executar();
     if (!j2Ativo)
         j2->setVivo(false);
     GG->displayJanela();
@@ -155,7 +151,13 @@ void Jogo::carregarJogo() {
     if (faseID == 1 ) { faseatual = 1; faseativa = f1;}
     else if (faseID == 2) {faseatual = 2; faseativa = f2;}
 
-    if (!faseativa) { arquivoSave.close(); return;}
+    if (faseativa) {
+        faseativa->carregarFase(arquivoSave, j1 , j2 , j2Ativo);
+    }
+
+    arquivoSave.close();
+
+  /*   if (!faseativa) { arquivoSave.close(); return;}
 
         faseativa->limparGC();
         faseativa->limparListEnts();
@@ -324,5 +326,5 @@ void Jogo::carregarJogo() {
         }
 
         arquivoSave.close();
-
+ */
  }
