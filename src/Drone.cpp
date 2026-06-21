@@ -3,7 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include <cmath>
 
-using namespace Entidades::Personagens::Inimigos;
+using namespace Entidades::EntidadesPertinentes::Personagens;
+using namespace Inimigos;
 
 Drone::Drone(Jogador* p,Jogador* p1, const char* caminhoTextura) : Inimigo(), emKnockback(false), vetorKnockback(sf::Vector2f()){
     setFigura(sf::Vector2f(50.0f, 40.0f));
@@ -14,6 +15,7 @@ Drone::Drone(Jogador* p,Jogador* p1, const char* caminhoTextura) : Inimigo(), em
     setVel(0.2f * (float)nivel_maldade + 0.5f, 0.2f * (float)nivel_maldade + 0.5f);
     figura.setPosition(pos);
     contraGravidade = -0.3f;
+    pontosDados = num_vidas + nivel_maldade;
 }
 Drone::~Drone() { emKnockback = false; pJ[0] = nullptr;pJ[1] = nullptr; }
 
@@ -21,6 +23,8 @@ void Drone::setJog(Jogador*j,int n) {
 
     pJ[n] = j;
 }
+
+void Drone::setEmKnockback(bool k) { emKnockback = k; }
 
 void Drone::danificar(Jogador* p) {
 
@@ -127,5 +131,21 @@ void Drone::mover() {
 
     setPos(pos.x, pos.y);
     figura.setPosition(pos);
+
+}
+
+void Drone::salvar() {
+
+    if (buffer) {
+		buffer << "Drone" << " ";
+	}
+
+    salvarDataBuffer();
+
+    if (buffer) {
+
+        buffer << emKnockback << "\n";
+    }
+
 
 }

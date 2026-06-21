@@ -1,8 +1,10 @@
 #include "Fase.h"
 
 namespace Entidades {
-	namespace Personagens{
-		class Jogador;
+	namespace EntidadesPertinentes {
+		namespace Personagens {
+			class Jogador;
+		}
 	}
 }
 
@@ -12,7 +14,7 @@ namespace Fases {
 		const int maxTanques;
 		const int maxMinas;
 	protected:
-		void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
+		void criarInimigos(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
 		void criarTanques();
 		void criarProjeteis();
 		void gerenciarProjeteis();
@@ -20,10 +22,12 @@ namespace Fases {
 		void criarObstaculos();
 		void criarCenario();
 	public:
-		FaseDois(Entidades::Personagens::Jogador* j1=nullptr, Entidades::Personagens::Jogador* j2 = nullptr);
+		FaseDois(Entidades::EntidadesPertinentes::Personagens::Jogador* j1=nullptr, Entidades::EntidadesPertinentes::Personagens::Jogador* j2 = nullptr);
 		~FaseDois();
-		void inicializar(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
+		void inicializar(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
 		void executar();
+		void carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,
+				Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo);
 		void desenhar();
 		bool statusInimigos();
 	};

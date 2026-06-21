@@ -2,23 +2,25 @@
 #include "EntidadePertinente.h"
 
 namespace Entidades {
-    namespace Personagens {
-        class Personagem : public EntidadePertinente {
+    namespace EntidadesPertinentes{
+        namespace Personagens {
+            class Personagem : public EntidadePertinente {
 
-        protected:
-            int num_vidas;
-        public:
-            Personagem(int vidas = -1);
-            ~Personagem();
+            protected:
+                int num_vidas;
+            public:
+                Personagem(int vidas = -1);
+                ~Personagem();
 
-            void setVidas(int v);
-            int getVidas();
-            //void salvarDataBuffer();          TODO
-            virtual void executar() = 0;
-            //virtual void salvar() = 0;        TODO
-            virtual void mover() = 0;
+                void setVidas(int v);
+                int getVidas();
+                void salvarDataBuffer();
+                virtual void executar() = 0;
+                virtual void salvar() = 0;
+                virtual void mover() = 0;
 
-        };
+            };
+        }
 
     }
 }

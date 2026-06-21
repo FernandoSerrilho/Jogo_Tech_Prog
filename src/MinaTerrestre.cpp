@@ -2,7 +2,7 @@
 #include "Inimigo.h"
 #include "Jogador.h"
 
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
@@ -13,6 +13,7 @@ MinaTerrestre::MinaTerrestre(sf::Vector2f pos, sf::Vector2f tam) :Obstaculo(), t
 	setFigura(tam);
 	figura.setPosition(pos);
 	setPos(pos.x, pos.y);
+	setVel(0.0f,0.0f);
 	explosao.setSize(sf::Vector2f(raio,raio));
 	explosao.setPosition(pos);
 	setText("Texturas/Mina/MinaTerrestre.png", figura);
@@ -23,6 +24,10 @@ MinaTerrestre::~MinaTerrestre(){
 	tempoAtivo = false;
 	raio = -1;
 }
+
+void MinaTerrestre::setraio(float r) {raio = r;}
+
+void MinaTerrestre::setTempoAtivo(bool a) { tempoAtivo = a; }
 
 void MinaTerrestre::obstaculizar(Jogador* J){
 	if (!tempoAtivo) {
@@ -67,4 +72,18 @@ void MinaTerrestre::executar() {
 	}
 
 	gravitar();
+}
+
+void MinaTerrestre::salvar() {
+
+	if (buffer) {
+		buffer << "MinaTerrestre" << " ";
+	}
+
+	salvarDataBuffer();
+
+	if (buffer) {
+		buffer << tempoAtivacao << " " << raio << " " << tempoAtivo << "\n";
+	}
+
 }

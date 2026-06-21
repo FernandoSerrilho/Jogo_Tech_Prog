@@ -1,4 +1,5 @@
 #include "Coracao.h"
+using namespace Entidades;
 
 Coracao::Coracao(){}
 

@@ -1,8 +1,9 @@
 #include "Projetil.h"
 #include "Jogador.h"
 #include "Tanque.h"
+#include <iostream>
 
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 using namespace Inimigos;
 
@@ -72,3 +73,23 @@ void Projetil::executar() {
 
 }
 
+void Projetil::salvar() {
+
+    if (buffer) {
+		buffer << "Projetil" << " ";
+	}
+
+    salvarDataBuffer();
+
+    if (buffer) {
+        int idTq;
+        if (pTq != nullptr) {
+            idTq = pTq->getID();
+        }
+        else 
+            idTq = -1;
+        buffer << ativo << " " << idTq << "\n";
+    }
+
+
+}

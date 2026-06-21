@@ -1,8 +1,10 @@
 #include "Chao.h"
+#include "EntidadePertinente.h"
 #include "Jogador.h"
 
 using namespace Entidades;
-using namespace Entidades::Personagens;
+using namespace Entidades::EntidadesPertinentes;
+using namespace Personagens;
 
 Chao::Chao(const char* caminhoTextura):Entidade() {
 	sf::Vector2f tam(1920.0f, 50.0f);
@@ -20,7 +22,7 @@ void Chao::executar() {
 
 void Chao::colidir(EntidadePertinente* pE) {
 
-	sf::FloatRect boundsc = getBounds();
+	sf::FloatRect boundsc = this->getBounds();
 	sf::FloatRect boundse = pE->getBounds();
 
 	if (boundse.top < boundsc.top + boundsc.height && boundse.top + boundse.height > boundsc.top) {

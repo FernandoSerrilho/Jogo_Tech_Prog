@@ -2,6 +2,7 @@
 
 #include "Entidade.h"
 
+namespace Entidades{
 	class Coracao : public Entidade {
 	private:
 	public:
@@ -10,3 +11,4 @@
 		~Coracao();
 		void executar();
 	};
+}

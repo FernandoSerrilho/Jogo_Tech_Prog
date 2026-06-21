@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 using namespace Inimigos;
 using namespace Obstaculos;
@@ -17,6 +17,7 @@ Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), altura
     tam.y = (float)altura;
     setFigura(tam);
     setPos(pos.x,pos.y);
+    setVel(0.0f,0.0f);
     figura.setPosition(pos);
     setText("Texturas/Grama/QuadradoPlat.png", figura);
     contraGravidade = -0.3f;
@@ -31,7 +32,6 @@ void Plataforma::obstaculizar(Jogador* j1) {
     sf::FloatRect boundsj = j1->getBounds();
     sf::FloatRect boundsp = getBounds();
 
-    //colisao com o topo da plataforma
     if (boundsj.top + boundsj.height <= (boundsp.top + 10.0f)) {
         j1->setPos(pos.x, boundsp.top - boundsj.height);
 
@@ -39,17 +39,14 @@ void Plataforma::obstaculizar(Jogador* j1) {
 
         j1->setPulavel(true);
     }
-    //colisao por baixo da plataforma
     else if (boundsj.top >= boundsp.top + boundsp.height - 10.0f) {
         j1->setPos(pos.x, boundsp.top + boundsp.height);
 
         j1->setVel(j1->getVel().x, 0.0f);
     }
-    //colisao pela esquerda
     else if (boundsj.left + boundsj.width <= boundsp.left + 10.0f) {
         j1->setPos(boundsp.left - boundsj.width, pos.y);
     }
-    //colisao pela direita
     else {
         j1->setPos(boundsp.left + boundsp.width, pos.y);
 
@@ -91,4 +88,18 @@ void Plataforma::executar() {
     gravitar();
     setPos(posP.x,posP.y);
     desenhar(figura.getPosition());
+}
+
+void Plataforma::salvar() {
+
+    if (buffer) {
+		buffer << "Plataforma" << " ";
+	}
+
+    salvarDataBuffer();
+
+    if (buffer) {
+        buffer << altura << "\n";
+    }
+
 }

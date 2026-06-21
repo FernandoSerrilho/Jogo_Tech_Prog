@@ -1,6 +1,5 @@
+#include "Chao.h"        
 #include "Gerenciador_Colisoes.h"
-#include "Obstaculo.h"
-#include "Chao.h"
 #include "Inimigo.h"
 #include "Jogador.h"
 #include "Projetil.h"
@@ -10,7 +9,7 @@
 #include <iostream>
 
 using namespace Gerenciadores;
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 using namespace Obstaculos;
 using namespace Inimigos;
@@ -46,7 +45,7 @@ void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* pO) {
 
 }
 
-void Gerenciador_Colisoes::setChao(Chao* pC) {
+void Gerenciador_Colisoes::setChao(Entidades::Chao* pC) {
 
     pChao = pC;
 
@@ -94,7 +93,7 @@ void Gerenciador_Colisoes::tratarColisoesPlataformaInimigos() {
     }
 }
 
-const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) {
+const bool Gerenciador_Colisoes::verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2) {
 
     if (pe1 != NULL && pe2 != NULL) {
 

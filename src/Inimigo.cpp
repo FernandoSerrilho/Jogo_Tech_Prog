@@ -2,13 +2,11 @@
 #include "Jogador.h"
 #include <Windows.h>
 
-using namespace Entidades::Personagens::Inimigos;
+using namespace Entidades::EntidadesPertinentes::Personagens::Inimigos;
 
 
-Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false){
-
+Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false),pontosDados(0){
     nivel_maldade = rand()%10 + 1;
-
 }
 Inimigo::~Inimigo() { nivel_maldade = -1; invulneravel = false; }
 
@@ -18,7 +16,18 @@ void Inimigo::sementear() {
     srand((unsigned) time(&t)); rand();
 
 }
-
+void Inimigo::setNivelMaldade(int n) { nivel_maldade = n; }
 bool Inimigo::getInvulneravel() const { return invulneravel; }
 void Inimigo::setInvulneravel(bool inv) { invulneravel = inv; }
 sf::Clock& Inimigo::getRelogioInv() { return relogioinv; }
+int Inimigo::getPontos() { return pontosDados; }
+
+
+void Inimigo::salvarDataBuffer() {
+
+    Personagem::salvarDataBuffer();
+
+    if (buffer) {
+        buffer << nivel_maldade << " " << invulneravel << " ";
+    }
+}

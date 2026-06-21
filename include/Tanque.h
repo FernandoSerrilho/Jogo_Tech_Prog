@@ -4,33 +4,36 @@
 
 
 namespace Entidades {
-        class Projetil;
-    namespace Personagens {
-            class Jogador;
-        namespace Inimigos {
-            class Tanque : public Inimigo {
+        namespace EntidadesPertinentes{
+            class Projetil;
+            namespace Personagens {
+                class Jogador;
+                namespace Inimigos {
+                    class Tanque : public Inimigo {
 
-                private: 
-                    std::vector<Projetil*> balas;
-                    sf::Clock relogiocooldown;
-                    bool podeAtirar;
-                    float cooldown;
-                public:
-                    Tanque(const char* caminhoTextura = "");
-                    ~Tanque();
-                    
-                    bool getpodeAtirar();
-                    void setPodeAtirar(bool p);
+                    private:
+                        std::vector<Entidades::EntidadesPertinentes::Projetil*> balas;
+                        sf::Clock relogiocooldown;
+                        bool podeAtirar;
+                        float cooldown;
+                    public:
+                        Tanque(const char* caminhoTextura = "");
+                        ~Tanque();
 
-                    void resetClock();
-                    void adicionarBala(Projetil* b);
-                    void atirar();
+                        bool getpodeAtirar();
+                        void setPodeAtirar(bool p);
 
-                    void danificar(Jogador* pJ);     
-                    void mover();
-                    void executar();
+                        void resetClock();
+                        void adicionarBala(Entidades::EntidadesPertinentes::Projetil* b);
+                        void atirar();
 
-            };
-        }
+                        void danificar(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
+                        void mover();
+                        void executar();
+                        void salvar();
+
+                    };
+                }
+            }
     }
 }

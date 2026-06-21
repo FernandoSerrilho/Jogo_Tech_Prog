@@ -7,10 +7,11 @@
 #include <iostream>
 
 using namespace Entidades;
-using namespace Personagens;
+using namespace EntidadesPertinentes::Personagens;
+//using namespace Personagens;
 using namespace Inimigos;
 
-Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), pontos(0), atacando(false), podeAtacar(true),
+Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), num_jog(n), pontos(0), atacando(false), podeAtacar(true),
 modifiVelo(1.0f),lento(false),velBase(5.0f),pulavel(false), invulneravel(false) , 
 olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
     setFigura(sf::Vector2f(58.0f, 75.0f));
@@ -19,7 +20,7 @@ olhandoEsquerda(false), temp_inv(1.5f),faca(new Faca(this)){
     figura.setPosition(pos);
     setVidas(3);
     float inicio;
-    if (n == 2) {
+    if (num_jog == 2) {
         keys[0] = sf::Keyboard::Enter;
         keys[1] = sf::Keyboard::Left;
         keys[2] = sf::Keyboard::Right;
@@ -93,6 +94,7 @@ void Jogador::danificar(Inimigo* pIn) {
         pIn->getRelogioInv().restart();
 
         if (v <= 0) {
+            pontos += pIn->getPontos();
             pIn->setVivo(false);
             pIn->setPos(2500.0f, 2500.0f);
             return;
@@ -190,3 +192,22 @@ void Jogador::mover() {
     figura.setPosition(pos);
     modifiVelo = 1.0f;
 }
+
+void Jogador::salvar() {
+
+    if (buffer) {
+		buffer << "Jogador" << " ";
+	}
+
+    salvarDataBuffer();
+
+    if (buffer) {
+        buffer << nome << " " << num_jog << " " << pontos << " " << pulavel << " " << 
+        atacando << " " << podeAtacar << " " << lento << " " << invulneravel << " " << olhandoEsquerda <<  "\n"; 
+    }
+
+}
+
+int Jogador::getPontos() { return pontos; }
+
+void Jogador::setPontos(int n) { pontos = n; }

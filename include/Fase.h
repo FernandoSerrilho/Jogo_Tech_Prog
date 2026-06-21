@@ -2,36 +2,50 @@
 #include "Ente.h"
 #include "ListaEntidades.h" 
 #include "Gerenciador_Colisoes.h"
-
-class BackGround;
-class Chao;
+#include "Gerenciador_Salvamento.h"
 
 namespace Entidades {
-	namespace Personagens{
-		class Jogador;
+	class BackGround;
+	class Chao;
+	//class Entidade;
+	namespace EntidadesPertinentes {
+			class Projetil;
+		namespace Personagens {
+			class Jogador;
+		}
 	}
-	class EntidadePertinente;
 }
 
-namespace Fases {
-	class Fase : public Ente {
-	protected:
-		Listas::ListaEntidades list_ents;
-		Gerenciadores::Gerenciador_Colisoes GC;
-		BackGround* bgFase;
-		Chao* chaoFase;
-		const int maxDrones;
-		const int maxPlataformas;
-		void criarDrones(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
-		void criarPlataformas();
-		virtual void criarCenario() = 0;
-		virtual void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2) = 0;
-		virtual void criarObstaculos() = 0;
-	public:
-		Fase(Entidades::Personagens::Jogador* j1 = nullptr, Entidades::Personagens::Jogador* j2 = nullptr);
-		~Fase();
-		void limparGC();
-		void limparListEnts();
-		virtual void executar() = 0;
-	};
-}
+	namespace Fases {
+		class Fase : public Ente {
+		protected:
+			Listas::ListaEntidades list_ents;
+			Gerenciadores::Gerenciador_Colisoes GC;
+			Gerenciadores::Gerenciador_Salvamento GS;
+			Entidades::BackGround* bgFase;
+			Entidades::Chao* chaoFase;
+			int num_fase;
+			const int maxDrones;
+			const int maxPlataformas;
+			void criarDrones(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
+			void criarPlataformas();
+			virtual void criarCenario() = 0;
+			virtual void criarInimigos(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2) = 0;
+			virtual void criarObstaculos() = 0;
+		public:
+			Fase(Entidades::EntidadesPertinentes::Personagens::Jogador* j1 = nullptr, Entidades::EntidadesPertinentes::Personagens::Jogador* j2 = nullptr);
+			~Fase();
+			void incluirEntidade(Entidades::Entidade* e);
+			void incluirInimigo(Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo* i);
+    		void incluirObstaculo(Entidades::EntidadesPertinentes::Obstaculos::Obstaculo* o);
+			void incluirProjetil(Entidades::EntidadesPertinentes::Projetil* p);
+			void limparGC();
+			void limparListEnts();
+			virtual void executar() = 0;
+			void salvarFase();
+			bool carregarEntidadeemComum(const std::string& tipoLido, int id, float px ,float py , float vx, float vy, bool vivo ,std::ifstream& arquivo,
+				 Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo);
+			virtual void carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,
+				Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) = 0;
+		};
+	}

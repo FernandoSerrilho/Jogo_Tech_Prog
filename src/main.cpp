@@ -2,7 +2,7 @@
 #include "Inimigo.h"
 
 using namespace Gerenciadores;
-using namespace Entidades::Personagens::Inimigos;
+using namespace Entidades::EntidadesPertinentes::Personagens::Inimigos;
 
 int main() {
 

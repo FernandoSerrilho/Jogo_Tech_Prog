@@ -1,4 +1,5 @@
 #include "FaseDois.h"
+#include "Jogador.h"
 #include "Chao.h"
 #include "BackGround.h"
 #include "MinaTerrestre.h"
@@ -10,12 +11,13 @@
 using namespace Gerenciadores;
 using namespace Listas;
 using namespace Fases;
-using namespace Entidades;
+using namespace Entidades::EntidadesPertinentes;
 using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
 
 FaseDois::FaseDois(Jogador* j1,Jogador* j2):Fase(j1,j2),maxTanques(rand() % 4 + 3),maxMinas(rand() % 3 + 3) {
+	num_fase = 2;
 	limparGC();
 	limparListEnts();
 	inicializar(j1,j2);
@@ -50,7 +52,7 @@ void FaseDois::criarTanques() {
         t1->setPos(p.x, p.y);
 
         GC.incluirInimigo(t1);
-        list_ents.incluir(t1);
+        incluirEntidade(t1);
     }
 
 }
@@ -62,7 +64,7 @@ void FaseDois::criarProjeteis() {
 
         	b1->setAtivo(false); 
         	GC.IncluirProjetil(b1);
-        	list_ents.incluir(b1);
+        	incluirEntidade(b1);
     	}
 
 	
@@ -70,22 +72,22 @@ void FaseDois::criarProjeteis() {
 
 void FaseDois::gerenciarProjeteis() {
 
-	Lista<Entidade>::Iterador it = list_ents.begin();
+	Lista<Entidades::Entidade>::Iterador it = list_ents.begin();
 
 	while (it != list_ents.end()) {
-		Entidade* e = *it;
+		Entidades::Entidade* e = *it;
 
 		if (e && e->getVivo()) {
 			Tanque* t1 = dynamic_cast<Tanque*>(e);
 
 			if (t1 && t1->getpodeAtirar()) {
 
-				Lista<Entidade>::Iterador itBala = list_ents.begin();
+				Lista<Entidades::Entidade>::Iterador itBala = list_ents.begin();
 				bool achouAtiva = false;
 
 				while (itBala != list_ents.end() && !achouAtiva) {
 
-					Entidade* eBala = *itBala;
+					Entidades::Entidade* eBala = *itBala;
 
 					if (eBala) {
 						Projetil* b1 = dynamic_cast<Projetil*>(eBala);
@@ -112,7 +114,7 @@ void FaseDois::gerenciarProjeteis() {
 }
 
 void FaseDois::criarMinasTerrestres() {
-	Entidades::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
 
 	for (int i = 0;i < maxMinas;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
@@ -131,7 +133,7 @@ void FaseDois::criarMinasTerrestres() {
 
 		MinaTerrestre* mT = new MinaTerrestre(sf::Vector2f(p.x, p.y), sf::Vector2f(29.0f, 10.0f));
 		GC.incluirObstaculo(mT);
-		list_ents.incluir(mT);
+		incluirEntidade(mT);
 	}
 }
 
@@ -142,9 +144,9 @@ void FaseDois::criarObstaculos() {
 }
 
 void FaseDois::criarCenario() {
-	BackGround* b = new BackGround("Texturas/BackGround/BackgroundF2.png");
+	Entidades::BackGround* b = new Entidades::BackGround("Texturas/BackGround/BackgroundF2.png");
 	bgFase = b;
-	Chao* c = new Chao("Texturas/Grama/Chao2.png");
+	Entidades::Chao* c = new Entidades::Chao("Texturas/Grama/Chao2.png");
 	GC.setChao(c);
 	chaoFase = c;
 }
@@ -158,10 +160,100 @@ void FaseDois::executar() {
 }
 
 void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
+	incluirEntidade(j1);
+	if (j2 && j2->getVivo()) {incluirEntidade(j2);} 
 	criarCenario();
 	criarObstaculos();
 	criarInimigos(j1,j2);
 	criarProjeteis();
+}
+
+void FaseDois::carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) {
+ 	limparGC();
+    limparListEnts();
+
+    std::vector<int> idsTanquesSave;
+    std::vector<Tanque*> tanquesNovos;
+
+    std::vector<int> idsTanqueDaBala;
+    std::vector<Projetil*> balasPendentes;
+
+    std::string tipoLido;
+    while (arquivo >> tipoLido) {
+        int id; float px, py, vx, vy; bool vivo;
+        arquivo >> id >> px >> py >> vx >> vy >> vivo;
+
+        if (carregarEntidadeemComum(tipoLido, id, px, py, vx, vy, vivo, arquivo, j1, j2, j2Ativo)) {
+            continue;
+        }
+        else if (tipoLido == "Tanque") {
+            int vidas, nivel; bool inv, podeAtirar; float cooldown;
+            arquivo >> vidas >> nivel >> inv >> podeAtirar >> cooldown;
+
+            Tanque* t = new Tanque("Texturas/Tanque/tanque.png");
+            t->setPos(px, py);
+            t->setVel(vx, vy);
+            t->setVivo(vivo);
+            t->setVidas(vidas);
+            t->setNivelMaldade(nivel);
+            t->setInvulneravel(inv);
+            t->setPodeAtirar(podeAtirar);
+            incluirInimigo(t);
+
+            idsTanquesSave.push_back(id);
+            tanquesNovos.push_back(t);
+        }
+        else if (tipoLido == "MinaTerrestre") {
+            bool danoso; float tempoAtivacao, raio; bool tempoAtivo;
+            arquivo >> danoso >> tempoAtivacao >> raio >> tempoAtivo;
+
+            MinaTerrestre* m = new MinaTerrestre(sf::Vector2f(px, py), sf::Vector2f(29.0f, 10.0f));
+            m->setPos(px, py);
+            m->setVivo(vivo);
+            m->setTempoAtivo(tempoAtivo);
+            m->setraio(raio);
+            incluirObstaculo(m);
+        }
+        else if (tipoLido == "Projetil") {
+            bool ativo; int idTanqueSalvo;
+            arquivo >> ativo >> idTanqueSalvo;
+
+            Projetil* b = new Projetil(sf::Vector2f(px, py), "Texturas/Tanque/Bala.png");
+            b->setPos(px, py);
+            b->setVel(vx, vy);
+            b->setVivo(vivo);
+            b->setAtivo(ativo);
+            incluirProjetil(b);
+
+            if (idTanqueSalvo != -1) {
+                idsTanqueDaBala.push_back(idTanqueSalvo);
+                balasPendentes.push_back(b);
+            }
+        }
+        else {
+            std::string lixo;
+            std::getline(arquivo, lixo);
+        }
+    }
+
+    for (size_t i = 0; i < balasPendentes.size(); i++) {
+        int idProcurado = idsTanqueDaBala[i];
+        Tanque* tanqueEncontrado = nullptr;
+
+        for (size_t j = 0; j < idsTanquesSave.size(); j++) {
+            if (idsTanquesSave[j] == idProcurado) {
+                tanqueEncontrado = tanquesNovos[j];
+                break;
+            }
+        }
+
+        if (tanqueEncontrado) {
+            tanqueEncontrado->setPodeAtirar(false);
+            tanqueEncontrado->adicionarBala(balasPendentes[i]);
+            balasPendentes[i]->setTanque(tanqueEncontrado);
+        }
+    }
+
 }
 
 void FaseDois::desenhar() {
