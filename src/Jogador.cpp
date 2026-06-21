@@ -195,6 +195,10 @@ void Jogador::mover() {
 
 void Jogador::salvar() {
 
+    if (buffer) {
+		buffer << "Jogador" << " ";
+	}
+
     salvarDataBuffer();
 
     if (buffer) {

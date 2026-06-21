@@ -2,6 +2,7 @@
 #include "Drone.h"
 #include "Plataforma.h"
 #include "Jogador.h"
+#include "Projetil.h"
 #include "Entidade.h"
 #include <iostream>
 #include <cstdio>
@@ -22,6 +23,27 @@ Fase::~Fase() { bgFase = nullptr; chaoFase = nullptr; }
 
 void Fase::incluirEntidade(Entidade* e) {
 	list_ents.incluir(e);
+}
+
+void Fase::incluirInimigo(Inimigo* i) {
+    if (i) {
+        GC.incluirInimigo(i);
+        incluirEntidade(i);
+    }
+}
+
+void Fase::incluirObstaculo(Obstaculo* o) {
+    if (o) {
+        GC.incluirObstaculo(o);
+        incluirEntidade(o);
+    }
+}
+
+void Fase::incluirProjetil(Projetil* p) {
+    if (p) {
+        GC.IncluirProjetil(p);
+        incluirEntidade(p);
+    }
 }
 
 void Fase::criarDrones(Jogador* j1,Jogador* j2) {
@@ -53,7 +75,6 @@ void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 		GC.incluirInimigo(d1);
 		incluirEntidade(d1);
 
-		std::cout <<"drone id:" << d1->getID() << std::endl;
 	}
 }
 

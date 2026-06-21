@@ -52,6 +52,7 @@ void Tanque::danificar(Jogador* pJ) {
     VidasTanque++;
     setVidas(VidasTanque);
 
+
     pJ->initInv();
 }
 
@@ -108,6 +109,10 @@ void Tanque::executar() {
 }
 
 void Tanque::salvar() {
+
+    if (buffer) {
+		buffer << "Tanque" << " ";
+	}
 
     salvarDataBuffer();
 

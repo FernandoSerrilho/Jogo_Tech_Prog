@@ -2,6 +2,13 @@
 #include "Menu.h"
 #include "Gerenciador_Grafico.h"
 #include "Jogador.h"
+#include "Drone.h"
+#include "Arbusto.h"
+#include "Plataforma.h"
+#include "Tanque.h"
+#include "Projetil.h"
+#include "Soldado.h"
+#include "MinaTerrestre.h"
 #include "FaseUm.h"
 #include "FaseDois.h"
 
@@ -9,6 +16,8 @@ using namespace Fases;
 using namespace Gerenciadores;
 using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
+using namespace Personagens::Inimigos;
+using namespace Obstaculos;
 
 
 Jogo::Jogo() :GG(GG->getGerenciadorG()), j1(new Jogador("Texturas/Jogador/Soldado.png", "Texturas/Jogador/CoracaoVermelho.png",1)),
@@ -95,10 +104,10 @@ void Jogo::executar() {
 void Jogo::executarf1() {
     GG->limpaJanela();
     f1->executar();
-    if (j1->getVivo()) 
-        //j1->executar();
-    if(j2Ativo && j2)
-        //j2->executar();
+    //if (j1->getVivo()) 
+       // j1->executar();
+ //   if(j2Ativo && j2)
+     //   j2->executar();
     if (!j2Ativo)
         j2->setVivo(false);
     GG->displayJanela();
@@ -107,10 +116,6 @@ void Jogo::executarf1() {
 void Jogo::executarf2() {
     GG->limpaJanela();
     f2->executar();
-    if (j1->getVivo()) 
-        //j1->executar();
-    if(j2Ativo && j2)
-        //j2->executar();
     if (!j2Ativo)
         j2->setVivo(false);
     GG->displayJanela();
@@ -118,22 +123,10 @@ void Jogo::executarf2() {
 
 void Jogo::desenharf1() {
     f1->desenhar();
-    if(j1->getVivo())
-        j1->desenhar(j1->getPos());
-    if (j2Ativo && j2) {
-        if (j2->getVivo())
-            j2->desenhar(j2->getPos());
-    }
 }
 
 void Jogo::desenharf2() {
     f2->desenhar();
-    if (j1->getVivo())
-        j1->desenhar(j1->getPos());
-    if (j2Ativo && j2) {
-        if (j2->getVivo())
-            j2->desenhar(j2->getPos());
-    }
 }
 
 void Jogo::salvarJogo() {
@@ -147,7 +140,7 @@ void Jogo::salvarJogo() {
 }
 
 void Jogo::carregarJogo() {
-/*    std::ifstream arquivoSave("save.txt");
+    std::ifstream arquivoSave("save.txt");
     if (!arquivoSave.is_open()) {
         std:: cerr << "Sem save encontrado \n";
         return;
@@ -162,48 +155,174 @@ void Jogo::carregarJogo() {
     if (faseID == 1 ) { faseatual = 1; faseativa = f1;}
     else if (faseID == 2) {faseatual = 2; faseativa = f2;}
 
-    if (faseativa) {
+    if (!faseativa) { arquivoSave.close(); return;}
+
+        faseativa->limparGC();
         faseativa->limparListEnts();
 
-        int id;
+        std::vector<int> idsTanquesSave;
+        std::vector<Tanque*> tanquesNovos;
 
-        while (arquivoSave >> id) {
+        std::vector<int> idsTanqueDaBala;
+        std::vector<Projetil*> balasPendentes;
+
+        std::string tipoLido;
+
+        while (arquivoSave >> tipoLido) {
+            int id; 
             float px, py , vx , vy;
             bool vivo;
 
-            arquivoSave>> px >> py >> vx >> vy >> vivo;
+            arquivoSave>> id >> px >> py >> vx >> vy >> vivo;
 
-            if (id == 0 || id == 5) {
-                Jogador* j = (id == 0) ? j1 : j2;
-
-                std::string nomeLido;
-                int num_jog, pontos;
+            if (tipoLido == "Jogador") {
+                int vidas, num_jog, pontos;
                 bool pulavel, atacando, podeAtacar, lento, invulneravel, olhandoEsquerda;
+                std::string nomeLido;
 
+                arquivoSave >> vidas;
                 arquivoSave >> nomeLido >> num_jog >> pontos >> pulavel >> atacando >> podeAtacar >> lento >> invulneravel >> olhandoEsquerda;
 
+                Jogador* j = (num_jog == 1) ? j1 : j2;
+
                 if (j) {
-
-                j->setPos(px, py);
-                j->setVel(vx, vy);
+                j->setPos(px, py); 
+                j->setVel(vx, vy);  
                 j->setVivo(vivo);
-
+                j->setVidas(vidas);
                 j->setNome(nomeLido);
-
+                j->setPontos(pontos);
+                j->setPulavel(pulavel);
+                j->setLent(lento);
                 faseativa->incluirEntidade(j);
-
+                
+                if (num_jog == 2) {j2Ativo = true;}
                 }
             }
 
-            else {}
+            else if (tipoLido == "Drone") {
+                int vidas, nivel; bool inv, emKnock;
+                arquivoSave >> vidas >> nivel >> inv >> emKnock;
+
+                Drone* d = new Drone(j1, j2, "Texturas/Drone/drone_somente.png");
+                d->setPos(px, py);
+                d->setVel(vx, vy);
+                d->setVivo(vivo);
+                d->setVidas(vidas);
+                d->setNivelMaldade(nivel);
+                d->setInvulneravel(inv);
+                d->setEmKnockback(emKnock);
+                faseativa->incluirInimigo(d);
+        }
+            else if (tipoLido == "Soldado") {
+                int vidas, nivel; bool inv, parado; float tempoParado;
+                arquivoSave >> vidas >> nivel >> inv >> parado >> tempoParado;
+
+                Soldado* s = new Soldado(sf::Vector2f(px, py), "Texturas/Soldado/SoldadoInimigo.png");
+                s->setPos(px, py);
+                s->setVel(vx, vy);
+                s->setVivo(vivo);
+                s->setVidas(vidas);
+                s->setNivelMaldade(nivel);
+                s->setInvulneravel(inv);
+                s->setParado(parado);
+                faseativa->incluirInimigo(s);
+        }
+            else if (tipoLido == "Tanque") {
+                int vidas, nivel; bool inv, podeAtirar; float cooldown;
+                arquivoSave >> vidas >> nivel >> inv >> podeAtirar >> cooldown;
+
+                Tanque* t = new Tanque("Texturas/Tanque/tanque.png");
+                t->setPos(px, py);
+                t->setVel(vx, vy);
+                t->setVivo(vivo);
+                t->setVidas(vidas);
+                t->setNivelMaldade(nivel);
+                t->setInvulneravel(inv);
+                t->setPodeAtirar(podeAtirar);
+                faseativa->incluirInimigo(t);
+
+               
+                idsTanquesSave.push_back(id);
+                tanquesNovos.push_back(t);
+        }
+        else if (tipoLido == "Projetil") {
+            bool ativo; int idTanqueSalvo;
+            arquivoSave >> ativo >> idTanqueSalvo;
+
+            Projetil* b = new Projetil(sf::Vector2f(px, py), "Texturas/Tanque/Bala.png");
+            b->setPos(px, py);
+            b->setVel(vx, vy);
+            b->setVivo(vivo);
+            b->setAtivo(ativo);
+            faseativa->incluirProjetil(b);
+
+            if (idTanqueSalvo != -1) {
+                idsTanqueDaBala.push_back(idTanqueSalvo);
+              balasPendentes.push_back(b);
+            }
+        }
+        else if (tipoLido == "Arbusto") {
+            bool danoso;
+            float lentidao;
+            arquivoSave >> danoso >> lentidao;
+
+            Arbusto* a = new Arbusto(sf::Vector2f(px, py), sf::Vector2f(29.0f, 17.0f));
+            a->setPos(px, py);
+            a->setVel(vx, vy);
+            a->setVivo(vivo);
+            faseativa->incluirObstaculo(a);
+        }
+        else if (tipoLido == "Plataforma") {
+            bool danoso; int altura;
+            arquivoSave >> danoso >> altura;
+
+            Plataforma* p = new Plataforma(sf::Vector2f(px, py), sf::Vector2f(300.0f, 42.0f));
+            p->setPos(px, py);
+            p->setVel(vx, vy);
+            p->setVivo(vivo);
+            faseativa->incluirObstaculo(p);
+        }
+        else if (tipoLido == "MinaTerrestre") {
+            bool danoso; float tempoAtivacao, raio; bool tempoAtivo;
+            arquivoSave >> danoso >> tempoAtivacao >> raio >> tempoAtivo;
+
+            MinaTerrestre* m = new MinaTerrestre(sf::Vector2f(px, py), sf::Vector2f(29.0f, 10.0f));
+            m->setPos(px, py);
+            m->setVel(vx, vy);
+            m->setVivo(vivo);
+            m->setTempoAtivo(tempoAtivo);
+            m->setraio(raio);
+            faseativa->incluirObstaculo(m);
+        }
+        else {
+            std::string lixo;
+            std::getline(arquivoSave, lixo);
+        }
+
+        for (size_t i = 0; i < balasPendentes.size(); i++) {
+        int idProcurado = idsTanqueDaBala[i];
+        Tanque* tanqueEncontrado = nullptr;
+
+        for (size_t j = 0; j < idsTanquesSave.size(); j++) {
+            if (idsTanquesSave[j] == idProcurado) {
+                tanqueEncontrado = tanquesNovos[j];
+                break;
+            }
+        }
+
+        if (tanqueEncontrado) {
+            tanqueEncontrado->setPodeAtirar(false); 
+            tanqueEncontrado->adicionarBala(balasPendentes[i]);
+            balasPendentes[i]->setTanque(tanqueEncontrado);
+        }
+}
+
+
+
 
         }
 
         arquivoSave.close();
 
-    }
-
-
-*/
-
-}
+ }

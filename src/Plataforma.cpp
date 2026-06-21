@@ -17,6 +17,7 @@ Plataforma::Plataforma(sf::Vector2f pos, sf::Vector2f tam) : Obstaculo(), altura
     tam.y = (float)altura;
     setFigura(tam);
     setPos(pos.x,pos.y);
+    setVel(0.0f,0.0f);
     figura.setPosition(pos);
     setText("Texturas/Grama/QuadradoPlat.png", figura);
     contraGravidade = -0.3f;
@@ -94,6 +95,10 @@ void Plataforma::executar() {
 }
 
 void Plataforma::salvar() {
+
+    if (buffer) {
+		buffer << "Plataforma" << " ";
+	}
 
     salvarDataBuffer();
 

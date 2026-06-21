@@ -21,6 +21,7 @@ namespace Entidades {
                     void salvarDataBuffer();
                     virtual void executar() = 0;
                     virtual void danificar(Jogador* p) = 0;
+                    void setNivelMaldade(int n);
                     bool getInvulneravel() const;
                     void setInvulneravel(bool inv);
                     sf::Clock& getRelogioInv();

@@ -27,6 +27,8 @@ namespace Entidades{
 				MinaTerrestre();
 				MinaTerrestre(sf::Vector2f pos, sf::Vector2f tam);
 				~MinaTerrestre();
+				void setraio(float r);
+				void setTempoAtivo(bool a);
 				void explodir(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
 				void obstaculizar(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
 				void executar();

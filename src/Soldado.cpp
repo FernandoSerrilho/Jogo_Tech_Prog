@@ -21,6 +21,8 @@ Soldado::Soldado(sf::Vector2f pos,const char* caminhoTextura) : Inimigo()
 
 Soldado::~Soldado() {}
 
+void Soldado::setParado(bool p) { parado = p; }
+
 void Soldado::danificar(Jogador* j) {
 	if (j->getInvulneravel()) return;
 	
@@ -73,7 +75,12 @@ void Soldado::executar() {
 }
 
 
+
 void Soldado::salvar() {
+
+	if (buffer) {
+		buffer << "Soldado" << " ";
+	}
 
 	salvarDataBuffer();
 

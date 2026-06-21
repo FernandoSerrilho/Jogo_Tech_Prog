@@ -16,7 +16,7 @@ void Inimigo::sementear() {
     srand((unsigned) time(&t)); rand();
 
 }
-
+void Inimigo::setNivelMaldade(int n) { nivel_maldade = n; }
 bool Inimigo::getInvulneravel() const { return invulneravel; }
 void Inimigo::setInvulneravel(bool inv) { invulneravel = inv; }
 sf::Clock& Inimigo::getRelogioInv() { return relogioinv; }
@@ -25,7 +25,7 @@ int Inimigo::getPontos() { return pontosDados; }
 
 void Inimigo::salvarDataBuffer() {
 
-    EntidadePertinente::salvarDataBuffer();
+    Personagem::salvarDataBuffer();
 
     if (buffer) {
         buffer << nivel_maldade << " " << invulneravel << " ";

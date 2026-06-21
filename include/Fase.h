@@ -9,6 +9,7 @@ namespace Entidades {
 	class Chao;
 	//class Entidade;
 	namespace EntidadesPertinentes {
+			class Projetil;
 		namespace Personagens {
 			class Jogador;
 		}
@@ -35,6 +36,9 @@ namespace Entidades {
 			Fase(Entidades::EntidadesPertinentes::Personagens::Jogador* j1 = nullptr, Entidades::EntidadesPertinentes::Personagens::Jogador* j2 = nullptr);
 			~Fase();
 			void incluirEntidade(Entidades::Entidade* e);
+			void incluirInimigo(Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo* i);
+    		void incluirObstaculo(Entidades::EntidadesPertinentes::Obstaculos::Obstaculo* o);
+			void incluirProjetil(Entidades::EntidadesPertinentes::Projetil* p);
 			void limparGC();
 			void limparListEnts();
 			virtual void executar() = 0;

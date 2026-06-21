@@ -18,6 +18,7 @@ namespace Entidades {
                     Drone(Jogador* p1 = NULL, Jogador* p2 = NULL, const char* caminhoTextura = "");
                     ~Drone();
                     void danificar(Jogador* p);
+                    void setEmKnockback(bool k);
                     void setJog(Jogador* p, int n);
                     void executar();
                     void mover();

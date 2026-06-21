@@ -1,5 +1,6 @@
 #include "ListaEntidades.h"
 #include "Entidade.h"
+#include "Jogador.h"
 #include <iostream>
 using namespace std;
 using namespace Listas;

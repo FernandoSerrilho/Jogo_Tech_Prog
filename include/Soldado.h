@@ -15,6 +15,7 @@ namespace Entidades {
 				public:
 					Soldado(sf::Vector2f pos, const char* caminhoTextura = "");
 					~Soldado();
+					void setParado(bool p);
 					void executar();
 					void danificar(Jogador* j);
 					void mover();

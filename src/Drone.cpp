@@ -24,6 +24,8 @@ void Drone::setJog(Jogador*j,int n) {
     pJ[n] = j;
 }
 
+void Drone::setEmKnockback(bool k) { emKnockback = k; }
+
 void Drone::danificar(Jogador* p) {
 
 
@@ -133,6 +135,10 @@ void Drone::mover() {
 }
 
 void Drone::salvar() {
+
+    if (buffer) {
+		buffer << "Drone" << " ";
+	}
 
     salvarDataBuffer();
 
