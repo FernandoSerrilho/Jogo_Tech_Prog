@@ -1,6 +1,6 @@
 #include "Obstaculo.h"
 
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Obstaculos;
 
 Obstaculo::Obstaculo(bool flag) : EntidadePertinente(), danoso(flag){}

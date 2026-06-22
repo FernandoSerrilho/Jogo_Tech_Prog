@@ -8,7 +8,7 @@
 using namespace Gerenciadores;
 using namespace Listas;
 using namespace Fases;
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
@@ -30,7 +30,7 @@ void FaseUm::criarInimigos(Jogador* j1,Jogador* j2) {
 }
 
 void FaseUm::criarSoldados() {
-	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	sf::Vector2f p(0.0f, 0.0f);
 
@@ -57,7 +57,7 @@ void FaseUm::criarSoldados() {
 }
 
 void FaseUm::criarArbustos() {
-	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	for (int i = 0;i < maxArbustos;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
@@ -109,7 +109,7 @@ void FaseUm::inicializar(Jogador* j1,Jogador* j2) {
 	criarInimigos(j1,j2);
 }
 
-void FaseUm::carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) {
+void FaseUm::carregarFase(std::ifstream& arquivo, Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2, bool& j2Ativo) {
 
 	limparGC();
     limparListEnts();

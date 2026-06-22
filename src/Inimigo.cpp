@@ -2,7 +2,7 @@
 #include "Jogador.h"
 #include <Windows.h>
 
-using namespace Entidades::EntidadesPertinentes::Personagens::Inimigos;
+using namespace Entidades::Personagens::Inimigos;
 
 
 Inimigo::Inimigo() : Personagem(), nivel_maldade(0) , invulneravel(false),pontosDados(0){

@@ -2,14 +2,13 @@
 #include "Inimigo.h"
 
 namespace Entidades {
-    namespace EntidadesPertinentes{
         namespace Personagens {
             class Jogador;
             namespace Inimigos {
                 class Drone : public Inimigo {
 
                 private:
-                    Entidades::EntidadesPertinentes::Personagens::Jogador* pJ[2];
+                    Entidades::Personagens::Jogador* pJ[2];
                     bool emKnockback;
                     sf::Clock relogioKnockback;
                     sf::Vector2f vetorKnockback;
@@ -27,5 +26,5 @@ namespace Entidades {
                 };
             }
         }
-    }
+    
 }

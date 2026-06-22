@@ -10,7 +10,6 @@
 using namespace Fases;
 using namespace Listas;
 using namespace Entidades;
-using namespace EntidadesPertinentes;
 using namespace Personagens;
 using namespace Obstaculos;
 using namespace Inimigos;

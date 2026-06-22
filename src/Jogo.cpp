@@ -14,9 +14,9 @@
 
 using namespace Fases;
 using namespace Gerenciadores;
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Personagens;
-using namespace Personagens::Inimigos;
+using namespace Inimigos;
 using namespace Obstaculos;
 
 

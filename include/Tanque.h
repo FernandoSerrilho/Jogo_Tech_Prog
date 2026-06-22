@@ -4,7 +4,6 @@
 
 
 namespace Entidades {
-        namespace EntidadesPertinentes{
             class Projetil;
             namespace Personagens {
                 class Jogador;
@@ -12,7 +11,7 @@ namespace Entidades {
                     class Tanque : public Inimigo {
 
                     private:
-                        std::vector<Entidades::EntidadesPertinentes::Projetil*> balas;
+                        std::vector<Entidades::Projetil*> balas;
                         sf::Clock relogiocooldown;
                         bool podeAtirar;
                         float cooldown;
@@ -24,10 +23,10 @@ namespace Entidades {
                         void setPodeAtirar(bool p);
 
                         void resetClock();
-                        void adicionarBala(Entidades::EntidadesPertinentes::Projetil* b);
+                        void adicionarBala(Entidades::Projetil* b);
                         void atirar();
 
-                        void danificar(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
+                        void danificar(Entidades::Personagens::Jogador* pJ);
                         void mover();
                         void executar();
                         void salvar();
@@ -35,5 +34,4 @@ namespace Entidades {
                     };
                 }
             }
-    }
 }

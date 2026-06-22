@@ -3,7 +3,6 @@
 #include "Inimigo.h"
 
 namespace Entidades {
-	namespace EntidadesPertinentes{
 		namespace Personagens {
 			namespace Inimigos {
 				class Soldado : public Inimigo {
@@ -23,5 +22,4 @@ namespace Entidades {
 				};
 			}
 		}
-	}
 }

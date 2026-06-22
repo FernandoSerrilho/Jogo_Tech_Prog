@@ -7,13 +7,10 @@
 namespace Entidades {
 	class BackGround;
 	class Chao;
-	//class Entidade;
-	namespace EntidadesPertinentes {
 			class Projetil;
 		namespace Personagens {
 			class Jogador;
 		}
-	}
 }
 
 	namespace Fases {
@@ -27,25 +24,24 @@ namespace Entidades {
 			int num_fase;
 			const int maxDrones;
 			const int maxPlataformas;
-			void criarDrones(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
+			void criarDrones(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2);
 			void criarPlataformas();
 			virtual void criarCenario() = 0;
-			virtual void criarInimigos(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2) = 0;
+			virtual void criarInimigos(Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2) = 0;
 			virtual void criarObstaculos() = 0;
 		public:
-			Fase(Entidades::EntidadesPertinentes::Personagens::Jogador* j1 = nullptr, Entidades::EntidadesPertinentes::Personagens::Jogador* j2 = nullptr);
+			Fase(Entidades::Personagens::Jogador* j1 = nullptr, Entidades::Personagens::Jogador* j2 = nullptr);
 			~Fase();
 			void incluirEntidade(Entidades::Entidade* e);
-			void incluirInimigo(Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo* i);
-    		void incluirObstaculo(Entidades::EntidadesPertinentes::Obstaculos::Obstaculo* o);
-			//void incluirProjetil(Entidades::EntidadesPertinentes::Projetil* p);
+			void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* i);
+    		void incluirObstaculo(Entidades::Obstaculos::Obstaculo* o);
 			void limparGC();
 			void limparListEnts();
 			virtual void executar() = 0;
 			void salvarFase();
 			bool carregarEntidadeemComum(const std::string& tipoLido, int id, float px ,float py , float vx, float vy, bool vivo ,std::ifstream& arquivo,
-				 Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo);
-			virtual void carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,
-				Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) = 0;
+				 Entidades::Personagens::Jogador* j1, Entidades::Personagens::Jogador* j2, bool& j2Ativo);
+			virtual void carregarFase(std::ifstream& arquivo, Entidades::Personagens::Jogador* j1,
+				Entidades::Personagens::Jogador* j2, bool& j2Ativo) = 0;
 		};
 	}

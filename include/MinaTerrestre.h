@@ -3,18 +3,15 @@
 #include "Obstaculo.h"
 
 namespace Entidades {
-	namespace EntidadesPertinentes {
 		namespace Personagens {
 			class Jogador;
 			namespace Inimigos {
 				class Inimigo;
 			}
 		}
-	}
 }
 
 namespace Entidades{
-	namespace EntidadesPertinentes {
 		namespace Obstaculos {
 			class MinaTerrestre :public Obstaculo {
 			private:
@@ -29,11 +26,10 @@ namespace Entidades{
 				~MinaTerrestre();
 				void setraio(float r);
 				void setTempoAtivo(bool a);
-				void explodir(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
-				void obstaculizar(Entidades::EntidadesPertinentes::Personagens::Jogador* pJ);
+				void explodir(Entidades::Personagens::Jogador* pJ);
+				void obstaculizar(Entidades::Personagens::Jogador* pJ);
 				void executar();
 				void salvar();
 			};
 		}
-	}
 }

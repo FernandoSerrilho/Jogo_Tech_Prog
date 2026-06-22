@@ -2,7 +2,7 @@
 #include "Personagem.h"
 
 namespace Entidades {
-    namespace EntidadesPertinentes {
+
         namespace Personagens {
 
             class Jogador;
@@ -31,5 +31,4 @@ namespace Entidades {
                 };
             }
         }
-    }
 }
