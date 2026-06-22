@@ -3,7 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include <cmath>
 
-using namespace Entidades::EntidadesPertinentes::Personagens;
+using namespace Entidades::Personagens;
 using namespace Inimigos;
 
 Drone::Drone(Jogador* p,Jogador* p1, const char* caminhoTextura) : Inimigo(), emKnockback(false), vetorKnockback(sf::Vector2f()){

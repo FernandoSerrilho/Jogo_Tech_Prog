@@ -2,7 +2,7 @@
     #include "Jogador.h"
 
     using namespace Entidades;
-    using namespace EntidadesPertinentes::Personagens;
+    using namespace ::Personagens;
 
     Faca::Faca(Jogador* pJ): Entidade(), pJog(pJ) {
         setFigura(sf::Vector2f(70.0f, 58.0f));

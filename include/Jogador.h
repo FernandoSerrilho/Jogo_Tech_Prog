@@ -5,7 +5,6 @@
 namespace Entidades {
     class Coracao;
     class Faca;
-    namespace EntidadesPertinentes {
         namespace Personagens {
             namespace Inimigos {
                 class Inimigo;
@@ -45,8 +44,8 @@ namespace Entidades {
                 void initInv();
                 void attInv();
 
-                void danificar(Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo* pIn);
-                void colidir(Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo* pIn);
+                void danificar(Entidades::Personagens::Inimigos::Inimigo* pIn);
+                void colidir(Entidades::Personagens::Inimigos::Inimigo* pIn);
                 void atacar();
                 void executar();
                 void salvar();
@@ -57,5 +56,5 @@ namespace Entidades {
                 void setPontos(int n);
             };
         }
-    }
+    
 }

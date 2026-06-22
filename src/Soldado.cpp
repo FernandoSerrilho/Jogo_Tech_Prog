@@ -2,7 +2,7 @@
 #include "Jogador.h"
 #include <cmath>
 
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Personagens;
 using namespace Inimigos;
 

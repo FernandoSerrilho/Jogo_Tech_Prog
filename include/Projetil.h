@@ -2,16 +2,13 @@
 
 #include "EntidadePertinente.h"
 
-
 namespace Entidades {
-    namespace EntidadesPertinentes {
-        namespace Personagens {
-            class Jogador;
-            namespace Inimigos {
-                class Tanque;
-            }
+    namespace Personagens {
+        class Jogador;
+        namespace Inimigos {
+            class Tanque;
         }
-
+    }
 
         class Projetil : public EntidadePertinente {
 
@@ -34,5 +31,4 @@ namespace Entidades {
             void salvar();
 
         };
-    }
 }

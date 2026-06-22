@@ -3,7 +3,6 @@
 #include <fstream>
 
 namespace Entidades {
-    namespace EntidadesPertinentes {
         class EntidadePertinente : public Entidade {
 
         protected:
@@ -23,5 +22,4 @@ namespace Entidades {
             void gravitar();
             virtual void salvar() = 0;
         };
-    }
 }
