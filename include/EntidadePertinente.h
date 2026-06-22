@@ -7,12 +7,16 @@ namespace Entidades {
 
         protected:
             sf::Vector2f vel;
-            std::ostream& buffer;
+            static std::ofstream buffer;
             float gravidade;
             float contraGravidade;
         public:
             EntidadePertinente();
             virtual ~EntidadePertinente();
+
+            static void abrirArquivo(const std::string& caminho);
+            static void fecharArquivo();
+            static std::ofstream& getArquivo();
         protected:
             void salvarDataBuffer();
         public:

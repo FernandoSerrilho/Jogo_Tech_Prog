@@ -170,8 +170,8 @@ void Fase::salvarFase() {
 
 	std::remove("save.txt");
 
-	GS.abrirArquivo("save.txt");
-	std::ofstream& buffer = Gerenciador_Salvamento::getArquivo();
+	EntidadePertinente::abrirArquivo("save.txt");
+	std::ofstream& buffer = EntidadePertinente::getArquivo();
 
 	if (buffer) {
 		buffer << num_fase << "\n";
@@ -193,6 +193,6 @@ void Fase::salvarFase() {
 		++it;
 	}
 
-	GS.fecharArquivo();
+	EntidadePertinente::fecharArquivo();
 
 }
