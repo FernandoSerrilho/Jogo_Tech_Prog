@@ -38,13 +38,6 @@ void Fase::incluirObstaculo(Obstaculo* o) {
     }
 }
 
-//void Fase::incluirProjetil(Projetil* p) {
-   // if (p) {
-    //    GC.IncluirProjetil(p);
-   //     incluirEntidade(p);
-  ///  }
-//}
-
 void Fase::criarDrones(Jogador* j1,Jogador* j2) {
 	Inimigo::sementear();
 
