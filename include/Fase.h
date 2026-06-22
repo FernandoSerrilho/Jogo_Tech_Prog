@@ -2,7 +2,6 @@
 #include "Ente.h"
 #include "ListaEntidades.h" 
 #include "Gerenciador_Colisoes.h"
-#include "Gerenciador_Salvamento.h"
 
 namespace Entidades {
 	class BackGround;
@@ -18,7 +17,6 @@ namespace Entidades {
 		protected:
 			Listas::ListaEntidades list_ents;
 			Gerenciadores::Gerenciador_Colisoes GC;
-			Gerenciadores::Gerenciador_Salvamento GS;
 			Entidades::BackGround* bgFase;
 			Entidades::Chao* chaoFase;
 			int num_fase;
@@ -35,7 +33,6 @@ namespace Entidades {
 			void incluirEntidade(Entidades::Entidade* e);
 			void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* i);
     		void incluirObstaculo(Entidades::Obstaculos::Obstaculo* o);
-			void incluirProjetil(Entidades::Projetil* p);
 			void limparGC();
 			void limparListEnts();
 			virtual void executar() = 0;
