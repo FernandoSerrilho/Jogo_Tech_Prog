@@ -24,6 +24,7 @@ namespace Fases {
 	public:
 		FaseDois(Entidades::EntidadesPertinentes::Personagens::Jogador* j1=nullptr, Entidades::EntidadesPertinentes::Personagens::Jogador* j2 = nullptr);
 		~FaseDois();
+		void incluirProjetil(Entidades::EntidadesPertinentes::Projetil* p);
 		void inicializar(Entidades::EntidadesPertinentes::Personagens::Jogador* j1, Entidades::EntidadesPertinentes::Personagens::Jogador* j2);
 		void executar();
 		void carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,

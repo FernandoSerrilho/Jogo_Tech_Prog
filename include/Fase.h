@@ -38,7 +38,7 @@ namespace Entidades {
 			void incluirEntidade(Entidades::Entidade* e);
 			void incluirInimigo(Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo* i);
     		void incluirObstaculo(Entidades::EntidadesPertinentes::Obstaculos::Obstaculo* o);
-			void incluirProjetil(Entidades::EntidadesPertinentes::Projetil* p);
+			//void incluirProjetil(Entidades::EntidadesPertinentes::Projetil* p);
 			void limparGC();
 			void limparListEnts();
 			virtual void executar() = 0;

@@ -159,6 +159,13 @@ void FaseDois::executar() {
 	GC.executar();
 }
 
+void FaseDois::incluirProjetil(Projetil* p) {
+    if (p) {
+        GC.IncluirProjetil(p);
+        incluirEntidade(p);
+    }
+}
+
 void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
 	incluirEntidade(j1);
 	if (j2 && j2->getVivo()) {incluirEntidade(j2);} 
