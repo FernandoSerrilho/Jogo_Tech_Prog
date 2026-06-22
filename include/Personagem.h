@@ -2,7 +2,6 @@
 #include "EntidadePertinente.h"
 
 namespace Entidades {
-    namespace EntidadesPertinentes{
         namespace Personagens {
             class Personagem : public EntidadePertinente {
 
@@ -21,6 +20,4 @@ namespace Entidades {
 
             };
         }
-
-    }
 }

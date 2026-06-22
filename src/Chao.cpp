@@ -3,7 +3,6 @@
 #include "Jogador.h"
 
 using namespace Entidades;
-using namespace Entidades::EntidadesPertinentes;
 using namespace Personagens;
 
 Chao::Chao(const char* caminhoTextura):Entidade() {

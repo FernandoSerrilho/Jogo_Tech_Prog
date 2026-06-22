@@ -2,7 +2,6 @@
 
 #include "Obstaculo.h"
 namespace Entidades {
-	namespace EntidadesPertinentes {
 		namespace Personagens {
 			class Jogador;
 			namespace Inimigos {
@@ -10,10 +9,8 @@ namespace Entidades {
 			}
 		}
 	}
-}
 
 namespace Entidades {
-	namespace EntidadesPertinentes {
 		namespace Obstaculos {
 			class Arbusto : public Obstaculo {
 			private:
@@ -24,9 +21,8 @@ namespace Entidades {
 				~Arbusto();
 				void setLent(float lent);
 				void executar();
-				void obstaculizar(Entidades::EntidadesPertinentes::Personagens::Jogador* j1);
+				void obstaculizar(Entidades::Personagens::Jogador* j1);
 				void salvar();
 			};
 		}
-	}
 }

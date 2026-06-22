@@ -3,12 +3,11 @@
 #include "Tanque.h"
 #include <iostream>
 
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Personagens;
 using namespace Inimigos;
 
-
-Projetil::Projetil(sf::Vector2f posicao, const char* caminhoTextura) : EntidadePertinente() , ativo(true), pTq(nullptr) {
+Projetil::Projetil(sf::Vector2f posicao, const char* caminhoTextura) : EntidadePertinente(), ativo(true), pTq(nullptr) {
     setFigura(sf::Vector2f(26.0f, 11.0f));
     figura.setPosition(posicao);
     setText(caminhoTextura, figura);

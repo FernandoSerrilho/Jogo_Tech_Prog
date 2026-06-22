@@ -7,8 +7,7 @@
 #include <iostream>
 
 using namespace Entidades;
-using namespace EntidadesPertinentes::Personagens;
-//using namespace Personagens;
+using namespace Personagens;
 using namespace Inimigos;
 
 Jogador::Jogador(const char* caminhoTextura, const char* caminhoTexturaCoracao, int n) : nome(""), Personagem(), num_jog(n), pontos(0), atacando(false), podeAtacar(true),

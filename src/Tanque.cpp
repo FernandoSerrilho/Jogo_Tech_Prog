@@ -4,8 +4,8 @@
 #include <cmath>
 #include <iostream>
 
-using namespace Entidades::EntidadesPertinentes;
-using namespace Entidades::EntidadesPertinentes::Personagens;
+using namespace Entidades;
+using namespace Entidades::Personagens;
 using namespace Inimigos;
 
 Tanque::Tanque(const char* caminhoTextura) : Inimigo(), podeAtirar(false), cooldown(0.0f){

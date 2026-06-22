@@ -8,18 +8,16 @@ using namespace std;
 class Jogo;
 namespace Entidades {
 	class BackGround;
-	namespace EntidadesPertinentes {
 		namespace Personagens {
 			class Jogador;
 		}
-	}
 }
 
 class Menu : public Ente {
 public:
 	enum EstadoMenu {
 		MENU_PRINCIPAL,
-		MENU_MORTE,
+		MENU_DERROTA,
 		FASE_VENCIDA,
 		SEL_RANKING,
 		RANKING,
@@ -38,7 +36,7 @@ private:
 	sf::Font fonte;
 	Entidades::BackGround* bMenu;
 
-	std::vector<Entidades::EntidadesPertinentes::Personagens::Jogador*> ranking;
+	std::vector<Entidades::Personagens::Jogador*> ranking;
 	map<string, sf::Text> textos;
 
 	int n_jogs;
@@ -49,7 +47,7 @@ private:
 	void initText(const string& chave, const string& conteudo, unsigned int tamanho, sf::Vector2f posicao);
 	void carregarRanking(const char* caminhoRanking);
 	void gravarRanking(const char* caminhoRanking);
-	void trataRanking(Entidades::EntidadesPertinentes::Personagens::Jogador* j, const char* caminhoRanking);
+	void trataRanking(Entidades::Personagens::Jogador* j, const char* caminhoRanking);
 	void addJogadorRanking(const char* caminhoRanking);
 public:
 	Menu(Jogo* pJ = nullptr);

@@ -9,7 +9,7 @@
 #include <iostream>
 
 using namespace Gerenciadores;
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Personagens;
 using namespace Obstaculos;
 using namespace Inimigos;

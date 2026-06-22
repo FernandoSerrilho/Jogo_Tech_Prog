@@ -11,7 +11,7 @@
 using namespace Gerenciadores;
 using namespace Listas;
 using namespace Fases;
-using namespace Entidades::EntidadesPertinentes;
+using namespace Entidades;
 using namespace Obstaculos;
 using namespace Personagens;
 using namespace Inimigos;
@@ -114,7 +114,7 @@ void FaseDois::gerenciarProjeteis() {
 }
 
 void FaseDois::criarMinasTerrestres() {
-	Entidades::EntidadesPertinentes::Personagens::Inimigos::Inimigo::sementear();
+	Entidades::Personagens::Inimigos::Inimigo::sementear();
 
 	for (int i = 0;i < maxMinas;i++) {
 		sf::Vector2f p(0.0f, 0.0f);
@@ -168,7 +168,7 @@ void FaseDois::inicializar(Jogador* j1,Jogador* j2) {
 	criarProjeteis();
 }
 
-void FaseDois::carregarFase(std::ifstream& arquivo, Entidades::EntidadesPertinentes::Personagens::Jogador* j1,Entidades::EntidadesPertinentes::Personagens::Jogador* j2, bool& j2Ativo) {
+void FaseDois::carregarFase(std::ifstream& arquivo, Entidades::Personagens::Jogador* j1,Entidades::Personagens::Jogador* j2, bool& j2Ativo) {
  	limparGC();
     limparListEnts();
 
