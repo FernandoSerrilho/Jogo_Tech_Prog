@@ -1,3 +1,7 @@
+//Link do sprite do Jogador: https://opengameart.org/content/ww2-soldier
+//Link do sprite da faca: https://opengameart.org/content/pixel-weapons1
+//Link do sprite do coração: https://unreached-lands.itch.io/lifebar-pixelart-sprites-16x16
+
 #include "Jogo.h"
 #include "Menu.h"
 #include "Gerenciador_Grafico.h"

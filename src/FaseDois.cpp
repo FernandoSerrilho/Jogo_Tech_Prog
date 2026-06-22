@@ -1,3 +1,9 @@
+//Link do sprite do tanque: https://opengameart.org/content/pixel-tank
+//Link do sprite da bala: https://opengameart.org/content/weapon-icons-1
+//Link do sprite do chão: https://opengameart.org/content/stone-ground
+//Link do sprite do fundo: https://opengameart.org/content/starfield-background
+//Link do sprite da mina terestre: https://drive.google.com/file/d/1eCCxQ479SYTTpjwk2PwgGPxOtp-_eV8o/view?usp=drive_link
+
 #include "FaseDois.h"
 #include "Jogador.h"
 #include "Chao.h"

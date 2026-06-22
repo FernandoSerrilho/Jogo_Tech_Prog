@@ -1,3 +1,6 @@
+//Link do sprite do drone: https://opengameart.org/content/pixel-art-drone
+//Link do sprite da plataforma: https://opengameart.org/content/platformer-night-tileset
+
 #include "Fase.h"
 #include "Drone.h"
 #include "Plataforma.h"

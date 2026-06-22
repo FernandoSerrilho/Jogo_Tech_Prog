@@ -1,3 +1,8 @@
+//Link do sprite do chão: https://imdaniell.itch.io/dirt-walls-and-platforms
+// Link do sprite do background: https://gamer247.itch.io/sky
+//Link do sprite do soldado: https://opengameart.org/content/green-soldier
+//Link do sprite do arbusto: https://karsiori.itch.io/free-pixel-art-bush-pack
+
 #include "FaseUm.h"
 #include "Jogador.h"
 #include "Chao.h"
