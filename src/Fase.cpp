@@ -1,3 +1,8 @@
+//Link do sprite do drone: https://opengameart.org/content/pixel-art-drone
+//Link do sprite da plataforma: https://opengameart.org/content/platformer-night-tileset
+//Agradecimentos ao canal GEGE++ do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/channel/UCUa8BOx2F3hlxgPcpZmnBnQ
+//Agradecimentos ao canal Dev Felipe do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/@devfelipe8214
+
 #include "Fase.h"
 #include "Drone.h"
 #include "Plataforma.h"

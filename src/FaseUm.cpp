@@ -1,3 +1,10 @@
+//Link do sprite do chão: https://imdaniell.itch.io/dirt-walls-and-platforms
+// Link do sprite do background: https://gamer247.itch.io/sky
+//Link do sprite do soldado: https://opengameart.org/content/green-soldier
+//Link do sprite do arbusto: https://karsiori.itch.io/free-pixel-art-bush-pack
+//Agradecimentos ao canal GEGE++ do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/channel/UCUa8BOx2F3hlxgPcpZmnBnQ
+//Agradecimentos ao canal Dev Felipe do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/@devfelipe8214
+
 #include "FaseUm.h"
 #include "Jogador.h"
 #include "Chao.h"

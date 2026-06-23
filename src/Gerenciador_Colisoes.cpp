@@ -1,3 +1,5 @@
+//Agradecimentos ao canal GEGE++ do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/channel/UCUa8BOx2F3hlxgPcpZmnBnQ
+
 #include "Chao.h"        
 #include "Gerenciador_Colisoes.h"
 #include "Inimigo.h"

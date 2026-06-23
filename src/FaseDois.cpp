@@ -1,3 +1,11 @@
+//Link do sprite do tanque: https://opengameart.org/content/pixel-tank
+//Link do sprite da bala: https://opengameart.org/content/weapon-icons-1
+//Link do sprite do chão: https://opengameart.org/content/stone-ground
+//Link do sprite do fundo: https://opengameart.org/content/starfield-background
+//Link do sprite da mina terestre: https://drive.google.com/file/d/1eCCxQ479SYTTpjwk2PwgGPxOtp-_eV8o/view?usp=drive_link
+//Agradecimentos ao canal GEGE++ do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/channel/UCUa8BOx2F3hlxgPcpZmnBnQ
+//Agradecimentos ao canal Dev Felipe do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/@devfelipe8214
+
 #include "FaseDois.h"
 #include "Jogador.h"
 #include "Chao.h"

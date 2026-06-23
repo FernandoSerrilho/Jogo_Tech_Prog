@@ -1,3 +1,5 @@
+//Agradecimentos ao canal Dev Felipe do Youtube, por fornecer uma base para o respectivo arquivo: https://www.youtube.com/@devfelipe8214
+
 #include "Menu.h"
 #include "Jogo.h"
 #include "BackGround.h"
